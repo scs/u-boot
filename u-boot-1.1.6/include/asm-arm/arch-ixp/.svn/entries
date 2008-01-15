@@ -1,0 +1,54 @@
+8
+
+dir
+1029
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot/trunk/u-boot-1.1.6/include/asm-arm/arch-ixp
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot
+
+
+
+2007-07-15T01:26:21.482694Z
+839
+vapier
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+e8ad1c53-384c-47db-b5ce-66ae1f620dea
+
+ixp425.h
+file
+
+
+
+
+2008-01-14T17:23:54.000000Z
+37875065362ec6e27a1d372c70578a88
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+ixp425pci.h
+file
+
+
+
+
+2008-01-14T17:23:54.000000Z
+0a39afd4a3e8fa88f81cc3a5c258cd7a
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+

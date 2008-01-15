@@ -1,0 +1,395 @@
+8
+
+dir
+1029
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot/trunk/u-boot-1.1.6
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot
+
+
+
+2007-11-21T03:53:10.034850Z
+1029
+vapier
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+e8ad1c53-384c-47db-b5ce-66ae1f620dea
+
+lib_i386
+dir
+
+m68k_config.mk
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+2c7f6f63b92d8b29f188480f5b6c1cc1
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+lib_nios2
+dir
+
+i386_config.mk
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+d9381f0ad9453f414c641b40d59b84c7
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+nios2_config.mk
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+0c8a05b36b3671f869adbeeb776729ea
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+CHANGELOG
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+848f2e2c8a554d8898082b53f60c2637
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+cpu
+dir
+
+patches
+dir
+
+rtc
+dir
+
+disk
+dir
+
+dtt
+dir
+
+localversion-adi
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+39eef1bec5fcba3bc45b6bfe52e2daa0
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+CREDITS
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+4de059d85704573f2a659dbb452391ec
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+tools
+dir
+
+lib_generic
+dir
+
+lib_arm
+dir
+
+doc
+dir
+
+fs
+dir
+
+lib_ppc
+dir
+
+COPYING
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+4c6cde5df68eff615d36789dc18edd3b
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+arm_config.mk
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+a8090d9ddc7a05c74fe8ecc81694b46d
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+config.mk
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+ac7488e50e06885c7290f9af1f92a34e
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+lib_microblaze
+dir
+
+Makefile
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+0def819465f5fccce6542300f967f5df
+2007-11-01T22:32:14.893015Z
+998
+strubi
+has-props
+
+ppc_config.mk
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+3d4275a633b7a94548fff0bc6bd1a138
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+microblaze_config.mk
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+8af4fa5e5a3c88d3ef884abfd13cb9b7
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+include
+dir
+
+lib_avr32
+dir
+
+post
+dir
+
+net
+dir
+
+board
+dir
+
+common
+dir
+
+avr32_config.mk
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+98a5f7ea4d04e0e89cf4756f3a3c2771
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+CHANGELOG-before-U-Boot-1.1.5
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+3f460d65b4253ec56af62df3311bb383
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+README
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+d80af111fbbb39d001873cfb260dd2cc
+2007-10-18T04:03:27.596819Z
+966
+vapier
+has-props
+
+mkconfig
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+8c015016b539be8ad5ddbe5c71a47f3e
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+nand_spl
+dir
+
+lib_mips
+dir
+
+lib_nios
+dir
+
+lib_blackfin
+dir
+
+rules.mk
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+443e43d0c0bcc986b4c815e0a4b3fe88
+2007-11-03T21:07:15.133819Z
+1004
+vapier
+has-props
+
+mips_config.mk
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+cdad26c0f0ce952a061e41d7816c12a3
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+nios_config.mk
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+40b3915bc1a5e97497f5e1f189e867b0
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+blackfin_config.mk
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+7179ae413bc8168dfe16f9556f7367db
+2007-10-18T06:17:14.308575Z
+970
+vapier
+has-props
+
+MAKEALL
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+762baa0f3957c8e7f82acc5fa503c498
+2007-11-05T21:18:57.160602Z
+1012
+vapier
+has-props
+
+MAINTAINERS
+file
+
+
+
+
+2008-01-14T17:29:28.000000Z
+8a66c68e0907ff4843fbbc11b40c9142
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+lib_m68k
+dir
+
+drivers
+dir
+
+examples
+dir
+

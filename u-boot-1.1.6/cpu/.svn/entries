@@ -1,0 +1,121 @@
+8
+
+dir
+1029
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot/trunk/u-boot-1.1.6/cpu
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot
+
+
+
+2007-11-15T21:47:11.324685Z
+1027
+vapier
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+e8ad1c53-384c-47db-b5ce-66ae1f620dea
+
+arm926ejs
+dir
+
+mcf52x2
+dir
+
+ppc4xx
+dir
+
+microblaze
+dir
+
+pxa
+dir
+
+arm1136
+dir
+
+mpc8220
+dir
+
+mpc8260
+dir
+
+ixp
+dir
+
+arm925t
+dir
+
+sa1100
+dir
+
+mpc824x
+dir
+
+nios
+dir
+
+mips
+dir
+
+blackfin
+dir
+
+mpc83xx
+dir
+
+arm946es
+dir
+
+mpc85xx
+dir
+
+mpc86xx
+dir
+
+74xx_7xx
+dir
+
+s3c44b0
+dir
+
+mpc5xx
+dir
+
+lh7a40x
+dir
+
+mpc8xx
+dir
+
+i386
+dir
+
+at32ap
+dir
+
+nios2
+dir
+
+arm720t
+dir
+
+arm920t
+dir
+
+arm_intcm
+dir
+
+mpc5xxx
+dir
+

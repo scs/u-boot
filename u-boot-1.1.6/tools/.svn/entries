@@ -1,0 +1,205 @@
+8
+
+dir
+1029
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot/trunk/u-boot-1.1.6/tools
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot
+
+
+
+2007-11-12T12:45:33.514502Z
+1019
+hennerich
+has-props
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+e8ad1c53-384c-47db-b5ce-66ae1f620dea
+
+bmp_logo.c
+file
+
+
+
+
+2008-01-14T17:23:07.000000Z
+7b76d8b92b13b470613e8e00e3bdd6e8
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+easylogo
+dir
+
+ncb.c
+file
+
+
+
+
+2008-01-14T17:23:07.000000Z
+4b0fdfd6ad20d6316058c3214dacbd7f
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+logos
+dir
+
+gen_eth_addr.c
+file
+
+
+
+
+2008-01-14T17:23:07.000000Z
+c4dd23b8e66ec7f14140ed330a9f51e2
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+inca-swap-bytes.c
+file
+
+
+
+
+2008-01-14T17:23:07.000000Z
+3e2dd3119fecd279153834ef1018d548
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+scripts
+dir
+
+env
+dir
+
+mkimage.c
+file
+
+
+
+
+2008-01-14T17:23:07.000000Z
+b1c1d85a29a01402e6ad170e01411cc4
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+bddb
+dir
+
+img2srec.c
+file
+
+
+
+
+2008-01-14T17:23:07.000000Z
+873f1e5dbea4b77b4a651de2a0d500c9
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+gdb
+dir
+
+mpc86x_clk.c
+file
+
+
+
+
+2008-01-14T17:23:07.000000Z
+5b399f69790fc30102d1694747e31e5b
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+envcrc.c
+file
+
+
+
+
+2008-01-14T17:23:07.000000Z
+a4858fe87c20c25e9be2411a9e5e84d6
+2007-10-10T23:08:30.800661Z
+953
+vapier
+has-props
+
+img2brec.sh
+file
+
+
+
+
+2008-01-14T17:23:07.000000Z
+4bdc85f2dcf0db24d670936bad627610
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+updater
+dir
+
+setlocalversion
+file
+
+
+
+
+2008-01-14T17:23:07.000000Z
+62eafcb62567deef7768b621b06f7cd6
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+Makefile
+file
+
+
+
+
+2008-01-14T17:23:07.000000Z
+abbb405f7f6de16247bc5887daf0ee11
+2007-11-04T19:00:10.063927Z
+1005
+vapier
+has-props
+
+Makefile.win32
+file
+
+
+
+
+2008-01-14T17:23:07.000000Z
+24bdf5d95cc4beae8b773d909489a388
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+

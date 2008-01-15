@@ -1,0 +1,691 @@
+8
+
+dir
+1029
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot/trunk/u-boot-1.1.6/board
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot
+
+
+
+2007-11-04T20:17:14.340016Z
+1006
+vapier
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+e8ad1c53-384c-47db-b5ce-66ae1f620dea
+
+hmi1001
+dir
+
+pm856
+dir
+
+canmb
+dir
+
+mcc200
+dir
+
+ep8260
+dir
+
+sbc8240
+dir
+
+stxgp3
+dir
+
+oxc
+dir
+
+mvblue
+dir
+
+prodrive
+dir
+
+sbc8560
+dir
+
+total5200
+dir
+
+gcplus
+dir
+
+stxxtc
+dir
+
+tqm85xx
+dir
+
+bc3450
+dir
+
+gth2
+dir
+
+cu824
+dir
+
+bf533-ezkit
+dir
+
+altera
+dir
+
+omap1610inn
+dir
+
+sixnet
+dir
+
+ep82xxm
+dir
+
+musenki
+dir
+
+emk
+dir
+
+evb64260
+dir
+
+dave
+dir
+
+jse
+dir
+
+eric
+dir
+
+dbau1x00
+dir
+
+hidden_dragon
+dir
+
+BuS
+dir
+
+cradle
+dir
+
+gen860t
+dir
+
+etx094
+dir
+
+netta2
+dir
+
+xpedite1k
+dir
+
+integratorcp
+dir
+
+m5272c3
+dir
+
+Marvell
+dir
+
+siemens
+dir
+
+westel
+dir
+
+MAI
+dir
+
+ppmc7xx
+dir
+
+sbc2410x
+dir
+
+bf561-ezkit
+dir
+
+wepep250
+dir
+
+bf527-ezkit
+dir
+
+pb1x00
+dir
+
+mousse
+dir
+
+RPXClassic
+dir
+
+ep88x
+dir
+
+rattler
+dir
+
+c2mon
+dir
+
+bf537-srv1
+dir
+
+ep7312
+dir
+
+v38b
+dir
+
+cm41xx
+dir
+
+barco
+dir
+
+mvs1
+dir
+
+sorcery
+dir
+
+sbc8260
+dir
+
+uc100
+dir
+
+rpxsuper
+dir
+
+quantum
+dir
+
+ivm
+dir
+
+versatile
+dir
+
+sandpoint
+dir
+
+ixdp425
+dir
+
+csb272
+dir
+
+shannon
+dir
+
+exbitgen
+dir
+
+lantec
+dir
+
+purple
+dir
+
+tqm8xx
+dir
+
+kb9202
+dir
+
+voiceblue
+dir
+
+impa7
+dir
+
+cpc45
+dir
+
+ppmc8260
+dir
+
+xsengine
+dir
+
+netphone
+dir
+
+logodl
+dir
+
+bmw
+dir
+
+evb4510
+dir
+
+RPXlite
+dir
+
+g2000
+dir
+
+mpc8540ads
+dir
+
+delta
+dir
+
+mpc8560ads
+dir
+
+cray
+dir
+
+pcippc2
+dir
+
+genietv
+dir
+
+utx8245
+dir
+
+rmu
+dir
+
+rbc823
+dir
+
+sandburst
+dir
+
+cpu86
+dir
+
+cpu87
+dir
+
+cobra5272
+dir
+
+omap1510inn
+dir
+
+cds
+dir
+
+xm250
+dir
+
+ssv
+dir
+
+netta
+dir
+
+cm4008
+dir
+
+sacsng
+dir
+
+cogent
+dir
+
+mx1fs2
+dir
+
+tqm8260
+dir
+
+sc520_cdp
+dir
+
+psyent
+dir
+
+assabet
+dir
+
+bf537-minotaur
+dir
+
+gth
+dir
+
+dnp1110
+dir
+
+pn62
+dir
+
+mpc8260ads
+dir
+
+mpl
+dir
+
+modnet50
+dir
+
+alaska
+dir
+
+scb9328
+dir
+
+mx1ads
+dir
+
+mbx8xx
+dir
+
+icecube
+dir
+
+sl8245
+dir
+
+lpd7a40x
+dir
+
+incaip
+dir
+
+amcc
+dir
+
+smdk2400
+dir
+
+cmi
+dir
+
+r5200
+dir
+
+tqm5200
+dir
+
+m5282evb
+dir
+
+xilinx
+dir
+
+pm826
+dir
+
+fads
+dir
+
+pm828
+dir
+
+adder
+dir
+
+icu862
+dir
+
+hymod
+dir
+
+AtmarkTechno
+dir
+
+hermes
+dir
+
+bf537-pnav
+dir
+
+omap730p2
+dir
+
+amirix
+dir
+
+flagadm
+dir
+
+nc650
+dir
+
+eltec
+dir
+
+xaeniax
+dir
+
+iphase4539
+dir
+
+kup
+dir
+
+etin
+dir
+
+eXalion
+dir
+
+csb226
+dir
+
+spc1920
+dir
+
+lart
+dir
+
+svm_sc8xx
+dir
+
+armadillo
+dir
+
+smdk2410
+dir
+
+ip860
+dir
+
+zpc1900
+dir
+
+mpc8540eval
+dir
+
+m5271evb
+dir
+
+innokom
+dir
+
+bf548-ezkit
+dir
+
+sc520_spunk
+dir
+
+w7o
+dir
+
+v37
+dir
+
+nx823
+dir
+
+a3000
+dir
+
+cmc_pu2
+dir
+
+tqm834x
+dir
+
+trab
+dir
+
+ml2
+dir
+
+ep8248
+dir
+
+funkwerk
+dir
+
+mpc8266ads
+dir
+
+gw8260
+dir
+
+spd8xx
+dir
+
+omap2420h4
+dir
+
+sbc405
+dir
+
+pm520
+dir
+
+ids8247
+dir
+
+bf533-stamp
+dir
+
+csb472
+dir
+
+ns9750dev
+dir
+
+pleb2
+dir
+
+at91rm9200dk
+dir
+
+LEOX
+dir
+
+csb637
+dir
+
+mp2usb
+dir
+
+bf537-stamp
+dir
+
+ispan
+dir
+
+mpc8641hpcn
+dir
+
+esd
+dir
+
+sx1
+dir
+
+inka4x0
+dir
+
+mpc8349emds
+dir
+
+netstar
+dir
+
+pxa255_idp
+dir
+
+lubbock
+dir
+
+RPXlite_dw
+dir
+
+tb0229
+dir
+
+esteem192e
+dir
+
+netvia
+dir
+
+o2dnt
+dir
+
+omap5912osk
+dir
+
+lwmon
+dir
+
+adsvix
+dir
+
+integratorap
+dir
+
+r360mpi
+dir
+
+snmc
+dir
+
+atmel
+dir
+
+pcs440ep
+dir
+
+cerf250
+dir
+
+atc
+dir
+
+RRvision
+dir
+
+rsdproto
+dir
+
+pm854
+dir
+
+zylonite
+dir
+

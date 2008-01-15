@@ -1,0 +1,10 @@
+K 10
+svn:ignore
+V 78
+*.a
+.depend
+bootrom-asm-offsets.c
+bootrom-asm-offsets.h
+bootrom-asm-offsets.s
+
+END

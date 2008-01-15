@@ -1,0 +1,15 @@
+K 10
+svn:ignore
+V 100
+u-boot
+u-boot.bin
+u-boot.hex
+u-boot.ldr
+u-boot.map
+u-boot.srec
+System.map
+LOG
+.gdbinit
+.gdb_history
+
+END

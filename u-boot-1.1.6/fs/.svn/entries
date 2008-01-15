@@ -1,0 +1,59 @@
+8
+
+dir
+1029
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot/trunk/u-boot-1.1.6/fs
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot
+
+
+
+2007-10-24T16:41:13.303117Z
+984
+vapier
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+e8ad1c53-384c-47db-b5ce-66ae1f620dea
+
+ext2
+dir
+
+reiserfs
+dir
+
+fat
+dir
+
+jffs2
+dir
+
+cramfs
+dir
+
+fdos
+dir
+
+Makefile
+file
+
+
+
+
+2008-01-14T17:23:25.000000Z
+fdf2cb35860b6b9d53f41ca510b6cc69
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+

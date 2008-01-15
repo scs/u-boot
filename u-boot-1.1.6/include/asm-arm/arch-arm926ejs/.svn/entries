@@ -1,0 +1,41 @@
+8
+
+dir
+1029
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot/trunk/u-boot-1.1.6/include/asm-arm/arch-arm926ejs
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot
+
+
+
+2007-07-15T01:26:21.482694Z
+839
+vapier
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+e8ad1c53-384c-47db-b5ce-66ae1f620dea
+
+sizes.h
+file
+
+
+
+
+2008-01-14T17:23:50.000000Z
+44a8f70dfdfce1fffdc49a099fa8fd83
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+

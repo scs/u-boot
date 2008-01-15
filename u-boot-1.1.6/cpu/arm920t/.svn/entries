@@ -1,0 +1,105 @@
+8
+
+dir
+1029
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot/trunk/u-boot-1.1.6/cpu/arm920t
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot
+
+
+
+2007-07-15T01:26:21.482694Z
+839
+vapier
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+e8ad1c53-384c-47db-b5ce-66ae1f620dea
+
+interrupts.c
+file
+
+
+
+
+2008-01-14T17:22:23.000000Z
+2e4fd0a9215186ce1d87dfd5f9e5a073
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+s3c24x0
+dir
+
+at91rm9200
+dir
+
+cpu.c
+file
+
+
+
+
+2008-01-14T17:22:23.000000Z
+513e65bc8bfcca81cbb28bfdd119ece3
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+ks8695
+dir
+
+config.mk
+file
+
+
+
+
+2008-01-14T17:22:23.000000Z
+93db41f50dabf0e213740845ab7dd114
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+imx
+dir
+
+Makefile
+file
+
+
+
+
+2008-01-14T17:22:23.000000Z
+58e182c90cba81978540d430b7b071e5
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+start.S
+file
+
+
+
+
+2008-01-14T17:22:23.000000Z
+848e700c59e9382a51405b7be8408cc6
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+

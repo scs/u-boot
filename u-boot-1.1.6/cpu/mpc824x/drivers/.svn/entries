@@ -1,0 +1,73 @@
+8
+
+dir
+1029
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot/trunk/u-boot-1.1.6/cpu/mpc824x/drivers
+svn://firewall-sources.blackfin.uclinux.org:80/svn/u-boot
+
+
+
+2007-07-15T01:26:21.482694Z
+839
+vapier
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+e8ad1c53-384c-47db-b5ce-66ae1f620dea
+
+epic
+dir
+
+errors.h
+file
+
+
+
+
+2008-01-14T17:22:48.000000Z
+b9f178db560c610877a19a8e8dbe7fae
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+i2c_export.h
+file
+
+
+
+
+2008-01-14T17:22:48.000000Z
+6a319e4e170da7ade14d28e09a048520
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+epic.h
+file
+
+
+
+
+2008-01-14T17:22:48.000000Z
+ee507315b019b1bf2b50e89b3653fb13
+2007-07-15T01:26:21.482694Z
+839
+vapier
+has-props
+
+i2c
+dir
+
