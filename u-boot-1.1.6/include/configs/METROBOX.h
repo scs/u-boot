@@ -25,10 +25,19 @@
  ***********************************************************************/
 
 /*
- * $Id: METROBOX.h,v 1.21 2005/06/03 15:05:25 tsawyer Exp $
+ * $Id: METROBOX.h,v 1.1 2007/12/17 10:24:23 mberner Exp $
  *
  *
  * $Log: METROBOX.h,v $
+ * Revision 1.1  2007/12/17 10:24:23  mberner
+ * U-Boot added.
+ *
+ * Revision 1.1.1.1  2007/10/03 08:15:41  dstadelmann
+ * First Commit Of Sources
+ *
+ * Revision 1.1  2006/12/22 18:32:22  aubrey
+ * Initial revision
+ *
  * Revision 1.21  2005/06/03 15:05:25  tsawyer
  * MB rev 2.0.3 KA rev 0.0.7.  Add CONFIG_VERSION_VARIABLE, Add fakeled to MB
  *

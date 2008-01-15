@@ -1,7 +1,7 @@
 /*
  * U-boot - psd4256.h
  *
- * Copyright (c) 2005-2007 Analog Devices Inc.
+ * Copyright (c) 2005 blackfin.uclinux.org
  *
  * (C) Copyright 2000-2004
  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
@@ -21,8 +21,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
- * MA 02110-1301 USA
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+ * MA 02111-1307 USA
  */
 
 /*
@@ -49,19 +49,20 @@
  * Flash A Port A Bit definitions
  */
 
-#define	PSDA_PPICLK1	0x20	/* PPI Clock select bit 1               */
-#define	PSDA_PPICLK0	0x10	/* PPI Clock select bit 0               */
-#define	PSDA_VDEC_RST	0x08	/* Video decoder reset, 0 = RESET       */
-#define	PSDA_VENC_RST	0x04	/* Video encoder reset, 0 = RESET       */
-#define	PSDA_CODEC_RST	0x01	/* Codec reset, 0 = RESET               */
+#define	PSDA_PPICLK1	0x20		/* PPI Clock select bit 1		*/
+#define	PSDA_PPICLK0	0x10		/* PPI Clock select bit 0		*/
+#define	PSDA_VDEC_RST	0x08		/* Video decoder reset, 0 = RESET	*/
+#define	PSDA_VENC_RST	0x04		/* Video encoder reset, 0 = RESET	*/
+#define	PSDA_CODEC_RST	0x01		/* Codec reset, 0 = RESET		*/
 
 /*
  * Flash A Port B Bit definitions
  */
 
-#define	PSDA_LED9	0x20	/* LED 9, 1 = LED ON                    */
-#define	PSDA_LED8	0x10	/* LED 8, 1 = LED ON                    */
-#define	PSDA_LED7	0x08	/* LED 7, 1 = LED ON                    */
-#define	PSDA_LED6	0x04	/* LED 6, 1 = LED ON                    */
-#define	PSDA_LED5	0x02	/* LED 5, 1 = LED ON                    */
-#define	PSDA_LED4	0x01	/* LED 4, 1 = LED ON                    */
+#define	PSDA_LED9	0x20		/* LED 9, 1 = LED ON			*/
+#define	PSDA_LED8	0x10		/* LED 8, 1 = LED ON			*/
+#define	PSDA_LED7	0x08		/* LED 7, 1 = LED ON			*/
+#define	PSDA_LED6	0x04		/* LED 6, 1 = LED ON			*/
+#define	PSDA_LED5	0x02		/* LED 5, 1 = LED ON			*/
+#define	PSDA_LED4	0x01		/* LED 4, 1 = LED ON			*/
+

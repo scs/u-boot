@@ -2,8 +2,8 @@
  *
  * Name:	skrlmt.c
  * Project:	GEnesis, PCI Gigabit Ethernet Adapter
- * Version:	$Revision: 1.68 $
- * Date:	$Date: 2003/01/31 15:26:56 $
+ * Version:	$Revision: 1.1 $
+ * Date:	$Date: 2007/12/17 10:24:14 $
  * Purpose:	Manage links on SK-NET Adapters, esp. redundant ones.
  *
  ******************************************************************************/
@@ -26,6 +26,15 @@
  * History:
  *
  *	$Log: skrlmt.c,v $
+ *	Revision 1.1  2007/12/17 10:24:14  mberner
+ *	U-Boot added.
+ *	
+ *	Revision 1.1.1.1  2007/10/03 08:15:42  dstadelmann
+ *	First Commit Of Sources
+ *	
+ *	Revision 1.1  2006/12/22 18:31:51  aubrey
+ *	Initial revision
+ *
  *	Revision 1.68  2003/01/31 15:26:56  rschmidt
  *	Added init for local variables in RlmtInit().
  *
@@ -286,7 +295,7 @@
 
 #ifndef	lint
 static const char SysKonnectFileId[] =
-	"@(#) $Id: skrlmt.c,v 1.68 2003/01/31 15:26:56 rschmidt Exp $ (C) SysKonnect.";
+	"@(#) $Id: skrlmt.c,v 1.1 2007/12/17 10:24:14 mberner Exp $ (C) SysKonnect.";
 #endif	/* !defined(lint) */
 
 #define __SKRLMT_C

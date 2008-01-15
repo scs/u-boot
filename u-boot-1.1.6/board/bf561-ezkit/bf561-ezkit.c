@@ -2,7 +2,7 @@
  * U-boot - ezkit561.c
  *
  * Copyright (c) 2005 Bas Vermeulen <bas@buyways.nl>
- * Copyright (c) 2005-2007 Analog Devices Inc.
+ * Copyright (c) 2005 blackfin.uclinux.org
  *
  * (C) Copyright 2000-2004
  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
@@ -22,18 +22,15 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
- * MA 02110-1301 USA
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+ * MA 02111-1307 USA
  */
 
 #include <common.h>
-#include <config.h>
-#include <command.h>
-#include <asm/blackfin.h>
-#include <asm/io.h>
 
 int checkboard(void)
 {
+	printf("CPU:   ADSP BF561\n");
 	printf("Board: ADI BF561 EZ-Kit Lite board\n");
 	printf("       Support: http://blackfin.uclinux.org/\n");
 	return 0;
@@ -46,7 +43,7 @@ long int initdram(int board_type)
 	int brate;
 	char *tmp = getenv("baudrate");
 	brate = simple_strtoul(tmp, NULL, 16);
-	printf("Serial Port initialized with Baud rate = %x\n", brate);
+	printf("Serial Port initialized with Baud rate = %x\n",brate);
 	printf("SDRAM attributes:\n");
 	printf("tRCD %d SCLK Cycles,tRP %d SCLK Cycles,tRAS %d SCLK Cycles"
 	       "tWR %d SCLK Cycles,CAS Latency %d SCLK cycles \n",
@@ -65,10 +62,10 @@ int misc_init_r(void)
 {
 	/* Keep PF12 low to be able to drive the USB-LAN Extender */
 	*pFIO0_DIR = 0x0000;
-	*pFIO0_FLAG_C = 0x1000;	/* Clear PF12 */
-	SSYNC();
+	*pFIO0_FLAG_C = 0x1000; /* Clear PF12 */
+	__builtin_bfin_ssync();
 	*pFIO0_POLAR = 0x0000;
-	SSYNC();
+	__builtin_bfin_ssync();
 
 	return 0;
 }

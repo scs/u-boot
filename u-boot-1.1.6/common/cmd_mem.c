@@ -163,39 +163,21 @@ int do_mem_md ( cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 				addr += size;
 			}
 
-		} else	/* addr does not correspond to DataFlash */
+		} else {	/* addr does not correspond to DataFlash */
 #endif
-
-#ifdef CONFIG_BLACKFIN
-		/* See if we're trying to display L1 inst */
-		if (addr_bfin_on_chip_mem(addr)) {
-			memcpy (linebuf, (void *)addr, linebytes);
-			for (i=0; i<linebytes; i+= size) {
-				if (size == 4) {
-					printf(" %08x", *uip++);
-				} else if (size == 2) {
-					printf(" %04x", *usp++);
-				} else {
-					printf(" %02x", *ucp++);
-				}
-				addr += size;
+		for (i=0; i<linebytes; i+= size) {
+			if (size == 4) {
+				printf(" %08x", (*uip++ = *((uint *)addr)));
+			} else if (size == 2) {
+				printf(" %04x", (*usp++ = *((ushort *)addr)));
+			} else {
+				printf(" %02x", (*ucp++ = *((u_char *)addr)));
 			}
-		} else	/* addr does not correspond to L1 inst */
-#endif
-
-		{
-			for (i=0; i<linebytes; i+= size) {
-				if (size == 4) {
-					printf(" %08x", (*uip++ = *((uint *)addr)));
-				} else if (size == 2) {
-					printf(" %04x", (*usp++ = *((ushort *)addr)));
-				} else {
-					printf(" %02x", (*ucp++ = *((u_char *)addr)));
-				}
-				addr += size;
-			}
+			addr += size;
 		}
-
+#ifdef CONFIG_HAS_DATAFLASH
+		}
+#endif
 		puts ("    ");
 		cp = (u_char *)linebuf;
 		for (i=0; i<linebytes; i++) {
@@ -358,13 +340,6 @@ int do_mem_cmp (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 #ifdef CONFIG_HAS_DATAFLASH
 	if (addr_dataflash(addr1) | addr_dataflash(addr2)){
 		puts ("Comparison with DataFlash space not supported.\n\r");
-		return 0;
-	}
-#endif
-
-#ifdef CONFIG_BLACKFIN
-	if (addr_bfin_on_chip_mem(addr1) || addr_bfin_on_chip_mem(addr2)) {
-		puts ("Comparison with L1 instruction memory not supported.\n\r");
 		return 0;
 	}
 #endif
@@ -536,14 +511,6 @@ int do_mem_cp ( cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 	if (addr_dataflash(addr) && addr_dataflash(dest)){
 		puts ("Unsupported combination of source/destination.\n\r");
 		return 1;
-	}
-#endif
-
-#ifdef CONFIG_BLACKFIN
-	/* See if we're copying to/from L1 inst */
-	if (addr_bfin_on_chip_mem(dest) || addr_bfin_on_chip_mem(addr)) {
-		memcpy ((void *)dest, (void *)addr, count * size);
-		return 0;
 	}
 #endif
 
@@ -1071,13 +1038,6 @@ mod_mem(cmd_tbl_t *cmdtp, int incrflag, int flag, int argc, char *argv[])
 #ifdef CONFIG_HAS_DATAFLASH
 	if (addr_dataflash(addr)){
 		puts ("Can't modify DataFlash in place. Use cp instead.\n\r");
-		return 0;
-	}
-#endif
-
-#ifdef CONFIG_BLACKFIN
-	if (addr_bfin_on_chip_mem(addr)) {
-		puts ("Can't modify L1 instruction in place. Use cp instead.\n\r");
 		return 0;
 	}
 #endif

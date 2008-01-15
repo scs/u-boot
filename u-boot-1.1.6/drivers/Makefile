@@ -28,7 +28,7 @@ include $(TOPDIR)/config.mk
 LIB	= $(obj)libdrivers.a
 
 COBJS	= 3c589.o 5701rls.o ali512x.o atmel_usart.o \
-	  bcm570x.o bcm570x_autoneg.o bfin_mac.o cfb_console.o cfi_flash.o \
+	  bcm570x.o bcm570x_autoneg.o cfb_console.o cfi_flash.o \
 	  cs8900.o ct69000.o dataflash.o dc2114x.o dm9000x.o \
 	  e1000.o eepro100.o \
 	  i8042.o inca-ip_sw.o keyboard.o \
@@ -43,7 +43,7 @@ COBJS	= 3c589.o 5701rls.o ali512x.o atmel_usart.o \
 	  sed13806.o sed156x.o \
 	  serial.o serial_max3100.o \
 	  serial_pl010.o serial_pl011.o serial_xuartlite.o \
-	  sl811_usb.o sm501.o smc91111.o smsc9118.o smiLynxEM.o \
+	  sl811_usb.o sm501.o smc91111.o smiLynxEM.o \
 	  status_led.o sym53c8xx.o ahci.o \
 	  ti_pci1410a.o tigon3.o tsec.o \
 	  usbdcore.o usbdcore_ep0.o usbdcore_omap1510.o usbtty.o \
@@ -51,7 +51,7 @@ COBJS	= 3c589.o 5701rls.o ali512x.o atmel_usart.o \
 	  ks8695eth.o \
 	  pxa_pcmcia.o mpc8xx_pcmcia.o tqm8xx_pcmcia.o	\
 	  rpx_pcmcia.o \
-	  fsl_i2c.o ax88180.o
+	  fsl_i2c.o
 
 SRCS	:= $(COBJS:.o=.c)
 OBJS	:= $(addprefix $(obj),$(COBJS))

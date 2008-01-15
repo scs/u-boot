@@ -1,7 +1,7 @@
 /*
  * U-boot - stamp.h
  *
- * Copyright (c) 2005-2007 Analog Devices Inc.
+ * Copyright (c) 2005 blackfin.uclinux.org
  *
  * (C) Copyright 2000-2004
  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
@@ -21,8 +21,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
- * MA 02110-1301 USA
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+ * MA 02111-1307 USA
  */
 
 #ifndef __STAMP_H__
@@ -33,6 +33,9 @@ extern void init_Flags(void);
 extern volatile unsigned long *ambctl0;
 extern volatile unsigned long *ambctl1;
 extern volatile unsigned long *amgctl;
+
+extern unsigned long pll_div_fact;
+extern void serial_setbrg(void);
 
 /* Definitions used in  Compact Flash Boot support */
 #define FIO_EDGE_CF_BITS 	0x0000

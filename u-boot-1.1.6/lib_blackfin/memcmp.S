@@ -1,8 +1,17 @@
 /*
- * File: memcmp.S
+ * File:         arch/blackfin/lib/memcmp.S
+ * Based on:
+ * Author:
  *
- * Copyright 2004-2007 Analog Devices Inc.
- * Enter bugs at http://blackfin.uclinux.org/
+ * Created:
+ * Description:
+ *
+ * Rev:          $Id: memcmp.S,v 1.1 2007/12/17 10:24:30 mberner Exp $
+ *
+ * Modified:
+ *               Copyright 2004-2006 Analog Devices Inc.
+ *
+ * Bugs:         Enter bugs at http://blackfin.uclinux.org/
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

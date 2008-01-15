@@ -1,35 +1,50 @@
 /*
- * U-boot - Configuration file for BF537 PNAV board
+ * U-boot - Configuration file for BF537 STAMP board
  */
 
-#ifndef __CONFIG_BF537_PNAV_H__
-#define __CONFIG_BF537_PNAV_H__
-
-#include <asm/blackfin-config-pre.h>
-
-#define BFIN_CPU             bf537-0.2
-#define BFIN_BOOT_MODE       BFIN_BOOT_SPI_MASTER
+#ifndef __CONFIG_BF537_H__
+#define __CONFIG_BF537_H__
 
 #define CFG_LONGHELP		1
 #define CONFIG_CMDLINE_EDITING	1
-#define CONFIG_ENV_OVERWRITE	1
 #define CONFIG_BAUDRATE		115200
 
-#ifndef __ADSPBF534__
-#define CONFIG_BFIN_MAC
 #define CONFIG_BFIN_MAC_RMII
-#define CONFIG_NET_MULTI	1
-#endif
 
 /* Set default serial console for bf537 */
 #define CONFIG_UART_CONSOLE	0
+#define CONFIG_BF537		1
+#define CONFIG_BOOTDELAY	5
 /* define CONFIG_BF537_STAMP_LEDCMD to enable LED command*/
 /*#define CONFIG_BF537_STAMP_LEDCMD	1*/
+
+/*
+ * Boot Mode Set  
+ * Blackfin can support several boot modes
+ */
+#define BF537_BYPASS_BOOT	0x0011  /* Bootmode 0: Execute from 16-bit externeal memory ( bypass BOOT ROM) 	*/
+#define BF537_PARA_BOOT		0x0012  /* Bootmode 1: Boot from 8-bit or 16-bit flash 				*/
+#define BF537_SPI_MASTER_BOOT	0x0014	/* Bootmode 3: SPI master mode boot from SPI flash			*/
+#define BF537_SPI_SLAVE_BOOT	0x0015	/* Bootmode 4: SPI slave mode boot from SPI flash			*/
+#define BF537_TWI_MASTER_BOOT	0x0016	/* Bootmode 5: TWI master mode boot from EEPROM				*/
+#define BF537_TWI_SLAVE_BOOT	0x0017	/* Bootmode 6: TWI slave mode boot from EEPROM				*/
+#define BF537_UART_BOOT		0x0018	/* Bootmode 7: UART slave mdoe boot via UART host			*/
+/* Define the boot mode */
+#define BFIN_BOOT_MODE		BF537_SPI_MASTER_BOOT
+//#define BFIN_BOOT_MODE		BF537_SPI_MASTER_BOOT
+
+#define ADSP_BF534		0x34
+#define ADSP_BF536		0x36
+#define ADSP_BF537		0x37
+#define BFIN_CPU		ADSP_BF537
 
 /* Define if want to do post memory test */
 #undef CONFIG_POST_TEST
 
-#define CONFIG_RTC_BFIN		1
+/* Define where the uboot will be loaded by on-chip boot rom */
+#define APP_ENTRY 0x00001000
+
+#define CONFIG_RTC_BF533	1
 #define CONFIG_BOOT_RETRY_TIME	-1	/* Enable this if bootretry required, currently its disabled */
 
 /* CONFIG_CLKIN_HZ is any value in Hz                            */
@@ -53,12 +68,26 @@
 /* Values can range from 2-65535                                 */
 /* SCK Frequency = SCLK / (2 * CONFIG_SPI_BAUD)                  */
 #define CONFIG_SPI_BAUD                 2
-#if (BFIN_BOOT_MODE == BFIN_BOOT_SPI_MASTER)
+#if (BFIN_BOOT_MODE == BF537_SPI_MASTER_BOOT)
 #define CONFIG_SPI_BAUD_INITBLOCK						   4
 #endif
 
-#if (BFIN_BOOT_MODE == BFIN_BOOT_SPI_MASTER)
-#if (CONFIG_SCLK_HZ / (2*CONFIG_SPI_BAUD) > 20000000)
+#if ( CONFIG_CLKIN_HALF == 0 )
+#define CONFIG_VCO_HZ           ( CONFIG_CLKIN_HZ * CONFIG_VCO_MULT )
+#else
+#define CONFIG_VCO_HZ           (( CONFIG_CLKIN_HZ * CONFIG_VCO_MULT ) / 2 )
+#endif
+
+#if (CONFIG_PLL_BYPASS == 0)
+#define CONFIG_CCLK_HZ          ( CONFIG_VCO_HZ / CONFIG_CCLK_DIV )
+#define CONFIG_SCLK_HZ          ( CONFIG_VCO_HZ / CONFIG_SCLK_DIV )
+#else
+#define CONFIG_CCLK_HZ          CONFIG_CLKIN_HZ
+#define CONFIG_SCLK_HZ          CONFIG_CLKIN_HZ
+#endif
+
+#if (BFIN_BOOT_MODE == BF537_SPI_MASTER_BOOT)
+#if (CONFIG_SCLK_HZ / (2*CONFIG_SPI_BAUD) > 20000000) 
 #define CONFIG_SPI_FLASH_FAST_READ 1 /* Needed if SPI_CLK > 20 MHz */
 #else
 #undef CONFIG_SPI_FLASH_FAST_READ
@@ -79,30 +108,25 @@
  * Network Settings
  */
 /* network support */
-#ifdef CONFIG_BFIN_MAC
+#if (BFIN_CPU != ADSP_BF534)
 #define CONFIG_IPADDR           192.168.0.15
 #define CONFIG_NETMASK          255.255.255.0
 #define CONFIG_GATEWAYIP        192.168.0.1
 #define CONFIG_SERVERIP         192.168.0.2
-#define CONFIG_HOSTNAME         BFIN
+#define CONFIG_HOSTNAME         BF537
 #endif
 
 #define CONFIG_ROOTPATH		/romfs
 /* Uncomment next line to use fixed MAC address */
-#define CONFIG_ETHADDR          02:80:ad:24:21:18
+#define CONFIG_ETHADDR          02:80:ad:24:21:18 
 /* This is the routine that copies the MAC in Flash to the 'ethaddr' setting */
 
-#if (BFIN_BOOT_MODE == BFIN_BOOT_UART)
-# define CONFIG_BOOTDELAY	-1
-#else
-# define CONFIG_BOOTDELAY	5
-#endif
-
 #define CFG_LONGHELP			1
+#define CONFIG_BOOTDELAY		5
 #define CONFIG_BOOT_RETRY_TIME		-1	/* Enable this if bootretry required, currently its disabled */
 #define CONFIG_BOOTCOMMAND 		"run ramboot"
 
-#if (BFIN_BOOT_MODE == BFIN_BOOT_BYPASS) && defined(CONFIG_POST_TEST)
+#if (BFIN_BOOT_MODE == BF537_BYPASS_BOOT) && defined(CONFIG_POST_TEST)
 /* POST support */
 #define CONFIG_POST 		( CFG_POST_MEMORY | \
 				  CFG_POST_UART	  | \
@@ -110,7 +134,7 @@
 				  CFG_POST_ETHER  | \
 				  CFG_POST_LED	  | \
 				  CFG_POST_BUTTON)
-#else
+#else 
 #undef CONFIG_POST
 #endif
 
@@ -122,6 +146,19 @@
 #define CFG_CMD_POST_DIAG	0
 #endif
 
+/* CF-CARD IDE-HDD Support */
+
+//#define CONFIG_BFIN_CF_IDE    /* Add CF flash card support */
+//#define CONFIG_BFIN_HDD_IDE   /* Add IDE Disk Drive (HDD) support */
+
+
+#if defined(CONFIG_BFIN_CF_IDE) || defined(CONFIG_BFIN_HDD_IDE) 
+#  define CONFIG_BFIN_IDE	1
+#  define ADD_IDE_CMD           CFG_CMD_IDE
+#else
+#  define ADD_IDE_CMD           0
+#endif
+
 #define CONFIG_BF537_NAND 		/* Add nand flash support */
 
 #ifdef CONFIG_BF537_NAND
@@ -130,13 +167,13 @@
 #  define ADD_NAND_CMD		0
 #endif
 
-#ifdef CONFIG_BFIN_MAC
-# define CONFIG_BFIN_CMD		(CONFIG_CMD_DFL & ~CFG_CMD_NFS & ~CFG_CMD_DISPLAY & ~CFG_CMD_IMI & ~CFG_CMD_LOADB & ~CFG_CMD_LOADS)
+#if (BFIN_CPU == ADSP_BF534)
+#define CONFIG_BFIN_CMD		(CONFIG_CMD_DFL & ~CFG_CMD_NET) 
 #else
-# define CONFIG_BFIN_CMD		(CONFIG_CMD_DFL & ~CFG_CMD_NET)
+#define CONFIG_BFIN_CMD		(CONFIG_CMD_DFL & ~CFG_CMD_NFS & ~CFG_CMD_DISPLAY & ~CFG_CMD_IMI & ~CFG_CMD_LOADB & ~CFG_CMD_LOADS)
 #endif
 
-#if (BFIN_BOOT_MODE == BFIN_BOOT_BYPASS)
+#if (BFIN_BOOT_MODE == BF537_BYPASS_BOOT)
 #define CONFIG_COMMANDS			(CONFIG_BFIN_CMD| \
 					 CFG_CMD_ELF	| \
 					 CFG_CMD_I2C	| \
@@ -144,10 +181,11 @@
 					 CFG_CMD_JFFS2	| \
 					 CFG_CMD_EEPROM | \
 					 CFG_CMD_DHCP   | \
+					 ADD_IDE_CMD	| \
 					 ADD_NAND_CMD	| \
 					 CFG_CMD_POST_DIAG | \
 					 CFG_CMD_DATE)
-#elif (BFIN_BOOT_MODE == BFIN_BOOT_SPI_MASTER)
+#elif (BFIN_BOOT_MODE == BF537_SPI_MASTER_BOOT)
 #define CONFIG_COMMANDS			(CONFIG_BFIN_CMD| \
 					 CFG_CMD_CACHE  | \
 					 ADD_NAND_CMD	| \
@@ -155,46 +193,80 @@
 					 CFG_CMD_EEPROM)
 #endif
 
-#define CONFIG_BOOTARGS "root=/dev/mtdblock1 rw rootfstype=yaffs"
-#define CONFIG_LOADADDR	0x1000000
+#define CONFIG_BOOTARGS "root=/dev/mtdblock1 rw rootfstype=yaffs"	
 
-#if (BFIN_BOOT_MODE == BFIN_BOOT_BYPASS)
-# define BOOT_ENV_SETTINGS \
-	"update=tftpboot $(loadaddr) u-boot.bin;" \
-		"protect off 0x20000000 0x2003FFFF;" \
-		"erase 0x20000000 0x2003FFFF;cp.b 0x1000000 0x20000000 $(filesize)\0"
-#elif (BFIN_BOOT_MODE == BFIN_BOOT_SPI_MASTER)
-# define BOOT_ENV_SETTINGS \
-	"update=tftpboot $(loadaddr) u-boot.ldr;" \
-		"eeprom write $(loadaddr) 0x0 $(filesize);\0"
+#if (BFIN_BOOT_MODE == BF537_BYPASS_BOOT)
+#if (BFIN_CPU != ADSP_BF534)
+#define CONFIG_EXTRA_ENV_SETTINGS                               \
+        "ramargs=setenv bootargs root=/dev/mtdblock0 rw\0"      \
+        "nfsargs=setenv bootargs root=/dev/nfs rw "             \
+        "nfsroot=$(serverip):$(rootpath)\0"                     \
+        "addip=setenv bootargs $(bootargs) "                    \
+        "ip=$(ipaddr):$(serverip):$(gatewayip):$(netmask)"      \
+        ":$(hostname):eth0:off\0"                               \
+        "ramboot=tftpboot 0x1000000 linux;"                     \
+        "run ramargs;run addip;bootelf\0"                       \
+        "nfsboot=tftpboot 0x1000000 linux;"                     \
+        "run nfsargs;run addip;bootelf\0"                       \
+        "flashboot=bootm 0x20100000\0"                          \
+        "update=tftpboot 0x1000000 u-boot.bin;"                 \
+        "protect off 0x20000000 0x2007FFFF;"                    \
+        "erase 0x20000000 0x2007FFFF;cp.b 0x1000000 0x20000000 $(filesize)\0"\
+        ""
 #else
-# define BOOT_ENV_SETTINGS
+#define CONFIG_EXTRA_ENV_SETTINGS                               \
+        "ramargs=setenv bootargs root=/dev/mtdblock0 rw\0" \
+        "nfsargs=setenv bootargs root=/dev/nfs rw "             \
+        "flashboot=bootm 0x20100000\0" \
+        ""
 #endif
-#ifdef CONFIG_BFIN_MAC
-# define NETWORK_ENV_SETTINGS \
-	"nfsargs=setenv bootargs root=/dev/nfs rw " \
-		"nfsroot=$(serverip):$(rootpath)\0" \
-	"addip=setenv bootargs $(bootargs) " \
-		"ip=$(ipaddr):$(serverip):$(gatewayip):$(netmask)" \
-		":$(hostname):eth0:off\0" \
-	"ramboot=tftpboot $(loadaddr) linux;" \
-		"run ramargs;run addip;bootelf\0" \
-	"nfsboot=tftpboot $(loadaddr) linux;" \
-		"run nfsargs;run addip;bootelf\0"
+#elif (BFIN_BOOT_MODE == BF537_SPI_MASTER_BOOT)
+#if (BFIN_CPU != ADSP_BF534)
+#define CONFIG_EXTRA_ENV_SETTINGS					\
+        "ramargs=setenv bootargs root=/dev/mtdblock0 rw\0"		\
+        "nfsargs=setenv bootargs root=/dev/nfs rw "			\
+        "nfsroot=$(serverip):$(rootpath)\0"				\
+        "addip=setenv bootargs $(bootargs) "				\
+        "ip=$(ipaddr):$(serverip):$(gatewayip):$(netmask)"		\
+        ":$(hostname):eth0:off\0"					\
+    	"ramboot=tftpboot 0x1000000 uImage;"				\
+        "run ramargs;run addip;bootm\0"				\
+        "nfsboot=tftpboot 0x1000000 linux;"				\
+        "run nfsargs;run addip;bootelf\0"				\
+        "flashboot=bootm 0x20100000\0"					\
+        "update=tftpboot 0x1000000 u-boot.ldr;"				\
+        "eeprom write 0x1000000 0x0 $(filesize);\0"			\
+        "nandboot=nand read 0x1000000 0x20000 0x100000;bootm 0x1000000" \
+        ""
 #else
-# define NETWORK_ENV_SETTINGS
+#define CONFIG_EXTRA_ENV_SETTINGS                               \
+        "ramargs=setenv bootargs root=/dev/mtdblock0 rw\0" \
+        "nfsargs=setenv bootargs root=/dev/nfs rw "             \
+        "flashboot=bootm 0x20100000\0" \
+        ""
 #endif
-#define CONFIG_EXTRA_ENV_SETTINGS \
-	NETWORK_ENV_SETTINGS \
-	"ramargs=setenv bootargs root=/dev/mtdblock0 rw\0" \
-	"flashboot=bootm 0x20100000\0" \
-	"nandboot=nand read $(loadaddr) 0x20000 0x100000;bootm $(loadaddr)" \
-	BOOT_ENV_SETTINGS
+#endif
 
 /* this must be included AFTER the definition of CONFIG_COMMANDS (if any) */
 #include <cmd_confdefs.h>
 
-#define CFG_PROMPT "bfin> "
+#if (BFIN_BOOT_MODE == BF537_SPI_MASTER_BOOT)
+#if (BFIN_CPU == ADSP_BF534)
+#define	CFG_PROMPT		"serial_bf534> "	/* Monitor Command Prompt */
+#elif (BFIN_CPU == ADSP_BF536)
+#define	CFG_PROMPT		"serial_bf536> "	/* Monitor Command Prompt */
+#else
+#define	CFG_PROMPT		"PNAV> "	/* Monitor Command Prompt */
+#endif
+#else
+#if (BFIN_CPU == ADSP_BF534)
+#define	CFG_PROMPT		"bf534> "	/* Monitor Command Prompt */
+#elif (BFIN_CPU == ADSP_BF536)
+#define	CFG_PROMPT		"bf536> "	/* Monitor Command Prompt */
+#else
+#define	CFG_PROMPT		"bf537> "	/* Monitor Command Prompt */
+#endif
+#endif
 
 #if (CONFIG_COMMANDS & CFG_CMD_KGDB)
 #define	CFG_CBSIZE		1024	/* Console I/O Buffer Size */
@@ -222,21 +294,24 @@
 #define CFG_GBL_DATA_ADDR	(CFG_MALLOC_BASE - CFG_GBL_DATA_SIZE)
 #define CONFIG_STACKBASE	(CFG_GBL_DATA_ADDR  - 4)
 
+#define	CFG_BOOTMAPSZ		(8 << 20)	/* Initial Memory map for Linux */
 #define CFG_MAX_FLASH_BANKS	1	/* max number of memory banks */
 #define CFG_MAX_FLASH_SECT	71	/* max number of sectors on one chip */
 
-#if (BFIN_BOOT_MODE == BFIN_BOOT_BYPASS) || (BFIN_BOOT_MODE == BFIN_BOOT_UART)    /* for bf537-stamp, usrt boot mode still store env in flash */
+#if (BFIN_BOOT_MODE == BF537_BYPASS_BOOT) || (BFIN_BOOT_MODE == BF537_UART_BOOT)    /* for bf537-stamp, usrt boot mode still store env in flash */
 #define	CFG_ENV_IS_IN_FLASH	1
 #define CFG_ENV_ADDR		0x20004000
 #define CFG_ENV_OFFSET		(CFG_ENV_ADDR - CFG_FLASH_BASE)
-#elif (BFIN_BOOT_MODE == BFIN_BOOT_SPI_MASTER)
+#elif (BFIN_BOOT_MODE == BF537_SPI_MASTER_BOOT)
 #define CFG_ENV_IS_IN_EEPROM           1
 #define CFG_ENV_OFFSET                 0x4000
 #define CFG_ENV_HEADER                 (CFG_ENV_OFFSET + 0x16e)        /* 0x12A is the length of LDR file header */
 #endif
 #define CFG_ENV_SIZE		0x1000
 #define	CFG_ENV_SECT_SIZE	0x2000	/* Total Size of Environment Sector */
+//#if (BFIN_BOOT_MODE == BF537_BYPASS_BOOT)
 #define ENV_IS_EMBEDDED
+//#endif
 
 /* JFFS Partition offset set  */
 #define CFG_JFFS2_FIRST_BANK 0
@@ -244,29 +319,17 @@
 /* 512k reserved for u-boot */
 #define CFG_JFFS2_FIRST_SECTOR                 15
 
-
-#define FLASH_TOT_SECT		71
-
-
-/*
- * Serial Flash Infomation
- */
-	/* 	  NAME	    Sector Size	   Sectors
-	 *	 m25p05     32 * 1024        2
-	 *	 m25p10     32 * 1024        4
-	 *	 m25p20     64 * 1024        4
-	 *	 m25p40     64 * 1024        8
-	 *	 m25p80     64 * 1024        16
-	 *	 m25p16     64 * 1024        32
-	 *	 m25p32     64 * 1024        64
-	 *	 m25p64     64 * 1024        128
-	 *	 m25p128   256 * 1024        64
-	 */
-
 #define CONFIG_SPI
 
-#define CONFIG_SPI_FLASH_NUM_SECTORS	(4)
-#define CONFIG_SPI_FLASH_SECTOR_SIZE	(32 * 1024)
+/*
+ * Stack sizes
+ */
+#define CONFIG_STACKSIZE        (128*1024)      /* regular stack */
+
+#define POLL_MODE		1
+#define FLASH_TOT_SECT		71
+#define FLASH_SIZE		0x400000
+#define CFG_FLASH_SIZE		0x400000
 
 /*
  * Board NAND Infomation
@@ -311,27 +374,107 @@
 
 /*
  * I2C settings
+ * By default PF1 is used as SDA and PF0 as SCL on the Stamp board
  */
+/*#define CONFIG_SOFT_I2C			1*/	/* I2C bit-banged		*/
 #define CONFIG_HARD_I2C			1	/* I2C TWI */
 #if defined CONFIG_HARD_I2C
 #define CONFIG_TWICLK_KHZ		50
+#endif
+
+#if defined CONFIG_SOFT_I2C
+/*
+ * Software (bit-bang) I2C driver configuration
+ */
+#define PF_SCL				PF0
+#define PF_SDA				PF1
+
+#define I2C_INIT			(*pFIO_DIR |=  PF_SCL); asm("ssync;")
+#define I2C_ACTIVE			(*pFIO_DIR |=  PF_SDA); *pFIO_INEN &= ~PF_SDA; asm("ssync;")
+#define I2C_TRISTATE			(*pFIO_DIR &= ~PF_SDA); *pFIO_INEN |= PF_SDA; asm("ssync;")
+#define I2C_READ			((volatile)(*pFIO_FLAG_D & PF_SDA) != 0); asm("ssync;")
+#define I2C_SDA(bit)			if(bit) { \
+							*pFIO_FLAG_S = PF_SDA; \
+							asm("ssync;"); \
+						} \
+					else    { \
+							*pFIO_FLAG_C = PF_SDA; \
+							asm("ssync;"); \
+						}
+#define I2C_SCL(bit)			if(bit) { \
+							*pFIO_FLAG_S = PF_SCL; \
+							asm("ssync;"); \
+						} \
+					else    { \
+							*pFIO_FLAG_C = PF_SCL; \
+							asm("ssync;"); \
+						}
+#define I2C_DELAY			udelay(5)	/* 1/4 I2C clock duration */
 #endif
 
 #define CFG_I2C_SPEED			50000
 #define CFG_I2C_SLAVE			0xFE
 
 /* 0xFF, 0x7BB07BB0, 0x22547BB0 */
-/* #define CONFIG_EBIU_AMGCTL_VAL            (AMBEN_P0 | AMBEN_P1 | AMBEN_P2 | AMCKEN)
-#define CONFIG_EBIU_AMBCTL0_VAL              (B1WAT_7 | B1RAT_11 | B1HT_2 | B1ST_3 | B1TT_4 | ~B1RDYPOL |    \
+/* #define AMGCTLVAL            (AMBEN_P0 | AMBEN_P1 | AMBEN_P2 | AMCKEN)
+#define AMBCTL0VAL              (B1WAT_7 | B1RAT_11 | B1HT_2 | B1ST_3 | B1TT_4 | ~B1RDYPOL |    \
                                 ~B1RDYEN | B0WAT_7 | B0RAT_11 | B0HT_2 | B0ST_3 | B0TT_4 | ~B0RDYPOL | ~B0RDYEN)
-#define CONFIG_EBIU_AMBCTL1_VAL              (B3WAT_2 | B3RAT_2 | B3HT_1 | B3ST_1 | B3TT_4 | B3RDYPOL | ~B3RDYEN |   \
+#define AMBCTL1VAL              (B3WAT_2 | B3RAT_2 | B3HT_1 | B3ST_1 | B3TT_4 | B3RDYPOL | ~B3RDYEN |   \
                                 B2WAT_7 | B2RAT_11 | B2HT_2 | B2ST_3 | B2TT_4 | ~B2RDYPOL | ~B2RDYEN)
 */
 
-#define CONFIG_EBIU_AMGCTL_VAL               0xFF
-#define CONFIG_EBIU_AMBCTL0_VAL              0x7BB033B0
-#define CONFIG_EBIU_AMBCTL1_VAL              0xFFC27BB0
+#define AMGCTLVAL               0xFF
+#define AMBCTL0VAL              0x7BB033B0
+#define AMBCTL1VAL              0xFFC27BB0
 
-#include <asm/blackfin-config-post.h>
+#define CONFIG_VDSP		1
+
+#ifdef CONFIG_VDSP
+#define ET_EXEC_VDSP		0x8
+#define SHT_STRTAB_VDSP		0x1
+#define ELFSHDRSIZE_VDSP	0x2C
+#define VDSP_ENTRY_ADDR		0xFFA00000
+#endif
+
+#if defined(CONFIG_BFIN_IDE)
+
+#define CONFIG_DOS_PARTITION            1
+/*
+ * IDE/ATA stuff
+ */
+#undef  CONFIG_IDE_8xx_DIRECT           /* no pcmcia interface required */
+#undef  CONFIG_IDE_LED                  /* no led for ide supported */
+#undef  CONFIG_IDE_RESET                /* no reset for ide supported */
+
+#define CFG_IDE_MAXBUS  1               /* max. 1 IDE busses */
+#define CFG_IDE_MAXDEVICE               (CFG_IDE_MAXBUS*1) /* max. 1 drives per IDE bus */
+
+#undef  AMBCTL1VAL
+#define AMBCTL1VAL			0xFFC3FFC3
+
+#define CONFIG_CF_ATASEL_DIS 	0x20311800
+
+#if defined(CONFIG_BFIN_CF_IDE) /* USE CompactFlash Storage Card in the common memory space */
+#define CFG_ATA_BASE_ADDR               0x20211800
+#define CFG_ATA_IDE0_OFFSET             0x0000
+#define CFG_ATA_DATA_OFFSET             0x0000  /* Offset for data I/O */
+#define CFG_ATA_REG_OFFSET              0x0000  /* Offset for normal register accesses */
+#define CFG_ATA_ALT_OFFSET              0x000E  /* Offset for alternate registers */
+#define CFG_ATA_STRIDE                  1 	/* CF.A0 --> Blackfin.Ax */
+#endif /* CONFIG_BFIN_CF_IDE */
+ 
+#if defined(CONFIG_BFIN_HDD_IDE) /* USE TRUE IDE */
+#define CFG_ATA_BASE_ADDR               0x20314000
+#define CFG_ATA_IDE0_OFFSET             0x0000
+#define CFG_ATA_DATA_OFFSET             0x0020  /* Offset for data I/O */
+#define CFG_ATA_REG_OFFSET              0x0020  /* Offset for normal register accesses */
+#define CFG_ATA_ALT_OFFSET              0x001C  /* Offset for alternate registers */
+#define CFG_ATA_STRIDE                  2 	/* CF.A0 --> Blackfin.A1 */
+
+#undef  CONFIG_SCLK_DIV
+#define CONFIG_SCLK_DIV                 8
+#endif /* CONFIG_BFIN_HDD_IDE */
+
+#endif /*CONFIG_BFIN_IDE*/
 
 #endif

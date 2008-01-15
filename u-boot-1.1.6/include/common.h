@@ -199,8 +199,8 @@ void	init_cmd_timeout(void);
 void	reset_cmd_timeout(void);
 
 /* lib_$(ARCH)/board.c */
-void	board_init_f  (ulong) __attribute__ ((noreturn));
-void	board_init_r  (gd_t *, ulong) __attribute__ ((noreturn));
+void	board_init_f  (ulong);
+void	board_init_r  (gd_t *, ulong);
 int	checkboard    (void);
 int	checkflash    (void);
 int	checkdram     (void);
@@ -283,8 +283,6 @@ void	fdc_hw_init   (void);
 void eeprom_init  (void);
 #ifndef CONFIG_SPI
 int  eeprom_probe (unsigned dev_addr, unsigned offset);
-#else
-int  eeprom_info  (void);
 #endif
 int  eeprom_read  (unsigned dev_addr, unsigned offset, uchar *buffer, unsigned cnt);
 int  eeprom_write (unsigned dev_addr, unsigned offset, uchar *buffer, unsigned cnt);

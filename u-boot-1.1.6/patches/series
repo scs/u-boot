@@ -1,10 +1,10 @@
-MACOSX-uboot-porting.patch
-driver-smc91111.diff
-include-ata.patch
 Makefile.diff
+common-cmd_bootm.diff
 common-cmd_elf.diff
 common-environment.diff
+config.diff
 examples-Makefile.diff
+examples-stubs.diff
 skip-post-subdir.diff
 MAKEALL-blackfin.diff
 version.diff

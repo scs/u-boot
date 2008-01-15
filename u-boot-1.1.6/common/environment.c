@@ -44,7 +44,7 @@
  * Generate embedded environment table
  * inside U-Boot image, if needed.
  */
-#if defined(ENV_IS_EMBEDDED) || (defined(ENV_IS_EMBEDDED_CUSTOM) && defined(USE_HOSTCC))
+#if defined(ENV_IS_EMBEDDED)
 /*
  * Only put the environment in it's own section when we are building
  * U-Boot proper.  The host based program "tools/envcrc" does not need
@@ -80,16 +80,11 @@
 /*
  * Macros to generate global absolutes.
  */
-#if defined(__bfin__)
-# define GEN_SET_VALUE(name, value) asm (".set " GEN_SYMNAME(name) ", " GEN_VALUE(value))
-#else
-# define GEN_SET_VALUE(name, value) asm (GEN_SYMNAME(name) " = " GEN_VALUE(value))
-#endif
 #define GEN_SYMNAME(str) SYM_CHAR #str
 #define GEN_VALUE(str) #str
 #define GEN_ABS(name, value) \
 		asm (".globl " GEN_SYMNAME(name)); \
-		GEN_SET_VALUE(name, value)
+		asm (".set " GEN_SYMNAME(name) ", " GEN_VALUE(value))
 
 /*
  * Macros to transform values

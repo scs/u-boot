@@ -17,7 +17,7 @@
  *    along with this program; if not, write to the Free Software
  *    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  */
-#ident "$Id:$"
+#ident "$Id: host_bridge.c,v 1.1 2007/12/17 10:21:10 mberner Exp $"
 
 # include  <common.h>
 # include  <pci.h>

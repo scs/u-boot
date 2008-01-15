@@ -118,7 +118,6 @@ CC	= $(CROSS_COMPILE)gcc
 CPP	= $(CC) -E
 AR	= $(CROSS_COMPILE)ar
 NM	= $(CROSS_COMPILE)nm
-LDR	= $(CROSS_COMPILE)ldr
 STRIP	= $(CROSS_COMPILE)strip
 OBJCOPY = $(CROSS_COMPILE)objcopy
 OBJDUMP = $(CROSS_COMPILE)objdump
@@ -145,10 +144,7 @@ OBJCFLAGS += --gap-fill=0xff
 gccincdir := $(shell $(CC) -print-file-name=include)
 
 CPPFLAGS := $(DBGFLAGS) $(OPTFLAGS) $(RELFLAGS)		\
-	-D__KERNEL__
-ifneq ($(TEXT_BASE),)
-CPPFLAGS += -DTEXT_BASE=$(TEXT_BASE)
-endif
+	-D__KERNEL__ -DTEXT_BASE=$(TEXT_BASE)		\
 
 ifneq ($(OBJTREE),$(SRCTREE))
 CPPFLAGS += -I$(OBJTREE)/include2 -I$(OBJTREE)/include
@@ -187,9 +183,6 @@ endif
 AFLAGS := $(AFLAGS_DEBUG) -D__ASSEMBLY__ $(CPPFLAGS)
 
 LDFLAGS += -Bstatic -T $(LDSCRIPT) $(PLATFORM_LDFLAGS)
-ifneq ($(TEXT_BASE),)
-LDFLAGS += -Ttext $(TEXT_BASE)
-endif
 
 # Location of a usable BFD library, where we define "usable" as
 # "built for ${HOST}, supports ${TARGET}".  Sensible values are

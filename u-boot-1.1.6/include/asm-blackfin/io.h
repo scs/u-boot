@@ -1,7 +1,7 @@
 /*
  * U-boot - io.h IO routines
  *
- * Copyright (c) 2005-2007 Analog Devices Inc.
+ * Copyright (c) 2005 blackfin.uclinux.org
  *
  * See file CREDITS for list of people who contributed to this
  * project.
@@ -18,8 +18,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
- * MA 02110-1301 USA
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+ * MA 02111-1307 USA
  */
 
 #ifndef _BLACKFIN_IO_H
@@ -27,13 +27,13 @@
 
 #ifdef __KERNEL__
 
-#include <asm/blackfin.h>
+#include <linux/config.h>
 
 /* function prototypes for CF support */
 extern void cf_outsw(unsigned short *addr, unsigned short *sect_buf, int words);
 extern void cf_insw(unsigned short *sect_buf, unsigned short *addr, int words);
 extern unsigned char cf_inb(volatile unsigned char *addr);
-extern void cf_outb(unsigned char val, volatile unsigned char *addr);
+extern void cf_outb(unsigned char val, volatile unsigned char* addr);
 
 /*
  * These are for ISA/PCI shared memory _only_ and should never be used
@@ -46,65 +46,38 @@ extern void cf_outb(unsigned char val, volatile unsigned char *addr);
  * memory location directly.
  */
 
-#ifndef __ASSEMBLY__
 
-static inline unsigned char readb(const volatile void *addr)
-{
-	unsigned int val;
-	int tmp;
+#define readb(addr)		({ unsigned char __v = (*(volatile unsigned char *) (addr));asm("ssync;"); __v; })
+#define readw(addr)		({ unsigned short __v = (*(volatile unsigned short *) (addr)); asm("ssync;");__v; })
+#define readl(addr)		({ unsigned int __v = (*(volatile unsigned int *) (addr));asm("ssync;"); __v; })
 
-	__asm__ __volatile__ ("cli %1;\n\t"
-			"NOP; NOP; SSYNC;\n\t"
-			"%0 = b [%2] (z);\n\t"
-			"sti %1;\n\t"
-			: "=d"(val), "=d"(tmp): "a"(addr));
+#define writeb(b,addr)		{((*(volatile unsigned char *) (addr)) = (b)); asm("ssync;");}
+#define writew(b,addr)		{((*(volatile unsigned short *) (addr)) = (b)); asm("ssync;");}
+#define writel(b,addr)		{((*(volatile unsigned int *) (addr)) = (b)); asm("ssync;");}
 
-	return (unsigned char) val;
-}
+#define memset_io(a,b,c)	memset((void *)(a),(b),(c))
+#define memcpy_fromio(a,b,c)	memcpy((a),(void *)(b),(c))
+#define memcpy_toio(a,b,c)	memcpy((void *)(a),(b),(c))
 
-static inline unsigned short readw(const volatile void *addr)
-{
-	unsigned int val;
-	int tmp;
+#define inb_p(addr)		readb((addr) + BF533_PCIIO_BASE)
+#define inb(addr)		cf_inb((volatile unsigned char*)(addr))
 
-	__asm__ __volatile__ ("cli %1;\n\t"
-			"NOP; NOP; SSYNC;\n\t"
-			"%0 = w [%2] (z);\n\t"
-			"sti %1;\n\t"
-			: "=d"(val), "=d"(tmp): "a"(addr));
+#define outb(x,addr)		cf_outb((unsigned char)(x), (volatile unsigned char*)(addr))
+#define outb_p(x,addr)		outb(x, (addr) + BF533_PCIIO_BASE)
 
-	return (unsigned short) val;
-}
+#define inw(addr)		readw((addr) + BF533_PCIIO_BASE)
+#define inl(addr)		readl((addr) + BF533_PCIIO_BASE)
 
-static inline unsigned int readl(const volatile void *addr)
-{
-	unsigned int val;
-	int tmp;
+#define outw(x,addr)		writew(x, (addr) + BF533_PCIIO_BASE)
+#define outl(x,addr)		writel(x, (addr) + BF533_PCIIO_BASE)
 
-	__asm__ __volatile__ ("cli %1;\n\t"
-			"NOP; NOP; SSYNC;\n\t"
-			"%0 = [%2];\n\t"
-			"sti %1;\n\t"
-			: "=d"(val), "=d"(tmp): "a"(addr));
-	return val;
-}
+#define insb(port, addr, count)	memcpy((void*)addr, (void*)(BF533_PCIIO_BASE + port), count)
+#define insw(port, addr, count)	cf_insw((unsigned short*)addr, (unsigned short*)(port), (count))
+#define insl(port, addr, count)	memcpy((void*)addr, (void*)(BF533_PCIIO_BASE + port), (4*count))
 
-#endif /*  __ASSEMBLY__ */
-
-#define writeb(b, addr) (void)((*(volatile unsigned char *) (addr)) = (b))
-#define writew(b, addr) (void)((*(volatile unsigned short *) (addr)) = (b))
-#define writel(b, addr) (void)((*(volatile unsigned int *) (addr)) = (b))
-
-#define memset_io(a, b, c)	memset((void *)(a), (b), (c))
-#define memcpy_fromio(a, b, c)	memcpy((a), (void *)(b), (c))
-#define memcpy_toio(a, b, c)	memcpy((void *)(a), (b), (c))
-
-#define inb(addr)		cf_inb((volatile unsigned char *)(addr))
-#define outb(x, addr)		cf_outb((unsigned char)(x), (volatile unsigned char *)(addr))
-
-#define insw(port, addr, count)	cf_insw((unsigned short *)addr, (unsigned short *)(port), (count))
-
-#define outsw(port, addr, count)	cf_outsw((unsigned short *)(port), (unsigned short *)addr, (count))
+#define outsb(port,addr,count)	memcpy((void*)(BF533_PCIIO_BASE + port), (void*)addr, count)
+#define outsw(port,addr,count)	cf_outsw((unsigned short*)(port), (unsigned short*)addr, (count))
+#define outsl(port,addr,count)	memcpy((void*)(BF533_PCIIO_BASE + port), (void*)addr, (4*count))
 
 #define IO_SPACE_LIMIT		0xffff
 
@@ -122,7 +95,8 @@ extern inline void *ioremap(unsigned long physaddr, unsigned long size)
 {
 	return __ioremap(physaddr, size, IOMAP_NOCACHE_SER);
 }
-extern inline void *ioremap_nocache(unsigned long physaddr, unsigned long size)
+extern inline void *ioremap_nocache(unsigned long physaddr,
+				    unsigned long size)
 {
 	return __ioremap(physaddr, size, IOMAP_NOCACHE_SER);
 }
@@ -140,9 +114,9 @@ extern inline void *ioremap_fullcache(unsigned long physaddr,
 extern void iounmap(void *addr);
 
 extern void blkfin_inv_cache_all(void);
-#define dma_cache_inv(_start, _size)		do { blkfin_inv_cache_all(); } while (0)
-#define dma_cache_wback(_start, _size)		do { } while (0)
-#define dma_cache_wback_inv(_start, _size)	do { blkfin_inv_cache_all(); } while (0)
+#define dma_cache_inv(_start,_size)		do { blkfin_inv_cache_all();} while (0)
+#define dma_cache_wback(_start,_size)		do { } while (0)
+#define dma_cache_wback_inv(_start,_size)	do { blkfin_inv_cache_all();} while (0)
 
 #endif
 #endif

@@ -2,8 +2,8 @@
  *
  * Name:	skqueue.h
  * Project:	GEnesis, PCI Gigabit Ethernet Adapter
- * Version:	$Revision: 1.14 $
- * Date:	$Date: 2002/03/15 10:52:13 $
+ * Version:	$Revision: 1.1 $
+ * Date:	$Date: 2007/12/17 10:24:15 $
  * Purpose:	Defines for the Event queue
  *
  ******************************************************************************/
@@ -27,6 +27,15 @@
  * History:
  *
  *	$Log: skqueue.h,v $
+ *	Revision 1.1  2007/12/17 10:24:15  mberner
+ *	U-Boot added.
+ *	
+ *	Revision 1.1.1.1  2007/10/03 08:15:43  dstadelmann
+ *	First Commit Of Sources
+ *	
+ *	Revision 1.1  2006/12/22 18:31:53  aubrey
+ *	Initial revision
+ *
  *	Revision 1.14  2002/03/15 10:52:13  mkunz
  *	Added event classes for link aggregation
  *

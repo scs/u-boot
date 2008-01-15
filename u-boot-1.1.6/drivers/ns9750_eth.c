@@ -3,7 +3,7 @@
  * Copyright (C) 2004 by FS Forth-Systeme GmbH.
  * All rights reserved.
  *
- * $Id: ns9750_eth.c,v 1.2 2004/02/24 14:09:39 mpietrek Exp $
+ * $Id: ns9750_eth.c,v 1.1 2007/12/17 10:24:12 mberner Exp $
  * @Author: Markus Pietrek
  * @Descr: Ethernet driver for the NS9750. Uses DMA Engine with polling
  *	   interrupt status. But interrupts are not enabled.

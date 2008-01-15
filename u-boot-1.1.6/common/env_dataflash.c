@@ -36,7 +36,7 @@ extern int read_dataflash (unsigned long addr, unsigned long size, char
 *result);
 extern int write_dataflash (unsigned long addr_dest, unsigned long addr_src,
 		     unsigned long size);
-extern int AT91F_DataflashInit (void);
+extern int AT45F_DataflashInit (void);
 extern uchar default_environment[];
 /* extern int default_environment_size; */
 
@@ -74,7 +74,7 @@ int env_init(void)
 	unsigned off;
 	uchar buf[64];
 	if (gd->env_valid == 0){
-		AT91F_DataflashInit();	/* prepare for DATAFLASH read/write */
+		AT45F_DataflashInit();	/* prepare for DATAFLASH read/write */
 
 		/* read old CRC */
 		read_dataflash (CFG_ENV_ADDR+offsetof(env_t,crc),sizeof(ulong),&crc);

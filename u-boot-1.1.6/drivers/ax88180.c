@@ -38,7 +38,10 @@
  * Date        : 2006-09-06
  * Notes       :
  * History     :
- * $Log:$
+ * $Log: ax88180.c,v $
+ * Revision 1.1  2007/12/17 10:24:12  mberner
+ * U-Boot added.
+ *
  * 1.0.0	2006-09-06
  * New release for AX88180 US2 chip.
  *

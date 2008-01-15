@@ -2,8 +2,8 @@
  *
  * Name:	skgehw.h
  * Project:	GEnesis, PCI Gigabit Ethernet Adapter
- * Version:	$Revision: 1.49 $
- * Date:	$Date: 2003/01/28 09:43:49 $
+ * Version:	$Revision: 1.1 $
+ * Date:	$Date: 2007/12/17 10:24:15 $
  * Purpose:	Defines and Macros for the Gigabit Ethernet Adapter Product Family
  *
  ******************************************************************************/
@@ -25,6 +25,15 @@
  *
  * History:
  * $Log: skgehw.h,v $
+ * Revision 1.1  2007/12/17 10:24:15  mberner
+ * U-Boot added.
+ *
+ * Revision 1.1.1.1  2007/10/03 08:15:43  dstadelmann
+ * First Commit Of Sources
+ *
+ * Revision 1.1  2006/12/22 18:31:53  aubrey
+ * Initial revision
+ *
  * Revision 1.49  2003/01/28 09:43:49  rschmidt
  * Added defines for PCI-Spec. 2.3 IRQ
  * Added defines for CLK_RUN (YUKON-Lite)

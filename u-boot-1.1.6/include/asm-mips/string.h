@@ -1,4 +1,4 @@
-/* $Id: string.h,v 1.13 2000/02/19 14:12:14 harald Exp $
+/* $Id: string.h,v 1.1 2007/12/17 10:24:22 mberner Exp $
  *
  * This file is subject to the terms and conditions of the GNU General Public
  * License.  See the file "COPYING" in the main directory of this archive

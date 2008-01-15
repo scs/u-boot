@@ -1,6 +1,6 @@
 #!/bin/sh
-USER=/home/test
-WORK=/home/test/work/cruise
+USER=/home/lcv/test
+WORK=/home/lcv/
 CHECKOUT=$WORK/checkouts
 UBOOT_SCRIPTS=$WORK/test_scripts/u-boot
 

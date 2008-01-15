@@ -3,7 +3,7 @@
  * Copyright (C) 2004 by FS Forth-Systeme GmbH.
  * All rights reserved.
  *
- * $Id: ns9750_mem.h,v 1.1 2004/02/16 10:37:20 mpietrek Exp $
+ * $Id: ns9750_mem.h,v 1.1 2007/12/17 10:24:16 mberner Exp $
  * @Author: Markus Pietrek
  * @Descr: Definitions for Memory Control Module
  * @References: [1] NS9750 Hardware Reference Manual/December 2003 Chap. 5

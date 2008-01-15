@@ -15,7 +15,7 @@
  *   Parsing routines are based on driver/mtd/cmdline.c from the linux 2.4
  *   kernel tree.
  *
- *   $Id: cmdlinepart.c,v 1.17 2004/11/26 11:18:47 lavinen Exp $
+ *   $Id: cmd_jffs2.c,v 1.1 2007/12/17 10:23:00 mberner Exp $
  *   Copyright 2002 SYSGO Real-Time Solutions GmbH
  *
  * See file CREDITS for list of people who contributed to this
@@ -170,17 +170,10 @@ struct list_head devices;
 static struct mtd_device *current_dev = NULL;
 static u8 current_partnum = 0;
 
-#ifndef CFG_NO_FLASH
 extern int cramfs_check (struct part_info *info);
 extern int cramfs_load (char *loadoffset, struct part_info *info, char *filename);
 extern int cramfs_ls (struct part_info *info, char *filename);
 extern int cramfs_info (struct part_info *info);
-#else
-# define cramfs_check(info) (0)
-# define cramfs_load(loadoffset, info, filename) (-1)
-# define cramfs_ls(info, filename) (1)
-# define cramfs_info(info) (1)
-#endif
 
 static struct part_info* jffs2_part_info(struct mtd_device *dev, unsigned int part_num);
 

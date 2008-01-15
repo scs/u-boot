@@ -1,22 +1,21 @@
-/*
- * cplb.h - defines for managing CPLB tables
+/************************************************************************
  *
- * Copyright (c) 2002-2007 Analog Devices Inc.
+ * cplb.h
  *
- * Licensed under the GPL-2 or later.
- */
+ * (c) Copyright 2002-2003 Analog Devices, Inc.  All rights reserved.
+ *
+ ************************************************************************/
 
-#ifndef __ASM_BLACKFIN_CPLB_H__
-#define __ASM_BLACKFIN_CPLB_H__
-
-#include <asm/mach-common/bits/mpu.h>
+/* Defines necessary for cplb initialisation routines. */
+#ifndef _CPLB_H
+#define _CPLB_H
 
 #define CONFIG_BLKFIN_WT
 
 #define CPLB_ENABLE_ICACHE_P	0
 #define CPLB_ENABLE_DCACHE_P	1
 #define CPLB_ENABLE_DCACHE2_P	2
-#define CPLB_ENABLE_CPLBS_P	3	/* Deprecated! */
+#define CPLB_ENABLE_CPLBS_P	3	/* Deprecated!*/
 #define CPLB_ENABLE_ICPLBS_P	4
 #define CPLB_ENABLE_DCPLBS_P	5
 
@@ -56,25 +55,26 @@
 
 /*Use the menuconfig cache policy here - CONFIG_BLKFIN_WT/CONFIG_BLKFIN_WB*/
 
-#if ANOMALY_05000158
-# define ANOMALY_05000158_WORKAROUND 0x200
+#define ANOMALY_05000158                0x200
+
+#ifdef CONFIG_BLKFIN_WB         /*Write Back Policy */
+	#define SDRAM_DGENERIC          (PAGE_SIZE_4MB | CPLB_L1_CHBL | CPLB_DIRTY | CPLB_SUPV_WR | CPLB_USER_WR | CPLB_USER_RD | CPLB_VALID | ANOMALY_05000158)
+        #define SDRAM_DNON_CHBL         (PAGE_SIZE_4MB | CPLB_DIRTY | CPLB_SUPV_WR | CPLB_USER_RD | CPLB_USER_WR | CPLB_VALID | ANOMALY_05000158)
+        #define SDRAM_DKERNEL           (PAGE_SIZE_4MB | CPLB_L1_CHBL | CPLB_USER_RD | CPLB_USER_WR | CPLB_DIRTY | CPLB_SUPV_WR | CPLB_VALID | CPLB_LOCK | ANOMALY_05000158)
+        #define L1_DMEMORY              (PAGE_SIZE_4MB | CPLB_SUPV_WR | CPLB_USER_WR | CPLB_USER_RD | CPLB_VALID | ANOMALY_05000158)
+        #define SDRAM_EBIU              (PAGE_SIZE_4MB | CPLB_DIRTY | CPLB_USER_RD | CPLB_USER_WR | CPLB_SUPV_WR | CPLB_VALID | ANOMALY_05000158)
+
+#else  /*Write Through*/
+        #define SDRAM_DGENERIC          (PAGE_SIZE_4MB | CPLB_L1_CHBL | CPLB_WT | CPLB_L1_AOW | CPLB_SUPV_WR | CPLB_USER_RD | CPLB_USER_WR | CPLB_VALID | ANOMALY_05000158)
+        #define SDRAM_DNON_CHBL         (PAGE_SIZE_4MB | CPLB_WT | CPLB_L1_AOW | CPLB_SUPV_WR | CPLB_USER_WR | CPLB_USER_RD | CPLB_VALID | ANOMALY_05000158)
+        #define SDRAM_DKERNEL           (PAGE_SIZE_4MB | CPLB_L1_CHBL | CPLB_WT | CPLB_L1_AOW | CPLB_USER_RD | CPLB_SUPV_WR | CPLB_USER_WR | CPLB_VALID | CPLB_LOCK | ANOMALY_05000158)
+        #define L1_DMEMORY              (PAGE_SIZE_4MB | CPLB_SUPV_WR | CPLB_USER_WR | CPLB_VALID | ANOMALY_05000158)
+        #define SDRAM_EBIU              (PAGE_SIZE_4MB | CPLB_WT | CPLB_L1_AOW | CPLB_USER_RD | CPLB_USER_WR | CPLB_SUPV_WR | CPLB_VALID | ANOMALY_05000158)
+#endif
+
+#if defined(CONFIG_BF561)
+#define page_descriptor_table_size (CONFIG_MEM_SIZE/4 + 1 + 4) /* SDRAM +L1 + ASYNC_Memory */
 #else
-# define ANOMALY_05000158_WORKAROUND 0
+#define page_descriptor_table_size (CONFIG_MEM_SIZE/4 + 2) /* SDRAM + L1 + ASYNC_Memory */
 #endif
-
-#ifdef CONFIG_BLKFIN_WB		/*Write Back Policy */
-#define SDRAM_DGENERIC          (PAGE_SIZE_4MB | CPLB_L1_CHBL | CPLB_DIRTY | CPLB_SUPV_WR | CPLB_USER_WR | CPLB_USER_RD | CPLB_VALID | ANOMALY_05000158_WORKAROUND)
-#define SDRAM_DNON_CHBL         (PAGE_SIZE_4MB | CPLB_DIRTY | CPLB_SUPV_WR | CPLB_USER_RD | CPLB_USER_WR | CPLB_VALID | ANOMALY_05000158_WORKAROUND)
-#define SDRAM_DKERNEL           (PAGE_SIZE_4MB | CPLB_L1_CHBL | CPLB_USER_RD | CPLB_USER_WR | CPLB_DIRTY | CPLB_SUPV_WR | CPLB_VALID | CPLB_LOCK | ANOMALY_05000158_WORKAROUND)
-#define L1_DMEMORY              (PAGE_SIZE_4MB | CPLB_SUPV_WR | CPLB_USER_WR | CPLB_USER_RD | CPLB_VALID | ANOMALY_05000158_WORKAROUND)
-#define SDRAM_EBIU              (PAGE_SIZE_4MB | CPLB_DIRTY | CPLB_USER_RD | CPLB_USER_WR | CPLB_SUPV_WR | CPLB_VALID | ANOMALY_05000158_WORKAROUND)
-
-#else				/*Write Through */
-#define SDRAM_DGENERIC          (PAGE_SIZE_4MB | CPLB_L1_CHBL | CPLB_WT | CPLB_L1_AOW | CPLB_SUPV_WR | CPLB_USER_RD | CPLB_USER_WR | CPLB_VALID | ANOMALY_05000158_WORKAROUND)
-#define SDRAM_DNON_CHBL         (PAGE_SIZE_4MB | CPLB_WT | CPLB_L1_AOW | CPLB_SUPV_WR | CPLB_USER_WR | CPLB_USER_RD | CPLB_VALID | ANOMALY_05000158_WORKAROUND)
-#define SDRAM_DKERNEL           (PAGE_SIZE_4MB | CPLB_L1_CHBL | CPLB_WT | CPLB_L1_AOW | CPLB_USER_RD | CPLB_SUPV_WR | CPLB_USER_WR | CPLB_VALID | CPLB_LOCK | ANOMALY_05000158_WORKAROUND)
-#define L1_DMEMORY              (PAGE_SIZE_4MB | CPLB_SUPV_WR | CPLB_USER_WR | CPLB_VALID | ANOMALY_05000158_WORKAROUND)
-#define SDRAM_EBIU              (PAGE_SIZE_4MB | CPLB_WT | CPLB_L1_AOW | CPLB_USER_RD | CPLB_USER_WR | CPLB_SUPV_WR | CPLB_VALID | ANOMALY_05000158_WORKAROUND)
-#endif
-
-#endif				/* _CPLB_H */
+#endif /* _CPLB_H */

@@ -21,12 +21,13 @@
  */
 
 #include <common.h>
-#include <asm/io.h>
+
 
 #if (CONFIG_COMMANDS & CFG_CMD_NAND)
 
 #include <nand.h>
 
+//#define BFIN_READ(a,b)  CONCAT(bfin_read_TIMER,a,_,b)
 #define CONCAT(a,b,c,d) a ## b ## c ## d
 #define PORT(a,b)  CONCAT(pPORT,a,b,)
 
@@ -35,43 +36,34 @@
 #endif
 
 /*
- * hardware specific access to control-lines
+ *	hardware specific access to control-lines
  */
 static void bfin_hwcontrol(struct mtd_info *mtd, int cmd)
 {
-	register struct nand_chip *this = mtd->priv;
+        register struct nand_chip *this = mtd->priv;
 
-	switch (cmd) {
+        switch(cmd){
 
-	case NAND_CTL_SETCLE:
-		this->IO_ADDR_W = (void *)CFG_NAND_BASE + BFIN_NAND_CLE;
-		break;
-	case NAND_CTL_CLRCLE:
-		this->IO_ADDR_W = (void *)CFG_NAND_BASE;
-		break;
+        case NAND_CTL_SETCLE: this->IO_ADDR_W = CFG_NAND_BASE + BFIN_NAND_CLE; break;
+        case NAND_CTL_CLRCLE: this->IO_ADDR_W = CFG_NAND_BASE; break;
 
-	case NAND_CTL_SETALE:
-		this->IO_ADDR_W = (void *)CFG_NAND_BASE + BFIN_NAND_ALE;
-		break;
-	case NAND_CTL_CLRALE:
-		this->IO_ADDR_W = (void *)CFG_NAND_BASE;
-		break;
-	case NAND_CTL_SETNCE:
-	case NAND_CTL_CLRNCE:
-		break;
-	}
+        case NAND_CTL_SETALE: this->IO_ADDR_W = CFG_NAND_BASE + BFIN_NAND_ALE; break;
+        case NAND_CTL_CLRALE: this->IO_ADDR_W = CFG_NAND_BASE; break;
+        case NAND_CTL_SETNCE:
+        case NAND_CTL_CLRNCE: break;
+        }
 
-	this->IO_ADDR_R = (void *)this->IO_ADDR_W;
+        this->IO_ADDR_R = this->IO_ADDR_W;
 
-	/* Drain the writebuffer */
-	SSYNC();
+        /* Drain the writebuffer */
+        __builtin_bfin_ssync();
 }
 
 int bfin_device_ready(struct mtd_info *mtd)
 {
-	int ret = (*PORT(CONFIG_NAND_GPIO_PORT, IO) & BFIN_NAND_READY) ? 1 : 0;
-	SSYNC();
-	return ret;
+        int ret = (*PORT(CONFIG_NAND_GPIO_PORT,IO) & BFIN_NAND_READY)? 1 : 0;
+        __builtin_bfin_ssync();
+        return ret;
 }
 
 /*
@@ -94,13 +86,13 @@ int bfin_device_ready(struct mtd_info *mtd)
  */
 void board_nand_init(struct nand_chip *nand)
 {
-	*PORT(CONFIG_NAND_GPIO_PORT, _FER) &= ~BFIN_NAND_READY;
-	*PORT(CONFIG_NAND_GPIO_PORT, IO_DIR) &= ~BFIN_NAND_READY;
-	*PORT(CONFIG_NAND_GPIO_PORT, IO_INEN) |= BFIN_NAND_READY;
+	*PORT(CONFIG_NAND_GPIO_PORT,_FER)  &= ~BFIN_NAND_READY;
+        *PORT(CONFIG_NAND_GPIO_PORT,IO_DIR) &= ~BFIN_NAND_READY;
+        *PORT(CONFIG_NAND_GPIO_PORT,IO_INEN) |=  BFIN_NAND_READY;
 
 	nand->hwcontrol = bfin_hwcontrol;
 	nand->eccmode = NAND_ECC_SOFT;
 	nand->dev_ready = bfin_device_ready;
-	nand->chip_delay = 30;
+        nand->chip_delay = 30;
 }
-#endif				/* (CONFIG_COMMANDS & CFG_CMD_NAND) */
+#endif /* (CONFIG_COMMANDS & CFG_CMD_NAND) */

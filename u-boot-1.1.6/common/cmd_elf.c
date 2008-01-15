@@ -19,13 +19,14 @@
 #include <net.h>
 #include <elf.h>
 
-#if (CONFIG_COMMANDS & CFG_CMD_ELF)
-
+#define CMD_LINE_ADDR 0xFF900000  /* L1 scratchpad */
 static char *make_command_line(void);
 
 #if defined(CONFIG_WALNUT) || defined(CFG_VXWORKS_MAC_PTR)
 DECLARE_GLOBAL_DATA_PTR;
 #endif
+
+#if (CONFIG_COMMANDS & CFG_CMD_ELF)
 
 #ifndef MAX
 #define MAX(a,b) ((a) > (b) ? (a) : (b))
@@ -64,8 +65,6 @@ int do_bootelf (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 	 */
 	if (dcache_status ())
 		dcache_disable ();
-	if (icache_status())
-		icache_disable();
 
 	/* pass cmdline to the kernel. */
 	cmdline = make_command_line();
@@ -286,12 +285,10 @@ unsigned long load_elf_image (unsigned long addr)
 	unsigned char *image;		/* Binary image pointer             */
 	int i, j;			/* Loop counter                     */
 	unsigned char match;
-	unsigned long entry;
 
 	/* -------------------------------------------------- */
 
 	ehdr = (Elf32_Ehdr *) addr;
-	entry = ehdr->e_entry; 
 
 	/* Find the section header string table for output info */
 	shdr = (Elf32_Shdr *) (addr + ehdr->e_shoff +
@@ -359,7 +356,7 @@ unsigned long load_elf_image (unsigned long addr)
 		flush_cache (shdr->sh_addr, shdr->sh_size);
 	}
 
-	return entry;
+	return ehdr->e_entry;
 }
 
 /* ====================================================================== */

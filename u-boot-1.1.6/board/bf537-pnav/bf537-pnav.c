@@ -1,7 +1,7 @@
 /*
  * U-boot - BF537.c
  *
- * Copyright (c) 2005-2007 Analog Devices Inc.
+ * Copyright (c) 2005 blackfin.uclinux.org
  *
  * (C) Copyright 2000-2004
  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
@@ -21,20 +21,78 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
- * MA 02110-1301 USA
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+ * MA 02111-1307 USA
  */
 
 #include <common.h>
 #include <config.h>
 #include <command.h>
 #include <asm/blackfin.h>
-#include <asm/io.h>
+#include "ether_bf537.h"
 
 #define POST_WORD_ADDR 0xFF903FFC
 
+#if (BFIN_BOOT_MODE == BF537_BYPASS_BOOT)
+/*
+ * the bootldr command loads an address, checks to see if there
+ *   is a Boot stream that the on-chip BOOTROM can understand,
+ *   and loads it via the BOOTROM Callback. It is possible
+ *   to also add booting from SPI, or TWI, but this function does
+ *   not currently support that.
+ */
+int do_bootldr (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
+{
+	ulong   addr, entry;
+	ulong *data;
+
+	/* Get the address */
+	if (argc < 2) {
+		addr = load_addr;
+	} else {
+		addr = simple_strtoul(argv[1], NULL, 16);
+	}
+
+	/* Check if it is a LDR file */
+	data = (ulong *)addr;
+	if ( *data == 0xFF800060 || *data == 0xFF800040 || *data == 0xFF800020 ) {
+		/* We want to boot from FLASH or SDRAM */
+		entry = _BOOTROM_BOOT_DXE_FLASH;
+		printf ("## Booting ldr image at 0x%08lx ...\n", addr);
+		if (icache_status ())
+			icache_disable();
+		if (dcache_status ())
+			dcache_disable ();
+
+		__asm__(
+			"R7=%[a];\n"
+			"P0=%[b];\n"
+			"JUMP (P0);\n"
+			:
+			: [a] "d" (addr), [b] "a" (entry)
+			: "R7", "P0" );
+
+	} else {
+		printf ("## No ldr image at address 0x%08lx\n", addr);
+	}
+
+	return 0;
+}
+
+U_BOOT_CMD(bootldr,2,0,do_bootldr,
+	"bootldr - boot ldr image from memory\n",
+	"[addr]\n         - boot ldr image stored in memory\n");
+#endif
+
 int checkboard(void)
 {
+#if (BFIN_CPU == ADSP_BF534)	
+	printf("CPU:   ADSP BF534 Rev.: 0.%d\n", *pCHIPID >>28);
+#elif (BFIN_CPU == ADSP_BF536)	
+	printf("CPU:   ADSP BF536 Rev.: 0.%d\n", *pCHIPID >>28);
+#else	
+	printf("CPU:   ADSP BF537 Rev.: 0.%d\n", *pCHIPID >>28);
+#endif
 	printf("Board: ADI BF537 PNAV board\n");
 	printf("       Support: http://blackfin.uclinux.org/\n");
 	return 0;
@@ -45,7 +103,7 @@ int checkboard(void)
 void cf_outb(unsigned char val, volatile unsigned char* addr)
 {
         *(addr) = val;
-	SSYNC();
+	__builtin_bfin_ssync();
 }
 
 unsigned char cf_inb(volatile unsigned char *addr)
@@ -53,7 +111,7 @@ unsigned char cf_inb(volatile unsigned char *addr)
         volatile unsigned char c;
 
         c = *(addr);
-	SSYNC();
+	__builtin_bfin_ssync();
 
         return c;
 }
@@ -64,7 +122,7 @@ void cf_insw(unsigned short *sect_buf, unsigned short *addr, int words)
 
         for (i = 0;i < words; i++)
                 *(sect_buf + i) = *(addr);
-	SSYNC();
+	__builtin_bfin_ssync();
 }
 
 void cf_outsw(unsigned short *addr, unsigned short *sect_buf, int words)
@@ -73,7 +131,7 @@ void cf_outsw(unsigned short *addr, unsigned short *sect_buf, int words)
 
         for (i = 0;i < words; i++)
                 *(addr) = *(sect_buf + i);
-	SSYNC();
+	__builtin_bfin_ssync();
 }
 #endif /* CONFIG_BFIN_IDE */
 
@@ -99,7 +157,7 @@ long int initdram(int board_type)
 
 #if defined(CONFIG_MISC_INIT_R)
 /* miscellaneous platform dependent initialisations */
-#if (BFIN_BOOT_MODE == BFIN_BOOT_BYPASS)
+#if (BFIN_BOOT_MODE == BF537_BYPASS_BOOT)
 int misc_init_r(void)
 {
 	char nid[32];
@@ -139,7 +197,7 @@ int misc_init_r(void)
 #endif
 
 #ifdef CONFIG_POST
-#if (BFIN_BOOT_MODE == BFIN_BOOT_BYPASS)
+#if (BFIN_BOOT_MODE == BF537_BYPASS_BOOT)
 /* Using sw10-PF5 as the hotkey */
 int post_hotkeys_pressed(void)
 {
@@ -152,19 +210,19 @@ int post_hotkeys_pressed(void)
 	int delay = 3;
 	int i;
 	unsigned short value;
-
+	
 	*pPORTF_FER   &= ~PF5;
 	*pPORTFIO_DIR &= ~PF5;
 	*pPORTFIO_INEN|=  PF5;
-
-	printf("########Press SW10 to enter Memory POST########: %2d ",delay);
+	
+	printf("########Press SW10 to enter Memory POST########: %2d ",delay);	
 	while(delay--){
 		for(i=0;i<100;i++){
 			value = *pPORTFIO & PF5;
 			if(value != 0){
 				break;
 				}
-			udelay(10000);
+			udelay(10000);		
 			}
 		printf("\b\b\b%2d ",delay);
 	}
@@ -191,7 +249,7 @@ void post_word_store(ulong a)
 
 ulong post_word_load(void)
 {
-	volatile ulong *save_addr =
+	volatile ulong *save_addr = 
 		(volatile ulong *)POST_WORD_ADDR;
 	return *save_addr;
 }
@@ -239,7 +297,7 @@ int flash_post_test(int flags)
 		temp = pbuf;
 		value = 0;
 	}
-	printf("\n");
+	printf("\n");		
 	if(result)
 		return -1;
 	else
@@ -255,7 +313,7 @@ int led_post_test(int flags)
 {
 	*pPORTF_FER   	&= ~(PF6|PF7|PF8|PF9|PF10|PF11);
         *pPORTFIO_DIR 	|= PF6|PF7|PF8|PF9|PF10|PF11;
-        *pPORTFIO_INEN	&= ~(PF6|PF7|PF8|PF9|PF10|PF11);
+        *pPORTFIO_INEN	&= ~(PF6|PF7|PF8|PF9|PF10|PF11);	
 	*pPORTFIO 	&= ~(PF6|PF7|PF8|PF9|PF10|PF11);
 	udelay(1000000);
 	printf("LED1 on");
@@ -291,7 +349,7 @@ int led_post_test(int flags)
 int button_post_test(int flags)
 {
 	int i,delay = 5;
-	unsigned short value = 0;
+	unsigned short value = 0;	
 	int result = 0;
 
         *pPORTF_FER   &= ~(PF5|PF4|PF3|PF2);
@@ -314,7 +372,7 @@ int button_post_test(int flags)
 	else{
 		result = -1;
 		printf("\b\bfailed");
-	}
+	}	
 
 	delay = 5;
 	printf("\n--------Press SW11: %2d ",delay);

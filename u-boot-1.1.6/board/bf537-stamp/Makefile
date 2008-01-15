@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2005-2007 Analog Device Inc.
 #
-# (C) Copyright 2000-2006
+# (C) Copyright 2000-2004
 # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
 #
 # See file CREDITS for list of people who contributed to this
@@ -27,32 +27,22 @@
 
 include $(TOPDIR)/config.mk
 
-LIB	= $(obj)lib$(BOARD).a
+LIB	= lib$(BOARD).a
 
-COBJS	:= $(BOARD).o post-memory.o spi_flash.o cmd_bf537led.o nand.o
+OBJS	= $(BOARD).o ether_bf537.o post-memory.o at45.o
 
-SRCS	:= $(SOBJS:.o=.S) $(COBJS:.o=.c)
-OBJS	:= $(addprefix $(obj),$(COBJS))
-SOBJS	:= $(addprefix $(obj),$(SOBJS))
-
-$(LIB):	$(obj).depend $(OBJS) $(SOBJS) u-boot.lds
-	$(AR) $(ARFLAGS) $@ $(OBJS) $(SOBJS)
+$(LIB):	.depend $(OBJS) u-boot.lds
+	$(AR) cr $@ $(OBJS)
 
 u-boot.lds: u-boot.lds.S
-	$(CPP) $(CPPFLAGS) -D__ASSEMBLY__ -P -Ubfin $^ > $@.tmp
+	$(CPP) $(CPPFLAGS) -P -Ubfin $^ > $@.tmp
 	mv -f $@.tmp $@
-
-clean:
-	rm -f $(SOBJS) $(OBJS)
-
-distclean:	clean
-	rm -f $(LIB) core *.bak .depend
 
 #########################################################################
 
-# defines $(obj).depend target
-include $(SRCTREE)/rules.mk
+.depend:	Makefile $(SOBJS:.o=.S) $(OBJS:.o=.c)
+		$(CC) -M $(CFLAGS) $(SOBJS:.o=.S) $(OBJS:.o=.c) > $@
 
-sinclude $(obj).depend
+sinclude .depend
 
 #########################################################################

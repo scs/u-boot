@@ -2,7 +2,7 @@
 /* Linux driver for Disk-On-Chip 2000       */
 /* (c) 1999 Machine Vision Holdings, Inc.   */
 /* Author: David Woodhouse <dwmw2@mvhi.com> */
-/* $Id: doc2000.h,v 1.15 2001/09/19 00:22:15 dwmw2 Exp $ */
+/* $Id: doc2000.h,v 1.1 2007/12/17 10:24:27 mberner Exp $ */
 
 #ifndef __MTD_DOC2000_H__
 #define __MTD_DOC2000_H__

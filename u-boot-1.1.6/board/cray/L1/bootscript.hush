@@ -1,4 +1,4 @@
-# $Header$
+# $Header: /cvs/ferag/BogenerkennungsImplementation/u-boot/u-boot-1.1.6/board/cray/L1/bootscript.hush,v 1.1 2007/12/17 10:21:05 mberner Exp $
 # hush bootscript for PPCBOOT on L1
 # note: all #s are in hex, do _NOT_ prefix it with 0x
 

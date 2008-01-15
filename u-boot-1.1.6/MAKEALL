@@ -313,25 +313,12 @@ LIST_avr32="atstk1002"
 #########################################################################
 
 LIST_blackfin=" \
-	bf527-ezkit
 	bf533-ezkit
 	bf533-stamp
 	bf537-stamp
 	bf537-pnav
-	bf537-minotaur
-	bf537-srv1
-	bf548-ezkit
 	bf561-ezkit
 "
-procs() {
-	case ${target} in
-		bf52[257]*)   echo bf52{2,5,7};;
-		bf53[123]*)   echo bf53{1,2,3};;
-		bf53[467]*)   echo bf53{4,6,7};;
-		bf54[24789]*) echo bf54{2,4,7,9,8};;
-		bf561*)       echo bf561;;
-	esac
-}
 
 #-----------------------------------------------------------------------
 
@@ -343,18 +330,14 @@ procs() {
 build_target() {
 	target=$1
 
-	echo "Testing build for $target (CPU: $cpu) ..."
-
 	${MAKE} distclean >/dev/null
-	${MAKE} ${target}_config >/dev/null
+	${MAKE} ${target}_config
 
-	sed -i "/BFIN_CPU/s:\([[:space:]]\)bf[0-9]*-:\1${cpu}-:" include/configs/$target.h
-
-	${MAKE} ${JOBS} all 2>&1 >${LOG_DIR}/$target.$cpu.MAKELOG \
-				| tee ${LOG_DIR}/$target.$cpu.ERR
+	${MAKE} ${JOBS} all 2>&1 >${LOG_DIR}/$target.MAKELOG \
+				| tee ${LOG_DIR}/$target.ERR
 
 	${CROSS_COMPILE}size ${BUILD_DIR}/u-boot \
-				| tee -a ${LOG_DIR}/$target.$cpu.MAKELOG
+				| tee -a ${LOG_DIR}/$target.MAKELOG
 }
 
 #-----------------------------------------------------------------------
@@ -374,9 +357,7 @@ do
 	avr32)
 			for target in `eval echo '$LIST_'${arg}`
 			do
-				for cpu in $(procs) ; do
-					build_target ${target}
-				done
+				build_target ${target}
 			done
 			;;
 	*)		build_target ${arg}

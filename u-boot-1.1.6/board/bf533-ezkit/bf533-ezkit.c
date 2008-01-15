@@ -1,7 +1,7 @@
 /*
  * U-boot - ezkit533.c
  *
- * Copyright (c) 2005-2007 Analog Devices Inc.
+ * Copyright (c) 2005 blackfin.uclinux.org
  *
  * (C) Copyright 2000-2004
  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
@@ -21,8 +21,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
- * MA 02110-1301 USA
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+ * MA 02111-1307 USA
  */
 
 #include <common.h>
@@ -32,6 +32,13 @@
 
 int checkboard(void)
 {
+#if (BFIN_CPU == ADSP_BF531)	
+	printf("CPU:   ADSP BF531 Rev.: 0.%d\n", *pCHIPID >> 28);
+#elif (BFIN_CPU == ADSP_BF532)	
+	printf("CPU:   ADSP BF532 Rev.: 0.%d\n", *pCHIPID >> 28);
+#else	
+	printf("CPU:   ADSP BF533 Rev.: 0.%d\n", *pCHIPID >> 28);
+#endif	
 	printf("Board: ADI BF533 EZ-Kit Lite board\n");
 	printf("       Support: http://blackfin.uclinux.org/\n");
 	return 0;
@@ -44,7 +51,7 @@ long int initdram(int board_type)
 	int brate;
 	char *tmp = getenv("baudrate");
 	brate = simple_strtoul(tmp, NULL, 16);
-	printf("Serial Port initialized with Baud rate = %x\n", brate);
+	printf("Serial Port initialized with Baud rate = %x\n",brate);
 	printf("SDRAM attributes:\n");
 	printf("tRCD %d SCLK Cycles,tRP %d SCLK Cycles,tRAS %d SCLK Cycles"
 	       "tWR %d SCLK Cycles,CAS Latency %d SCLK cycles \n",
@@ -61,12 +68,10 @@ long int initdram(int board_type)
 /* miscellaneous platform dependent initialisations */
 int misc_init_r(void)
 {
-	/* Set direction bits for Video en/decoder reset as output      */
-	*(volatile unsigned char *)(CFG_FLASH1_BASE + PSD_PORTA_DIR) =
-	    PSDA_VDEC_RST | PSDA_VENC_RST;
-	/* Deactivate Video en/decoder reset lines                      */
-	*(volatile unsigned char *)(CFG_FLASH1_BASE + PSD_PORTA_DOUT) =
-	    PSDA_VDEC_RST | PSDA_VENC_RST;
+	/* Set direction bits for Video en/decoder reset as output	*/
+	*(volatile unsigned char *)(CFG_FLASH1_BASE + PSD_PORTA_DIR) = PSDA_VDEC_RST | PSDA_VENC_RST;
+	/* Deactivate Video en/decoder reset lines			*/
+	*(volatile unsigned char *)(CFG_FLASH1_BASE + PSD_PORTA_DOUT) = PSDA_VDEC_RST | PSDA_VENC_RST;
 
 	return 0;
 }

@@ -20,11 +20,16 @@
 #include <common.h>
 #include <config.h>
 #ifdef CONFIG_HAS_DATAFLASH
-#include <asm/hardware.h>
+#include <asm/arch/hardware.h>
 #include <dataflash.h>
+#include <flash.h>
 
-AT91S_DATAFLASH_INFO dataflash_info[CFG_MAX_DATAFLASH_BANKS];
-static AT91S_DataFlash DataFlashInst;
+#if defined(CFG_NO_FLASH)
+extern flash_info_t  flash_info[]; /* info for FLASH chips */
+#endif
+
+AT45S_DATAFLASH_INFO dataflash_info[CFG_MAX_DATAFLASH_BANKS];
+static AT45S_DataFlash DataFlashInst;
 
 int cs[][CFG_MAX_DATAFLASH_BANKS] = {
 	{CFG_DATAFLASH_LOGIC_ADDR_CS0, 0},	/* Logical adress, CS */
@@ -33,35 +38,34 @@ int cs[][CFG_MAX_DATAFLASH_BANKS] = {
 
 /*define the area offsets*/
 dataflash_protect_t area_list[NB_DATAFLASH_AREA] = {
-	{0, 0x7fff, FLAG_PROTECT_SET},			/* ROM code */
-	{0x8000, 0x1ffff, FLAG_PROTECT_SET},		/* u-boot code */
+	{0, 0x7fff, FLAG_PROTECT_CLEAR},		/* ROM code */
+	{0x8000, 0x1ffff, FLAG_PROTECT_CLEAR},	        /* u-boot code */
 	{0x20000, 0x27fff, FLAG_PROTECT_CLEAR},		/* u-boot environment */
 	{0x28000, 0x1fffff, FLAG_PROTECT_CLEAR},	/* data area size to tune */
 };
 
-extern void AT91F_SpiInit (void);
-extern int AT91F_DataflashProbe (int i, AT91PS_DataflashDesc pDesc);
-extern int AT91F_DataFlashRead (AT91PS_DataFlash pDataFlash,
+extern void AT45F_SpiInit (void);
+extern int AT45F_DataflashProbe (int i, AT45PS_DataflashDesc pDesc);
+extern int AT45F_DataFlashRead (AT45PS_DataFlash pDataFlash,
 				unsigned long addr,
 				unsigned long size, char *buffer);
-extern int AT91F_DataFlashWrite( AT91PS_DataFlash pDataFlash,
+extern int AT45F_DataFlashWrite( AT45PS_DataFlash pDataFlash,
 				    unsigned char *src,
 			            int dest,
 				    int size );
 
-int AT91F_DataflashInit (void)
+int AT45F_DataflashInit (void)
 {
 	int i, j;
 	int dfcode;
 
-	AT91F_SpiInit ();
+	AT45F_SpiInit ();
 
 	for (i = 0; i < CFG_MAX_DATAFLASH_BANKS; i++) {
 		dataflash_info[i].Desc.state = IDLE;
 		dataflash_info[i].id = 0;
 		dataflash_info[i].Device.pages_number = 0;
-		dfcode = AT91F_DataflashProbe (cs[i][1], &dataflash_info[i].Desc);
-
+		dfcode = AT45F_DataflashProbe (cs[i][1], &dataflash_info[i].Desc);
 		switch (dfcode) {
 		case AT45DB161:
 			dataflash_info[i].Device.pages_number = 4096;
@@ -76,8 +80,8 @@ int AT91F_DataflashInit (void)
 
 		case AT45DB321:
 			dataflash_info[i].Device.pages_number = 8192;
-			dataflash_info[i].Device.pages_size = 528;
-			dataflash_info[i].Device.page_offset = 10;
+			dataflash_info[i].Device.pages_size = 512;   /*Power of 2 Binary Page Size*/
+			dataflash_info[i].Device.page_offset = 9;
 			dataflash_info[i].Device.byte_mask = 0x300;
 			dataflash_info[i].Device.cs = cs[i][1];
 			dataflash_info[i].Desc.DataFlash_state = IDLE;
@@ -120,6 +124,17 @@ int AT91F_DataflashInit (void)
 			dataflash_info[i].Device.area_list[j].end = area_list[j].end + dataflash_info[i].logical_address;
 			dataflash_info[i].Device.area_list[j].protected = area_list[j].protected;
 		}
+
+		/* Set Dataflash to "power of 2" mode, c.f. Blackfin Anomaly 05000280 */
+		/* bit0 of status register stands for 512byte/pages */
+		AT45F_DataFlashGetStatus(dataflash_info[i].Device.cs,&dataflash_info[i].Desc);
+	    	unsigned int tmpState = dataflash_info[i].Desc.DataFlash_state;
+		
+		if (!(tmpState & 1)) {
+		  printf("Dataflash %i is still in 528byte/page mode: State is %x...\n", i, tmpState);
+		  printf("One-Time Programmable Register now set to 512byte/page: PLEASE POWER CYCLE THE DEVICE NOW!\n");
+		  AT45F_SpiEnsurePowerOf2(&dataflash_info[i]);
+		}// else printf("DataFlash %i in \"Power of 2 Binary Page Size Mode\". Status=%x.\n", i, tmpState);
 	}
 	return (1);
 }
@@ -171,10 +186,10 @@ void dataflash_print_info (void)
 
 
 /*------------------------------------------------------------------------------*/
-/* Function Name       : AT91F_DataflashSelect 					*/
+/* Function Name       : AT45F_DataflashSelect 					*/
 /* Object              : Select the correct device				*/
 /*------------------------------------------------------------------------------*/
-AT91PS_DataFlash AT91F_DataflashSelect (AT91PS_DataFlash pFlash, unsigned long *addr)
+AT45PS_DataFlash AT45F_DataflashSelect (AT45PS_DataFlash pFlash, unsigned long *addr)
 {
 	char addr_valid = 0;
 	int i;
@@ -185,7 +200,7 @@ AT91PS_DataFlash AT91F_DataflashSelect (AT91PS_DataFlash pFlash, unsigned long *
 			break;
 		}
 	if (!addr_valid) {
-		pFlash = (AT91PS_DataFlash) 0;
+		pFlash = (AT45PS_DataFlash) 0;
 		return pFlash;
 	}
 	pFlash->pDataFlashDesc = &(dataflash_info[i].Desc);
@@ -217,7 +232,7 @@ int addr_dataflash (unsigned long addr)
 /* Function Name       : size_dataflash 					*/
 /* Object              : Test if address is valid regarding the size		*/
 /*-----------------------------------------------------------------------------*/
-int size_dataflash (AT91PS_DataFlash pdataFlash, unsigned long addr, unsigned long size)
+int size_dataflash (AT45PS_DataFlash pdataFlash, unsigned long addr, unsigned long size)
 {
 	/* is outside the dataflash */
 	if (((int)addr & 0x0FFFFFFF) > (pdataFlash->pDevice->pages_size *
@@ -232,7 +247,7 @@ int size_dataflash (AT91PS_DataFlash pdataFlash, unsigned long addr, unsigned lo
 /* Function Name       : prot_dataflash 					*/
 /* Object              : Test if destination area is protected			*/
 /*-----------------------------------------------------------------------------*/
-int prot_dataflash (AT91PS_DataFlash pdataFlash, unsigned long addr)
+int prot_dataflash (AT45PS_DataFlash pdataFlash, unsigned long addr)
 {
 int area;
 	/* find area */
@@ -291,9 +306,9 @@ int i,j, area1, area2, addr_valid = 0;
 int read_dataflash (unsigned long addr, unsigned long size, char *result)
 {
 	unsigned long AddrToRead = addr;
-	AT91PS_DataFlash pFlash = &DataFlashInst;
+	AT45PS_DataFlash pFlash = &DataFlashInst;
 
-	pFlash = AT91F_DataflashSelect (pFlash, &AddrToRead);
+	pFlash = AT45F_DataflashSelect (pFlash, &AddrToRead);
 
 	if (pFlash == 0)
 		return ERR_UNKNOWN_FLASH_TYPE;
@@ -301,7 +316,7 @@ int read_dataflash (unsigned long addr, unsigned long size, char *result)
 	if (size_dataflash(pFlash,addr,size) == 0)
 		return ERR_INVAL;
 
-	return (AT91F_DataFlashRead (pFlash, AddrToRead, size, result));
+	return (AT45F_DataFlashRead (pFlash, AddrToRead, size, result));
 }
 
 
@@ -313,9 +328,9 @@ int write_dataflash (unsigned long addr_dest, unsigned long addr_src,
 		     unsigned long size)
 {
 	unsigned long AddrToWrite = addr_dest;
-	AT91PS_DataFlash pFlash = &DataFlashInst;
+	AT45PS_DataFlash pFlash = &DataFlashInst;
 
-	pFlash = AT91F_DataflashSelect (pFlash, &AddrToWrite);
+	pFlash = AT45F_DataflashSelect (pFlash, &AddrToWrite);
 
 	if (pFlash == 0)
 		return ERR_UNKNOWN_FLASH_TYPE;
@@ -328,8 +343,8 @@ int write_dataflash (unsigned long addr_dest, unsigned long addr_src,
 
 	if (AddrToWrite == -1)
 		return -1;
-
-	return AT91F_DataFlashWrite (pFlash, (uchar *)addr_src, AddrToWrite, size);
+	
+	return AT45F_DataFlashWrite (pFlash, (uchar *)addr_src, AddrToWrite, size);
 }
 
 
@@ -358,5 +373,32 @@ void dataflash_perror (int err)
 		break;
 	}
 }
+
+#if defined(CFG_NO_FLASH)
+flash_info_t * addr2info (ulong addr)
+{
+#ifndef CONFIG_SPD823TS
+        flash_info_t *info;
+        int i;
+
+        for (i=0, info=&flash_info[0]; i<CFG_MAX_FLASH_BANKS; ++i, ++info) {
+                if (info->flash_id != FLASH_UNKNOWN &&
+                    addr >= info->start[0] &&
+                    /* WARNING - The '- 1' is needed if the flash
+                     * is at the end of the address space, since
+                     * info->start[0] + info->size wraps back to 0.
+                     * Please don't change this unless you understand this.
+                     */
+                    addr <= info->start[0] + info->size - 1) {
+                        return (info);
+                }
+        }
+#endif /* CONFIG_SPD823TS */
+
+        return (NULL);
+}
+#endif
+
+
 
 #endif

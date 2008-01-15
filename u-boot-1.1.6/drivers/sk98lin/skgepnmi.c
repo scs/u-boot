@@ -2,8 +2,8 @@
  *
  * Name:	skgepnmi.c
  * Project:	GEnesis, PCI Gigabit Ethernet Adapter
- * Version:	$Revision: 1.102 $
- * Date:	$Date: 2002/12/16 14:03:24 $
+ * Version:	$Revision: 1.1 $
+ * Date:	$Date: 2007/12/17 10:24:14 $
  * Purpose:	Private Network Management Interface
  *
  ****************************************************************************/
@@ -26,6 +26,15 @@
  * History:
  *
  *	$Log: skgepnmi.c,v $
+ *	Revision 1.1  2007/12/17 10:24:14  mberner
+ *	U-Boot added.
+ *	
+ *	Revision 1.1.1.1  2007/10/03 08:15:42  dstadelmann
+ *	First Commit Of Sources
+ *	
+ *	Revision 1.1  2006/12/22 18:31:49  aubrey
+ *	Initial revision
+ *
  *	Revision 1.102  2002/12/16 14:03:24  tschilli
  *	VCT code in Vct() changed.
  *
@@ -437,7 +446,7 @@
 #ifdef CONFIG_SK98
 
 static const char SysKonnectFileId[] =
-	"@(#) $Id: skgepnmi.c,v 1.102 2002/12/16 14:03:24 tschilli Exp $"
+	"@(#) $Id: skgepnmi.c,v 1.1 2007/12/17 10:24:14 mberner Exp $"
 	" (C) SysKonnect.";
 
 #include "h/skdrv1st.h"

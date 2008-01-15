@@ -1,7 +1,7 @@
 #
 # U-boot Makefile
 #
-# Copyright (c) 2005-2007 Analog Devices Inc.
+# Copyright (c) 2005 blackfin.uclinux.org
 #
 # (C) Copyright 2000-2004
 # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
@@ -21,32 +21,27 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
-# MA 02110-1301 USA
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+# MA 02111-1307 USA
 #
 
 include $(TOPDIR)/config.mk
 
-CFLAGS += -DBFIN_BOARD_NAME='"$(BOARD)"'
+LIB	= lib$(ARCH).a
 
-LIB	= $(obj)lib$(ARCH).a
+AOBJS	= memcpy.o memcmp.o memset.o memmove.o
 
-SOBJS	= memcpy.o memcmp.o memset.o memmove.o
+COBJS	= post.o tests.o board.o bf533_linux.o bf533_string.o cache.o muldi3.o
+OBJS	= $(AOBJS) $(COBJS)
 
-COBJS	= post.o tests.o board.o bfin_linux.o bfin_string.o cache.o \
-	muldi3.o bootldr.o cplbinfo.o
-
-SRCS 	:= $(SOBJS:.o=.S) $(COBJS:.o=.c)
-OBJS	:= $(addprefix $(obj),$(SOBJS) $(COBJS))
-
-$(LIB):	$(obj).depend $(OBJS)
-	$(AR) $(ARFLAGS) $@ $(OBJS)
+$(LIB):	.depend $(OBJS)
+	$(AR) cr $@ $(OBJS)
 
 #########################################################################
 
-# defines $(obj).depend target
-include $(SRCTREE)/rules.mk
+.depend:	Makefile $(AOBJS:.o=.S) $(COBJS:.o=.c)
+		$(CC) -M $(CFLAGS) $(AOBJS:.o=.S) $(COBJS:.o=.c) > $@
 
-sinclude $(obj).depend
+sinclude .depend
 
 #########################################################################

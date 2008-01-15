@@ -1,5 +1,5 @@
 /*
- * $Id: mtd.h,v 1.56 2004/08/09 18:46:04 dmarlin Exp $
+ * $Id: mtd.h,v 1.1 2007/12/17 10:24:27 mberner Exp $
  *
  * Copyright (C) 1999-2003 David Woodhouse <dwmw2@infradead.org> et al.
  *

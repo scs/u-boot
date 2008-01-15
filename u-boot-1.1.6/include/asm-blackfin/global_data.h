@@ -1,7 +1,7 @@
 /*
  * U-boot - global_data.h Declarations for global data of u-boot
  *
- * Copyright (c) 2005-2007 Analog Devices Inc.
+ * Copyright (c) 2005 blackfin.uclinux.org
  *
  * (C) Copyright 2000-2004
  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
@@ -21,12 +21,14 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston,
- * MA 02110-1301 USA
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston,
+ * MA 02111-1307 USA
  */
 
 #ifndef	__ASM_GBL_DATA_H
 #define __ASM_GBL_DATA_H
+
+#include <asm/irq.h>
 
 /*
  * The following data structure is placed in some memory wich is
@@ -43,16 +45,16 @@ typedef struct global_data {
 	unsigned long board_type;
 	unsigned long baudrate;
 	unsigned long have_console;	/* serial_init() was called */
-	unsigned long ram_size;	/* RAM size */
+	unsigned long ram_size;		/* RAM size */
 	unsigned long reloc_off;	/* Relocation Offset */
-	unsigned long env_addr;	/* Address  of Environment struct */
+	unsigned long env_addr;		/* Address  of Environment struct */
 	unsigned long env_valid;	/* Checksum of Environment valid? */
 #if defined(CONFIG_POST) || defined(CONFIG_LOGBUFFER)
-	unsigned long post_log_word;	/* Record POST activities */
-	unsigned long post_init_f_time;	/* When post_init_f started */
+        unsigned long   post_log_word;  /* Record POST activities */
+        unsigned long   post_init_f_time;  /* When post_init_f started */
 #endif
 
-	void **jt;		/* jump table */
+	void **jt;			/* jump table */
 } gd_t;
 
 /*

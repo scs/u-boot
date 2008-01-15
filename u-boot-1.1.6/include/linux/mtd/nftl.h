@@ -2,7 +2,7 @@
 /* Defines for NAND Flash Translation Layer  */
 /* (c) 1999 Machine Vision Holdings, Inc.    */
 /* Author: David Woodhouse <dwmw2@mvhi.com>  */
-/* $Id: nftl.h,v 1.10 2000/12/29 00:25:38 dwmw2 Exp $ */
+/* $Id: nftl.h,v 1.1 2007/12/17 10:24:27 mberner Exp $ */
 
 #ifndef __MTD_NFTL_H__
 #define __MTD_NFTL_H__

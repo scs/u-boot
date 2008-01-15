@@ -36,6 +36,7 @@
 
 #include <asm/arch/hardware.h>
 #include "config.h"
+//#include <flash.h>
 
 /*number of protected area*/
 #define NB_DATAFLASH_AREA	4
@@ -47,16 +48,65 @@ typedef struct {
 	unsigned char protected;
 } dataflash_protect_t;
 
-typedef unsigned int AT91S_DataFlashStatus;
+typedef unsigned int AT45S_DataFlashStatus;
+
 
 /*----------------------------------------------------------------------*/
 /* DataFlash Structures							*/
 /*----------------------------------------------------------------------*/
 
+/* Taken from include/flash.h: FlashInfo, defines */
+/*-----------------------------------------------------------------------
+ * FLASH Info: contains chip specific data, per FLASH bank
+ */
+
+typedef struct {
+        ulong   size;                   /* total bank size in bytes             */
+        ushort  sector_count;           /* number of erase units                */
+        ulong   flash_id;               /* combined device & manufacturer code  */
+        ulong   start[CFG_MAX_FLASH_SECT];   /* physical sector start addresses */
+        uchar   protect[CFG_MAX_FLASH_SECT]; /* sector protection status        */
+#ifdef CFG_FLASH_CFI
+        uchar   portwidth;              /* the width of the port                */
+        uchar   chipwidth;              /* the width of the chip                */
+        ushort  buffer_size;            /* # of bytes in write buffer           */
+        ulong   erase_blk_tout;         /* maximum block erase timeout          */
+        ulong   write_tout;             /* maximum write timeout                */
+        ulong   buffer_write_tout;      /* maximum buffer write timeout         */
+        ushort  vendor;                 /* the primary vendor id                */
+        ushort  cmd_reset;              /* Vendor specific reset command        */
+        ushort  interface;              /* used for x8/x16 adjustments          */
+        ushort  legacy_unlock;          /* support Intel legacy (un)locking     */
+#endif
+} flash_info_t;
+
+/*-----------------------------------------------------------------------
+ * Protection Flags for flash_protect():
+ */
+#define FLAG_PROTECT_SET        0x01
+#define FLAG_PROTECT_CLEAR      0x02
+
+/*-----------------------------------------------------------------------
+ * return codes from flash_write():
+ */
+#define ERR_OK                          0
+#define ERR_TIMOUT                      1
+#define ERR_NOT_ERASED                  2
+#define ERR_PROTECTED                   4
+#define ERR_INVAL                       8
+#define ERR_ALIGN                       16
+#define ERR_UNKNOWN_FLASH_VENDOR        32
+#define ERR_UNKNOWN_FLASH_TYPE          64
+#define ERR_PROG_ERROR                  128
+
+#define FLASH_UNKNOWN   0xFFFF          /* unknown flash type                   */
+
+
+
 /*---------------------------------------------*/
 /* DataFlash Descriptor Structure Definition   */
 /*---------------------------------------------*/
-typedef struct _AT91S_DataflashDesc {
+typedef struct _AT45S_DataflashDesc {
 	unsigned char *tx_cmd_pt;
 	unsigned int tx_cmd_size;
 	unsigned char *rx_cmd_pt;
@@ -68,36 +118,36 @@ typedef struct _AT91S_DataflashDesc {
 	volatile unsigned char state;
 	volatile unsigned char DataFlash_state;
 	unsigned char command[8];
-} AT91S_DataflashDesc, *AT91PS_DataflashDesc;
+} AT45S_DataflashDesc, *AT45PS_DataflashDesc;
 
 /*---------------------------------------------*/
 /* DataFlash device definition structure       */
 /*---------------------------------------------*/
-typedef struct _AT91S_Dataflash {
+typedef struct _AT45S_Dataflash {
 	int pages_number;			/* dataflash page number */
 	int pages_size;				/* dataflash page size */
 	int page_offset;			/* page offset in command */
 	int byte_mask;				/* byte mask in command */
 	int cs;
 	dataflash_protect_t area_list[NB_DATAFLASH_AREA]; /* area protection status */
-} AT91S_DataflashFeatures, *AT91PS_DataflashFeatures;
+} AT45S_DataflashFeatures, *AT45PS_DataflashFeatures;
 
 /*---------------------------------------------*/
 /* DataFlash Structure Definition	       */
 /*---------------------------------------------*/
-typedef struct _AT91S_DataFlash {
-	AT91PS_DataflashDesc pDataFlashDesc;	/* dataflash descriptor */
-	AT91PS_DataflashFeatures pDevice;	/* Pointer on a dataflash features array */
-} AT91S_DataFlash, *AT91PS_DataFlash;
+typedef struct _AT45S_DataFlash {
+	AT45PS_DataflashDesc pDataFlashDesc;	/* dataflash descriptor */
+	AT45PS_DataflashFeatures pDevice;	/* Pointer on a dataflash features array */
+} AT45S_DataFlash, *AT45PS_DataFlash;
 
 
-typedef struct _AT91S_DATAFLASH_INFO {
+typedef struct _AT45S_DATAFLASH_INFO {
 
-	AT91S_DataflashDesc Desc;
-	AT91S_DataflashFeatures Device; /* Pointer on a dataflash features array */
+	AT45S_DataflashDesc Desc;
+	AT45S_DataflashFeatures Device; /* Pointer on a dataflash features array */
 	unsigned long logical_address;
 	unsigned int id;			/* device id */
-} AT91S_DATAFLASH_INFO, *AT91PS_DATAFLASH_INFO;
+} AT45S_DATAFLASH_INFO, *AT45PS_DATAFLASH_INFO;
 
 
 /*-------------------------------------------------------------------------------------------------*/
@@ -107,7 +157,7 @@ typedef struct _AT91S_DATAFLASH_INFO {
 #define AT45DB642	0x3c
 #define AT45DB128	0x10
 
-#define AT91C_DATAFLASH_TIMEOUT		10000	/* For AT91F_DataFlashWaitReady */
+#define AT45C_DATAFLASH_TIMEOUT		10000	/* For AT45F_DataFlashWaitReady */
 
 /* DataFlash return value */
 #define DATAFLASH_BUSY			0x00
@@ -166,13 +216,14 @@ typedef struct _AT91S_DATAFLASH_INFO {
 
 /*-------------------------------------------------------------------------------------------------*/
 
-extern int size_dataflash (AT91PS_DataFlash pdataFlash, unsigned long addr, unsigned long size);
-extern int prot_dataflash (AT91PS_DataFlash pdataFlash, unsigned long addr);
+extern flash_info_t * addr2info (ulong addr);
+extern int size_dataflash (AT45PS_DataFlash pdataFlash, unsigned long addr, unsigned long size);
+extern int prot_dataflash (AT45PS_DataFlash pdataFlash, unsigned long addr);
 extern int dataflash_real_protect (int flag, unsigned long start_addr, unsigned long end_addr);
 extern int addr_dataflash (unsigned long addr);
 extern int read_dataflash (unsigned long addr, unsigned long size, char *result);
 extern int write_dataflash (unsigned long addr, unsigned long dest, unsigned long size);
 extern void dataflash_print_info (void);
 extern void dataflash_perror (int err);
-
+extern flash_info_t * addr2info (ulong addr);	
 #endif

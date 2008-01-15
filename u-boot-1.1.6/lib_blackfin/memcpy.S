@@ -1,8 +1,22 @@
 /*
- * File: memcpy.S
+ * File:         arch/blackfin/lib/memcpy.S
+ * Based on:
+ * Author:
  *
- * Copyright 2004-2007 Analog Devices Inc.
- * Enter bugs at http://blackfin.uclinux.org/
+ * Created:
+ * Description:  internal version of memcpy(), issued by the compiler
+ *               to copy blocks of data around.
+ *               This is really memmove() - it has to be able to deal with
+ *               possible overlaps, because that ambiguity is when the compiler
+ *               gives up and calls a function. We have our own, internal version
+ *               so that we get something we trust, even if the user has redefined
+ *               the normal symbol.
+ * Rev:          $Id: memcpy.S,v 1.1 2007/12/17 10:24:30 mberner Exp $
+ *
+ * Modified:
+ *               Copyright 2004-2006 Analog Devices Inc.
+ *
+ * Bugs:         Enter bugs at http://blackfin.uclinux.org/
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +33,8 @@
  * to the Free Software Foundation, Inc.,
  * 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
+
+
 
 .align 2
 

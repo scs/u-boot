@@ -5,7 +5,7 @@
  *		       Steven J. Hill <sjhill@realitydiluted.com>
  *		       Thomas Gleixner <tglx@linutronix.de>
  *
- * $Id: nand.h,v 1.68 2004/11/12 10:40:37 gleixner Exp $
+ * $Id: nand.h,v 1.1 2007/12/17 10:24:27 mberner Exp $
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -109,8 +109,6 @@ extern int nand_read_raw (struct mtd_info *mtd, uint8_t *buf, loff_t from, size_
 /* Extended commands for large page devices */
 #define NAND_CMD_READSTART	0x30
 #define NAND_CMD_CACHEDPROG	0x15
-
-#define NAND_CMD_NONE -1
 
 /* Status bits */
 #define NAND_STATUS_FAIL	0x01

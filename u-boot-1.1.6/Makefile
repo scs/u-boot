@@ -179,6 +179,18 @@ endif
 ifeq ($(CPU),mpc86xx)
 OBJS += cpu/$(CPU)/resetvec.o
 endif
+ifeq ($(CPU),bf533)
+OBJS += cpu/$(CPU)/start1.o	cpu/$(CPU)/interrupt.o	cpu/$(CPU)/cache.o
+OBJS += cpu/$(CPU)/flush.o 	cpu/$(CPU)/init_sdram.o
+endif
+ifeq ($(CPU),bf537)
+OBJS += cpu/$(CPU)/start1.o	cpu/$(CPU)/interrupt.o	cpu/$(CPU)/cache.o
+OBJS += cpu/$(CPU)/flush.o      cpu/$(CPU)/init_sdram.o
+endif
+ifeq ($(CPU),bf561)
+OBJS += cpu/$(CPU)/start1.o     cpu/$(CPU)/interrupt.o  cpu/$(CPU)/cache.o
+OBJS += cpu/$(CPU)/flush.o 	cpu/$(CPU)/init_sdram.o
+endif
 
 OBJS := $(addprefix $(obj),$(OBJS))
 
@@ -231,7 +243,7 @@ __LIBS := $(subst $(obj),,$(LIBS))
 #########################################################################
 #########################################################################
 
-ALL = $(obj)u-boot.srec $(obj)u-boot.hex $(obj)u-boot.bin $(obj)u-boot.ldr $(obj)System.map $(U_BOOT_NAND)
+ALL = $(obj)u-boot.srec $(obj)u-boot.bin $(obj)u-boot.ldr $(obj)System.map $(U_BOOT_NAND)
 
 all:		$(ALL)
 
@@ -244,9 +256,9 @@ $(obj)u-boot.srec:	$(obj)u-boot
 $(obj)u-boot.bin:	$(obj)u-boot
 		$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
 
-$(obj)u-boot.ldr:	$(obj)u-boot
-		./tools/envcrc --binary > $(obj)env-ldr.o
-		$(LDR) -T $(CONFIG_CPU) -f -c $@ $< $(LDR_FLAGS)
+$(obj)u-boot.ldr: u-boot.bin u-boot
+		$(MAKE) -C tools/bin2ldr
+		cp tools/bin2ldr/app.ldr u-boot.ldr
 
 $(obj)u-boot.img:	$(obj)u-boot.bin
 		./tools/mkimage -A $(ARCH) -T firmware -C none \
@@ -2234,28 +2246,23 @@ suzaku_config:	unconfig
 	@echo "#define CONFIG_SUZAKU 1" >> $(obj)include/config.h
 	@$(MKCONFIG) -a $(@:_config=) microblaze microblaze suzaku AtmarkTechno
 
-#========================================================================
-# Blackfin
-#========================================================================
 #########################################################################
-## Analog Devices
+## Blackfin
 #########################################################################
-ADI_BOARDS = \
-	bf527-ezkit bf533-ezkit bf533-stamp bf537-pnav \
-	bf548-ezkit bf537-stamp bf561-ezkit
+bf533-ezkit_config	:	unconfig
+	@$(MKCONFIG) $(@:_config=) blackfin bf533 bf533-ezkit
 
-# Third party boards:
-ADI_BOARDS += bf537-minotaur bf537-srv1
+bf533-stamp_config	:	unconfig
+	@$(MKCONFIG) $(@:_config=) blackfin bf533 bf533-stamp
 
-$(ADI_BOARDS:%=%_config)	: unconfig
-	@$(MKCONFIG) $(@:_config=) blackfin blackfin $(@:_config=)
-	@[ "$(SRCTREE)" != "$(OBJTREE)" ] && LNPREFIX="../../include2/asm/" || LNPREFIX="" ; \
-		rm -f include/asm-blackfin/arch ; \
-		ln -s ${LNPREFIX}arch-$(firstword $(subst -, ,$(@:_config=))) include/asm-blackfin/arch
+bf537-stamp_config	:	unconfig
+	@$(MKCONFIG) $(@:_config=) blackfin bf537 bf537-stamp
 
-$(ADI_BOARDS):
-	$(MAKE) $@_config
-	$(MAKE)
+bf561-ezkit_config	:	unconfig
+	@$(MKCONFIG) $(@:_config=) blackfin bf561 bf561-ezkit
+
+bf537-pnav_config	:	unconfig
+	@$(MKCONFIG) $(@:_config=) blackfin bf537 bf537-pnav
 
 #========================================================================
 # AVR32
@@ -2287,19 +2294,14 @@ clean:
 	rm -f $(obj)tools/easylogo/easylogo $(obj)tools/bmp_logo
 	rm -f $(obj)tools/gdb/astest $(obj)tools/gdb/gdbcont $(obj)tools/gdb/gdbsend
 	rm -f $(obj)tools/env/fw_printenv $(obj)tools/env/fw_setenv
+	rm -f $(obj)tools/bin2ldr/app.bin $(obj)tools/bin2ldr/app.hex $(obj)tools/bin2ldr/app.ldr
+	rm -f $(obj)tools/bin2ldr/init_sdram* $(obj)tools/bin2ldr/jump $(obj)tools/bin2ldr/bin2ldr
+	rm -f $(obj)board/bf*/u-boot.lds
 	rm -f $(obj)board/cray/L1/bootscript.c $(obj)board/cray/L1/bootscript.image
 	rm -f $(obj)board/netstar/eeprom $(obj)board/netstar/crcek $(obj)board/netstar/crcit
 	rm -f $(obj)board/netstar/*.srec $(obj)board/netstar/*.bin
 	rm -f $(obj)board/trab/trab_fkt $(obj)board/voiceblue/eeprom
 	rm -f $(obj)board/integratorap/u-boot.lds $(obj)board/integratorcp/u-boot.lds
-	rm -f $(obj)board/bf527-ezkit/u-boot.lds
-	rm -f $(obj)board/bf533-ezkit/u-boot.lds $(obj)board/bf533-stamp/u-boot.lds
-	rm -f $(obj)board/bf537-stamp/u-boot.lds $(obj)board/bf537-pnav/u-boot.lds
-	rm -f $(obj)board/bf537-minotaur/u-boot.lds
-	rm -f $(obj)board/bf537-srv1/u-boot.lds
-	rm -f $(obj)board/bf548-ezkit/u-boot.lds
-	rm -f $(obj)board/bf561-ezkit/u-boot.lds
-	rm -f $(obj)cpu/blackfin/bootrom-asm-offsets.[chs]
 	rm -f $(obj)include/bmp_logo.h
 	rm -f $(obj)nand_spl/u-boot-spl $(obj)nand_spl/u-boot-spl.map
 

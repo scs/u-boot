@@ -41,7 +41,7 @@
  *	The AG-AND chips have nice features for speed improvement,
  *	which are not supported yet. Read / program 4 pages in one go.
  *
- * $Id: nand_base.c,v 1.126 2004/12/13 11:22:25 lavinen Exp $
+ * $Id: nand_base.c,v 1.1 2007/12/17 10:24:14 mberner Exp $
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -2337,8 +2337,7 @@ int nand_scan (struct mtd_info *mtd, int maxchips)
 			mtd->oobblock = 1024 << (extid & 0x3);
 			extid >>= 2;
 			/* Calc oobsize */
-			mtd->oobsize = (8 << (extid & 0x01)) *
-				(mtd->oobblock / 512);
+			mtd->oobsize = (8 << (extid & 0x03)) * (mtd->oobblock / 512);
 			extid >>= 2;
 			/* Calc blocksize. Blocksize is multiples of 64KiB */
 			mtd->erasesize = (64 * 1024)  << (extid & 0x03);
@@ -2632,9 +2631,7 @@ int nand_scan (struct mtd_info *mtd, int maxchips)
 	mtd->owner = THIS_MODULE;
 #endif
 	/* Build bad block table */
-	/* skip bad block scan for BF548-ezkit */
-	/*return this->scan_bbt (mtd);*/
-	return 0;
+	return this->scan_bbt (mtd);
 }
 
 /**

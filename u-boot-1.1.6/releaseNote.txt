@@ -1,0 +1,1 @@
+this release should be used to copy all the drivers, headerfiles etc from. its thas the most recent at45.c and dataflash.c files (including 'power of 2' byte addressing mode control).

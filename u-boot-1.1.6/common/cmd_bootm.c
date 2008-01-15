@@ -342,7 +342,7 @@ int do_bootm (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 		}
 		break;
 	case IH_COMP_GZIP:
-		printf ("   Uncompressing %s ... ", name);
+		printf ("   Uncompressing %s with gunzip... ", name);
 		if (gunzip ((void *)ntohl(hdr->ih_load), unc_len,
 			    (uchar *)data, &len) != 0) {
 			puts ("GUNZIP ERROR - must RESET board to recover\n");
@@ -1438,10 +1438,6 @@ int gunzip(void *dst, int dstlen, unsigned char *src, unsigned long *lenp)
 {
 	z_stream s;
 	int r, i, flags;
-
-	/* if memory regions overlap, whine about it */
-	if (dst + *lenp >= (void *)src && (void *)src < dst + *lenp)
-		puts ("\n   Warning: src and dst regions overlap ... ");
 
 	/* skip header */
 	i = 10;

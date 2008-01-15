@@ -2,13 +2,22 @@
  *
  * Unless otherwise specified, Copyright (C) 2004-2005 Barco Control Rooms
  *
- * $Source: /home/services/cvs/firmware/ppc/u-boot-1.1.2/board/barco/barco_svc.h,v $
- * $Revision: 1.2 $
- * $Author: mleeman $
- * $Date: 2005/02/21 12:48:58 $
+ * $Source: /cvs/ferag/BogenerkennungsImplementation/u-boot/u-boot-1.1.6/board/barco/barco_svc.h,v $
+ * $Revision: 1.1 $
+ * $Author: mberner $
+ * $Date: 2007/12/17 10:21:03 $
  *
  * Last ChangeLog Entry
  * $Log: barco_svc.h,v $
+ * Revision 1.1  2007/12/17 10:21:03  mberner
+ * U-Boot added.
+ *
+ * Revision 1.1.1.1  2007/10/03 08:15:48  dstadelmann
+ * First Commit Of Sources
+ *
+ * Revision 1.1  2006/12/22 18:28:48  aubrey
+ * Initial revision
+ *
  * Revision 1.2  2005/02/21 12:48:58  mleeman
  * update of copyright years (feedback wd)
  *
