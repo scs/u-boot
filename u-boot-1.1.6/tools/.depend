@@ -1,8 +1,8 @@
 environment.o: environment.c \
-  /home/lcv/u-boot/u-boot-1.1.6/include/config.h \
-  /home/lcv/u-boot/u-boot-1.1.6/include/configs/bf537-stamp.h \
-  /home/lcv/u-boot/u-boot-1.1.6/include/cmd_confdefs.h \
-  /home/lcv/u-boot/u-boot-1.1.6/include/environment.h
+  /home/lcv/uboot/u-boot-1.1.6/include/config.h \
+  /home/lcv/uboot/u-boot-1.1.6/include/configs/bf537-stamp.h \
+  /home/lcv/uboot/u-boot-1.1.6/include/cmd_confdefs.h \
+  /home/lcv/uboot/u-boot-1.1.6/include/environment.h
 crc32.o: crc32.c /usr/include/zlib.h /usr/include/zconf.h
 img2srec.o: img2srec.c \
   /usr/lib/gcc/i386-redhat-linux/4.1.2/include/stddef.h \
@@ -57,7 +57,7 @@ mkimage.o: mkimage.c /usr/include/errno.h /usr/include/features.h \
   /usr/include/sys/mman.h /usr/include/bits/mman.h \
   /usr/include/sys/stat.h /usr/include/bits/stat.h /usr/include/unistd.h \
   /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
-  /usr/include/getopt.h /home/lcv/u-boot/u-boot-1.1.6/include/image.h
+  /usr/include/getopt.h /home/lcv/uboot/u-boot-1.1.6/include/image.h
 envcrc.o: envcrc.c /usr/include/stdio.h /usr/include/features.h \
   /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
   /usr/include/gnu/stubs.h /usr/include/gnu/stubs-32.h \
@@ -74,9 +74,9 @@ envcrc.o: envcrc.c /usr/include/stdio.h /usr/include/features.h \
   /usr/include/sys/sysmacros.h /usr/include/bits/pthreadtypes.h \
   /usr/include/alloca.h /usr/include/unistd.h \
   /usr/include/bits/posix_opt.h /usr/include/bits/confname.h \
-  /usr/include/getopt.h /home/lcv/u-boot/u-boot-1.1.6/include/config.h \
-  /home/lcv/u-boot/u-boot-1.1.6/include/configs/bf537-stamp.h \
-  /home/lcv/u-boot/u-boot-1.1.6/include/cmd_confdefs.h
+  /usr/include/getopt.h /home/lcv/uboot/u-boot-1.1.6/include/config.h \
+  /home/lcv/uboot/u-boot-1.1.6/include/configs/bf537-stamp.h \
+  /home/lcv/uboot/u-boot-1.1.6/include/cmd_confdefs.h
 gen_eth_addr.o: gen_eth_addr.c /usr/include/stdio.h \
   /usr/include/features.h /usr/include/sys/cdefs.h \
   /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \

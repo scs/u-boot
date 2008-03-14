@@ -130,24 +130,25 @@
  */
 /* network support */
 #if (BFIN_CPU != ADSP_BF534)
-#define CONFIG_IPADDR           192.168.0.10
+#define CONFIG_IPADDR           192.168.1.1
 #define CONFIG_NETMASK          255.255.255.0
-#define CONFIG_GATEWAYIP        192.168.0.1
-#define CONFIG_SERVERIP         192.168.0.3
+#define CONFIG_GATEWAYIP        192.168.1.1
+#define CONFIG_SERVERIP         192.168.1.3
 #define CONFIG_HOSTNAME         BF537-LCV
 #define CONFIG_DP83848                         
 #define CONFIG_MII              
 #endif
 
 #define CONFIG_ROOTPATH		/romfs
-/* Uncomment next line to use fixed MAC address */
-#define CONFIG_ETHADDR          02:80:ad:20:31:e8 
+/* Uncomment next line to use fixed MAC address. This is the default
+MAC address in the address range of the industrial LCV board. */
+#define CONFIG_ETHADDR          00:20:e3:22:00:00 
 /* This is the routine that copies the MAC in Flash to the 'ethaddr' setting */
 
 #define CFG_LONGHELP			1
 //#define CONFIG_BOOTDELAY	        -1 //disable autoboot
 #define CONFIG_BOOT_RETRY_TIME		-1	/* Enable this if bootretry required, currently its disabled */
-#define CONFIG_BOOTCOMMAND 		"run tstlinux"
+#define CONFIG_BOOTCOMMAND 		"run boot"
 //#define CONFIG_BOOTCOMMAND 		"help"
 
 #if (BFIN_BOOT_MODE == BF537_BYPASS_BOOT) && defined(CONFIG_POST_TEST)
@@ -204,7 +205,7 @@
 					 CFG_CMD_ELF	| \
 					 CFG_CMD_CACHE  | \
 					 CFG_CMD_DHCP   | \
-					 ADD_IDE_CMD	| \ 
+					 ADD_IDE_CMD	| \
 					 CFG_CMD_FLASH  | \
 					 CFG_CMD_MII    | \
 					 CFG_CMD_NET    | \
@@ -220,13 +221,13 @@
 //CFG_CMD_JFFS2; CFG_CMD_EEPROM
 #endif
 
-#define CONFIG_BOOTARGS "root=/dev/mtdblock0 rw console=ttyBF0,115200 kgdboe=@192.168.0.10/,@192.168.0.3/"	
+#define CONFIG_BOOTARGS "root=/dev/mtdblock0 rw console=ttyBF0,115200 kgdboe=@192.168.1.1/,@192.168.1.3/"	
 #define CONFIG_LOADADDR	0x1000000
 
 #if ((BFIN_BOOT_MODE == BF537_BYPASS_BOOT) || (BFIN_BOOT_MODE == BF537_UART_BOOT))
 #if (BFIN_CPU != ADSP_BF534)
 #define CONFIG_EXTRA_ENV_SETTINGS                               \
-	"boot=tftp 0x2000000 uImage; bootm 0x2000000\0" \        
+	"boot=bootm 0x10020000\0" \
 	"nokgdbargs=setenv bootargs root=/dev/mtdblock0 rw console=ttyBF0,115200\0"	\
         "nfsargs=setenv bootargs root=/dev/nfs rw \0"             \
         "nfsroot=$(serverip):$(rootpath) console=ttyBF0,57600\0"                     \

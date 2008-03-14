@@ -97,13 +97,13 @@ lib_blackfin/libblackfin.a(cache.o)
                               common/libcommon.a(cmd_elf.o) (flush_cache)
 lib_blackfin/libblackfin.a(muldi3.o)
                               common/libcommon.a(main.o) (__muldi3)
-/home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
+/opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
                               cpu/bf537/serial.o (__udivsi3)
-/home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
+/opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
                               common/dlmalloc.o (__umodsi3)
-/home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
+/opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
                               cpu/bf537/libbf537.a(interrupts.o) (__umulsi3_highpart)
-/home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
+/opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
                               net/libnet.a(nfs.o) (__smulsi3_highpart)
 
 Allocating common symbols
@@ -695,13 +695,13 @@ Linker script and memory map
                 0x03fd5188                flush_cache
  .text          0x03fd51e8       0x68 lib_blackfin/libblackfin.a(muldi3.o)
                 0x03fd51e8                __muldi3
- .text          0x03fd5250       0x20 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
+ .text          0x03fd5250       0x20 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
                 0x03fd5250                __udivsi3
- .text          0x03fd5270        0xc /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
+ .text          0x03fd5270        0xc /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
                 0x03fd5270                __umodsi3
- .text          0x03fd527c       0x20 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
+ .text          0x03fd527c       0x20 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
                 0x03fd527c                __umulsi3_highpart
- .text          0x03fd529c       0x1c /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
+ .text          0x03fd529c       0x1c /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
                 0x03fd529c                __smulsi3_highpart
  *(.fixup)
  *(.got1)
@@ -718,7 +718,7 @@ Linker script and memory map
                 0xffa00000                _etext_l1 = .
                 0xffa00000                PROVIDE (etext_l1, .)
 
-.rodata         0x03fd52b8     0x49a8
+.rodata         0x03fd52b8     0x49ac
                 0x03fd52b8                . = ALIGN (0x4)
  *(EXCLUDE_FILE(board/bf537-stamp/post-memory.o) .rodata)
  .rodata        0x03fd52b8       0x10 cpu/bf537/traps.o
@@ -762,148 +762,148 @@ Linker script and memory map
                                  0x9c (size before relaxing)
  *fill*         0x03fd5f53        0x1 00
  .rodata.str1.4
-                0x03fd5f54       0xf8 lib_blackfin/libblackfin.a(board.o)
-                                0x100 (size before relaxing)
+                0x03fd5f54       0xfc lib_blackfin/libblackfin.a(board.o)
+                                0x104 (size before relaxing)
  .rodata.str1.4
-                0x03fd604c      0x241 net/libnet.a(net.o)
+                0x03fd6050      0x241 net/libnet.a(net.o)
                                 0x244 (size before relaxing)
- *fill*         0x03fd628d        0x3 00
+ *fill*         0x03fd6291        0x3 00
  .rodata.str1.4
-                0x03fd6290      0x1c9 net/libnet.a(tftp.o)
+                0x03fd6294      0x1c9 net/libnet.a(tftp.o)
                                 0x1e8 (size before relaxing)
- *fill*         0x03fd6459        0x3 00
+ *fill*         0x03fd645d        0x3 00
  .rodata.str1.4
-                0x03fd645c      0x115 net/libnet.a(bootp.o)
+                0x03fd6460      0x115 net/libnet.a(bootp.o)
                                 0x14c (size before relaxing)
- *fill*         0x03fd6571        0x3 00
+ *fill*         0x03fd6575        0x3 00
  .rodata.str1.4
-                0x03fd6574       0x13 net/libnet.a(rarp.o)
+                0x03fd6578       0x13 net/libnet.a(rarp.o)
                                  0x4c (size before relaxing)
- *fill*         0x03fd6587        0x1 00
+ *fill*         0x03fd658b        0x1 00
  .rodata.str1.4
-                0x03fd6588       0xea net/libnet.a(eth.o)
+                0x03fd658c       0xea net/libnet.a(eth.o)
                                  0xfc (size before relaxing)
- *fill*         0x03fd6672        0x2 00
+ *fill*         0x03fd6676        0x2 00
  .rodata.str1.4
-                0x03fd6674      0x101 net/libnet.a(nfs.o)
+                0x03fd6678      0x101 net/libnet.a(nfs.o)
                                 0x1a0 (size before relaxing)
- *fill*         0x03fd6775        0x3 00
+ *fill*         0x03fd6779        0x3 00
  .rodata.str1.4
-                0x03fd6778      0x214 drivers/libdrivers.a(dataflash.o)
+                0x03fd677c      0x214 drivers/libdrivers.a(dataflash.o)
                                 0x218 (size before relaxing)
  .rodata.str1.4
-                0x03fd698c        0x9 drivers/libdrivers.a(netconsole.o)
+                0x03fd6990        0x9 drivers/libdrivers.a(netconsole.o)
                                  0x1c (size before relaxing)
- *fill*         0x03fd6995        0x3 00
+ *fill*         0x03fd6999        0x3 00
  .rodata.str1.4
-                0x03fd6998      0x12d common/libcommon.a(main.o)
+                0x03fd699c      0x12d common/libcommon.a(main.o)
                                 0x134 (size before relaxing)
- *fill*         0x03fd6ac5        0x3 00
+ *fill*         0x03fd6ac9        0x3 00
  .rodata.str1.4
-                0x03fd6ac8       0xf7 common/libcommon.a(cmd_autoscript.o)
+                0x03fd6acc       0xf7 common/libcommon.a(cmd_autoscript.o)
                                  0xf8 (size before relaxing)
- *fill*         0x03fd6bbf        0x1 00
+ *fill*         0x03fd6bc3        0x1 00
  .rodata.str1.4
-                0x03fd6bc0       0xc2 common/libcommon.a(cmd_bdinfo.o)
+                0x03fd6bc4       0xc2 common/libcommon.a(cmd_bdinfo.o)
                                  0xc4 (size before relaxing)
- *fill*         0x03fd6c82        0x2 00
+ *fill*         0x03fd6c86        0x2 00
  .rodata.str1.4
-                0x03fd6c84      0x10c common/libcommon.a(cmd_boot.o)
+                0x03fd6c88      0x10c common/libcommon.a(cmd_boot.o)
                                 0x118 (size before relaxing)
  .rodata.str1.4
-                0x03fd6d90      0x806 common/libcommon.a(cmd_bootm.o)
+                0x03fd6d94      0x806 common/libcommon.a(cmd_bootm.o)
                                 0x848 (size before relaxing)
- *fill*         0x03fd7596        0x2 00
+ *fill*         0x03fd759a        0x2 00
  .rodata.str1.4
-                0x03fd7598      0x129 common/libcommon.a(cmd_cache.o)
+                0x03fd759c      0x129 common/libcommon.a(cmd_cache.o)
                                 0x13c (size before relaxing)
- *fill*         0x03fd76c1        0x3 00
+ *fill*         0x03fd76c5        0x3 00
  .rodata.str1.4
-                0x03fd76c4       0x6d common/libcommon.a(cmd_console.o)
+                0x03fd76c8       0x6d common/libcommon.a(cmd_console.o)
                                  0x74 (size before relaxing)
- *fill*         0x03fd7731        0x3 00
+ *fill*         0x03fd7735        0x3 00
  .rodata.str1.4
-                0x03fd7734      0x31d common/libcommon.a(cmd_elf.o)
+                0x03fd7738      0x31d common/libcommon.a(cmd_elf.o)
                                 0x338 (size before relaxing)
- *fill*         0x03fd7a51        0x3 00
+ *fill*         0x03fd7a55        0x3 00
  .rodata.str1.4
-                0x03fd7a54       0xcf common/libcommon.a(cmd_itest.o)
+                0x03fd7a58       0xcf common/libcommon.a(cmd_itest.o)
                                  0xdc (size before relaxing)
- *fill*         0x03fd7b23        0x1 00
+ *fill*         0x03fd7b27        0x1 00
  .rodata.str1.4
-                0x03fd7b24      0x377 common/libcommon.a(cmd_load.o)
+                0x03fd7b28      0x377 common/libcommon.a(cmd_load.o)
                                 0x398 (size before relaxing)
- *fill*         0x03fd7e9b        0x1 00
+ *fill*         0x03fd7e9f        0x1 00
  .rodata.str1.4
-                0x03fd7e9c      0x6c2 common/libcommon.a(cmd_mem.o)
+                0x03fd7ea0      0x6c2 common/libcommon.a(cmd_mem.o)
                                 0x6e8 (size before relaxing)
- *fill*         0x03fd855e        0x2 00
+ *fill*         0x03fd8562        0x2 00
  .rodata.str1.4
-                0x03fd8560      0x7d0 common/libcommon.a(cmd_mii.o)
+                0x03fd8564      0x7d0 common/libcommon.a(cmd_mii.o)
                                 0x7e8 (size before relaxing)
  .rodata.str1.4
-                0x03fd8d30       0x70 common/libcommon.a(cmd_misc.o)
+                0x03fd8d34       0x70 common/libcommon.a(cmd_misc.o)
                                  0x7c (size before relaxing)
  .rodata.str1.4
-                0x03fd8da0      0x269 common/libcommon.a(cmd_net.o)
+                0x03fd8da4      0x269 common/libcommon.a(cmd_net.o)
                                 0x2bc (size before relaxing)
- *fill*         0x03fd9009        0x3 00
+ *fill*         0x03fd900d        0x3 00
  .rodata.str1.4
-                0x03fd900c      0x2df common/libcommon.a(cmd_nvedit.o)
+                0x03fd9010      0x2df common/libcommon.a(cmd_nvedit.o)
                                 0x378 (size before relaxing)
- *fill*         0x03fd92eb        0x1 00
+ *fill*         0x03fd92ef        0x1 00
  .rodata.str1.4
-                0x03fd92ec      0x27c common/libcommon.a(command.o)
+                0x03fd92f0      0x27c common/libcommon.a(command.o)
                                 0x280 (size before relaxing)
  .rodata.str1.4
-                0x03fd9568       0x75 common/libcommon.a(console.o)
+                0x03fd956c       0x75 common/libcommon.a(console.o)
                                  0x7c (size before relaxing)
- *fill*         0x03fd95dd        0x3 00
+ *fill*         0x03fd95e1        0x3 00
  .rodata.str1.4
-                0x03fd95e0       0x2f common/libcommon.a(devices.o)
+                0x03fd95e4       0x2f common/libcommon.a(devices.o)
                                  0x48 (size before relaxing)
- *fill*         0x03fd960f        0x1 00
+ *fill*         0x03fd9613        0x1 00
  .rodata.str1.4
-                0x03fd9610       0x33 common/libcommon.a(env_common.o)
+                0x03fd9614       0x33 common/libcommon.a(env_common.o)
                                  0x34 (size before relaxing)
- *fill*         0x03fd9643        0x1 00
+ *fill*         0x03fd9647        0x1 00
  .rodata.str1.4
-                0x03fd9644        0x6 common/libcommon.a(env_flash.o)
+                0x03fd9648        0x6 common/libcommon.a(env_flash.o)
                                   0x8 (size before relaxing)
- *fill*         0x03fd964a        0x2 00
+ *fill*         0x03fd964e        0x2 00
  .rodata.str1.4
-                0x03fd964c      0x18a common/libcommon.a(miiphyutil.o)
+                0x03fd9650      0x18a common/libcommon.a(miiphyutil.o)
                                 0x190 (size before relaxing)
- *fill*         0x03fd97d6        0x2 00
+ *fill*         0x03fd97da        0x2 00
  .rodata.str1.4
-                0x03fd97d8       0xf1 common/libcommon.a(xyzModem.o)
+                0x03fd97dc       0xf1 common/libcommon.a(xyzModem.o)
                                  0xf8 (size before relaxing)
- *fill*         0x03fd98c9        0x3 00
+ *fill*         0x03fd98cd        0x3 00
  .rodata.str1.4
-                0x03fd98cc       0x1f lib_generic/libgeneric.a(display_options.o)
+                0x03fd98d0       0x1f lib_generic/libgeneric.a(display_options.o)
                                  0x20 (size before relaxing)
- *fill*         0x03fd98eb        0x1 00
+ *fill*         0x03fd98ef        0x1 00
  .rodata.str1.4
-                0x03fd98ec       0x57 lib_generic/libgeneric.a(vsprintf.o)
+                0x03fd98f0       0x57 lib_generic/libgeneric.a(vsprintf.o)
                                  0x58 (size before relaxing)
- *fill*         0x03fd9943        0x1 00
+ *fill*         0x03fd9947        0x1 00
  .rodata.str1.4
-                0x03fd9944      0x20f lib_generic/libgeneric.a(zlib.o)
+                0x03fd9948      0x20f lib_generic/libgeneric.a(zlib.o)
                                 0x214 (size before relaxing)
- *fill*         0x03fd9b53        0x1 00
+ *fill*         0x03fd9b57        0x1 00
  .rodata.str1.4
-                0x03fd9b54       0xf0 board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
+                0x03fd9b58       0xf0 board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
                                  0xf8 (size before relaxing)
  .rodata.str1.4
-                0x03fd9c44       0x1c lib_blackfin/libblackfin.a(bf533_linux.o)
+                0x03fd9c48       0x1c lib_blackfin/libblackfin.a(bf533_linux.o)
                                  0x28 (size before relaxing)
  *(.eh_frame)
-                0x03fd9c60                . = ALIGN (0x4)
-                0x03fd9c60                . = ALIGN (0x4)
-                0x03fd9c60                _erodata = .
-                0x03fd9c60                PROVIDE (erodata, .)
+                0x03fd9c64                . = ALIGN (0x4)
+                0x03fd9c64                . = ALIGN (0x4)
+                0x03fd9c64                _erodata = .
+                0x03fd9c64                PROVIDE (erodata, .)
 
-.rodata_l1      0xff900000        0x0 load address 0x03fd9c60
+.rodata_l1      0xff900000        0x0 load address 0x03fd9c64
                 0xff900000                . = ALIGN (0x4)
                 0xff900000                _rodata_l1 = .
                 0xff900000                PROVIDE (rodata_l1, .)
@@ -935,179 +935,179 @@ Linker script and memory map
                 0x00000000                __got2_entries = ((_FIXUP_TABLE_ - _GOT2_TABLE_) >> 0x2)
                 0x00000000                __fixup_entries = ((. - _FIXUP_TABLE_) >> 0x2)
 
-.data           0x03fd9c60      0xe68
+.data           0x03fd9c64      0xe50
  *(.data)
- .data          0x03fd9c60        0x0 cpu/bf537/start.o
- .data          0x03fd9c60        0x0 cpu/bf537/start1.o
- .data          0x03fd9c60        0x0 cpu/bf537/traps.o
- .data          0x03fd9c60        0x0 cpu/bf537/interrupt.o
- .data          0x03fd9c60       0x14 cpu/bf537/serial.o
-                0x03fd9c60                baud_table
- .data          0x03fd9c74      0x414 common/dlmalloc.o
- .data          0x03fda088        0x0 lib_generic/crc32.o
- .data          0x03fda088        0x0 common/environment.o
- .data          0x03fda088        0x0 board/bf537-stamp/post-memory.o
- .data          0x03fda088        0x0 cpu/bf537/cache.o
- .data          0x03fda088        0x0 cpu/bf537/flush.o
- .data          0x03fda088        0x0 cpu/bf537/init_sdram.o
- .data          0x03fda088        0x0 board/bf537-stamp/libbf537-stamp.a(bf537-stamp.o)
- .data          0x03fda088        0x0 cpu/bf537/libbf537.a(cpu.o)
- .data          0x03fda088        0x0 cpu/bf537/libbf537.a(ints.o)
- .data          0x03fda088        0x0 cpu/bf537/libbf537.a(interrupts.o)
- .data          0x03fda088        0x0 lib_blackfin/libblackfin.a(memset.o)
- .data          0x03fda088        0x0 lib_blackfin/libblackfin.a(board.o)
- .data          0x03fda088        0x0 lib_blackfin/libblackfin.a(bf533_string.o)
- .data          0x03fda088        0x0 lib_blackfin/libblackfin.a(memcpy.o)
- .data          0x03fda088        0xc net/libnet.a(net.o)
-                0x03fda088                NetBcastAddr
-                0x03fda090                NetOurNativeVLAN
-                0x03fda08e                NetOurVLAN
- .data          0x03fda094        0x0 net/libnet.a(tftp.o)
- .data          0x03fda094        0x0 net/libnet.a(bootp.o)
- .data          0x03fda094        0x0 net/libnet.a(rarp.o)
- .data          0x03fda094        0x0 net/libnet.a(eth.o)
- .data          0x03fda094        0x4 net/libnet.a(nfs.o)
- .data          0x03fda098       0x40 drivers/libdrivers.a(dataflash.o)
-                0x03fda098                cs
-                0x03fda0a8                area_list
- .data          0x03fda0d8        0x0 drivers/libdrivers.a(netconsole.o)
- .data          0x03fda0d8        0x8 common/libcommon.a(main.o)
- .data          0x03fda0e0        0x0 common/libcommon.a(cmd_autoscript.o)
- .data          0x03fda0e0        0x0 common/libcommon.a(cmd_bdinfo.o)
- .data          0x03fda0e0        0x0 common/libcommon.a(cmd_boot.o)
- .data          0x03fda0e0        0x4 common/libcommon.a(cmd_bootm.o)
-                0x03fda0e0                load_addr
- .data          0x03fda0e4        0x0 common/libcommon.a(cmd_cache.o)
- .data          0x03fda0e4        0x0 common/libcommon.a(cmd_console.o)
- .data          0x03fda0e4        0x0 common/libcommon.a(cmd_elf.o)
- .data          0x03fda0e4       0x68 common/libcommon.a(cmd_itest.o)
-                0x03fda0e4                op_table
- .data          0x03fda14c        0x4 common/libcommon.a(cmd_load.o)
- .data          0x03fda150        0x4 common/libcommon.a(cmd_mem.o)
-                0x03fda150                dp_last_length
- .data          0x03fda154      0x2e8 common/libcommon.a(cmd_mii.o)
-                0x03fda2bc                reg_2_desc_tbl
-                0x03fda2c8                reg_3_desc_tbl
-                0x03fda37c                reg_5_desc_tbl
-                0x03fda40c                desc_and_len_tbl
-                0x03fda184                reg_0_desc_tbl
-                0x03fda154                reg_0_5_desc_tbl
-                0x03fda2ec                reg_4_desc_tbl
-                0x03fda1fc                reg_1_desc_tbl
- .data          0x03fda43c        0x0 common/libcommon.a(cmd_misc.o)
- .data          0x03fda43c        0x0 common/libcommon.a(cmd_net.o)
- .data          0x03fda43c        0x0 common/libcommon.a(cmd_nvedit.o)
- .data          0x03fda43c        0x0 common/libcommon.a(command.o)
- .data          0x03fda43c        0x0 common/libcommon.a(console.o)
- .data          0x03fda43c        0xc common/libcommon.a(devices.o)
-                0x03fda43c                stdio_names
- .data          0x03fda448      0x360 common/libcommon.a(env_common.o)
-                0x03fda448                env_get_char
-                0x03fda44c                default_environment
- .data          0x03fda7a8        0x8 common/libcommon.a(env_flash.o)
-                0x03fda7ac                env_ptr
-                0x03fda7a8                env_name_spec
- .data          0x03fda7b0        0x0 common/libcommon.a(exports.o)
- .data          0x03fda7b0        0x0 common/libcommon.a(lists.o)
- .data          0x03fda7b0        0x0 common/libcommon.a(miiphyutil.o)
- .data          0x03fda7b0        0x0 common/libcommon.a(s_record.o)
- .data          0x03fda7b0        0x0 common/libcommon.a(xyzModem.o)
- .data          0x03fda7b0        0x0 common/libcommon.a(crc16.o)
- .data          0x03fda7b0        0x0 lib_generic/libgeneric.a(display_options.o)
- .data          0x03fda7b0        0x0 lib_generic/libgeneric.a(string.o)
- .data          0x03fda7b0        0x0 lib_generic/libgeneric.a(vsprintf.o)
- .data          0x03fda7b0      0x210 lib_generic/libgeneric.a(zlib.o)
-                0x03fda7b0                zlib_version
-                0x03fda7b4                z_errmsg
- .data          0x03fda9c0      0x100 lib_generic/libgeneric.a(ctype.o)
-                0x03fda9c0                _ctype
- .data          0x03fdaac0        0x8 board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
-                0x03fdaac0                SrcAddr
- .data          0x03fdaac8        0x0 board/bf537-stamp/libbf537-stamp.a(at45.o)
- .data          0x03fdaac8        0x0 lib_blackfin/libblackfin.a(memcmp.o)
- .data          0x03fdaac8        0x0 lib_blackfin/libblackfin.a(memmove.o)
- .data          0x03fdaac8        0x0 lib_blackfin/libblackfin.a(bf533_linux.o)
- .data          0x03fdaac8        0x0 lib_blackfin/libblackfin.a(cache.o)
- .data          0x03fdaac8        0x0 lib_blackfin/libblackfin.a(muldi3.o)
- .data          0x03fdaac8        0x0 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
- .data          0x03fdaac8        0x0 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
- .data          0x03fdaac8        0x0 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
- .data          0x03fdaac8        0x0 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
+ .data          0x03fd9c64        0x0 cpu/bf537/start.o
+ .data          0x03fd9c64        0x0 cpu/bf537/start1.o
+ .data          0x03fd9c64        0x0 cpu/bf537/traps.o
+ .data          0x03fd9c64        0x0 cpu/bf537/interrupt.o
+ .data          0x03fd9c64       0x14 cpu/bf537/serial.o
+                0x03fd9c64                baud_table
+ .data          0x03fd9c78      0x414 common/dlmalloc.o
+ .data          0x03fda08c        0x0 lib_generic/crc32.o
+ .data          0x03fda08c        0x0 common/environment.o
+ .data          0x03fda08c        0x0 board/bf537-stamp/post-memory.o
+ .data          0x03fda08c        0x0 cpu/bf537/cache.o
+ .data          0x03fda08c        0x0 cpu/bf537/flush.o
+ .data          0x03fda08c        0x0 cpu/bf537/init_sdram.o
+ .data          0x03fda08c        0x0 board/bf537-stamp/libbf537-stamp.a(bf537-stamp.o)
+ .data          0x03fda08c        0x0 cpu/bf537/libbf537.a(cpu.o)
+ .data          0x03fda08c        0x0 cpu/bf537/libbf537.a(ints.o)
+ .data          0x03fda08c        0x0 cpu/bf537/libbf537.a(interrupts.o)
+ .data          0x03fda08c        0x0 lib_blackfin/libblackfin.a(memset.o)
+ .data          0x03fda08c        0x0 lib_blackfin/libblackfin.a(board.o)
+ .data          0x03fda08c        0x0 lib_blackfin/libblackfin.a(bf533_string.o)
+ .data          0x03fda08c        0x0 lib_blackfin/libblackfin.a(memcpy.o)
+ .data          0x03fda08c        0xc net/libnet.a(net.o)
+                0x03fda08c                NetBcastAddr
+                0x03fda094                NetOurNativeVLAN
+                0x03fda092                NetOurVLAN
+ .data          0x03fda098        0x0 net/libnet.a(tftp.o)
+ .data          0x03fda098        0x0 net/libnet.a(bootp.o)
+ .data          0x03fda098        0x0 net/libnet.a(rarp.o)
+ .data          0x03fda098        0x0 net/libnet.a(eth.o)
+ .data          0x03fda098        0x4 net/libnet.a(nfs.o)
+ .data          0x03fda09c       0x40 drivers/libdrivers.a(dataflash.o)
+                0x03fda09c                cs
+                0x03fda0ac                area_list
+ .data          0x03fda0dc        0x0 drivers/libdrivers.a(netconsole.o)
+ .data          0x03fda0dc        0x8 common/libcommon.a(main.o)
+ .data          0x03fda0e4        0x0 common/libcommon.a(cmd_autoscript.o)
+ .data          0x03fda0e4        0x0 common/libcommon.a(cmd_bdinfo.o)
+ .data          0x03fda0e4        0x0 common/libcommon.a(cmd_boot.o)
+ .data          0x03fda0e4        0x4 common/libcommon.a(cmd_bootm.o)
+                0x03fda0e4                load_addr
+ .data          0x03fda0e8        0x0 common/libcommon.a(cmd_cache.o)
+ .data          0x03fda0e8        0x0 common/libcommon.a(cmd_console.o)
+ .data          0x03fda0e8        0x0 common/libcommon.a(cmd_elf.o)
+ .data          0x03fda0e8       0x68 common/libcommon.a(cmd_itest.o)
+                0x03fda0e8                op_table
+ .data          0x03fda150        0x4 common/libcommon.a(cmd_load.o)
+ .data          0x03fda154        0x4 common/libcommon.a(cmd_mem.o)
+                0x03fda154                dp_last_length
+ .data          0x03fda158      0x2e8 common/libcommon.a(cmd_mii.o)
+                0x03fda2c0                reg_2_desc_tbl
+                0x03fda2cc                reg_3_desc_tbl
+                0x03fda380                reg_5_desc_tbl
+                0x03fda410                desc_and_len_tbl
+                0x03fda188                reg_0_desc_tbl
+                0x03fda158                reg_0_5_desc_tbl
+                0x03fda2f0                reg_4_desc_tbl
+                0x03fda200                reg_1_desc_tbl
+ .data          0x03fda440        0x0 common/libcommon.a(cmd_misc.o)
+ .data          0x03fda440        0x0 common/libcommon.a(cmd_net.o)
+ .data          0x03fda440        0x0 common/libcommon.a(cmd_nvedit.o)
+ .data          0x03fda440        0x0 common/libcommon.a(command.o)
+ .data          0x03fda440        0x0 common/libcommon.a(console.o)
+ .data          0x03fda440        0xc common/libcommon.a(devices.o)
+                0x03fda440                stdio_names
+ .data          0x03fda44c      0x348 common/libcommon.a(env_common.o)
+                0x03fda44c                env_get_char
+                0x03fda450                default_environment
+ .data          0x03fda794        0x8 common/libcommon.a(env_flash.o)
+                0x03fda798                env_ptr
+                0x03fda794                env_name_spec
+ .data          0x03fda79c        0x0 common/libcommon.a(exports.o)
+ .data          0x03fda79c        0x0 common/libcommon.a(lists.o)
+ .data          0x03fda79c        0x0 common/libcommon.a(miiphyutil.o)
+ .data          0x03fda79c        0x0 common/libcommon.a(s_record.o)
+ .data          0x03fda79c        0x0 common/libcommon.a(xyzModem.o)
+ .data          0x03fda79c        0x0 common/libcommon.a(crc16.o)
+ .data          0x03fda79c        0x0 lib_generic/libgeneric.a(display_options.o)
+ .data          0x03fda79c        0x0 lib_generic/libgeneric.a(string.o)
+ .data          0x03fda79c        0x0 lib_generic/libgeneric.a(vsprintf.o)
+ .data          0x03fda79c      0x210 lib_generic/libgeneric.a(zlib.o)
+                0x03fda79c                zlib_version
+                0x03fda7a0                z_errmsg
+ .data          0x03fda9ac      0x100 lib_generic/libgeneric.a(ctype.o)
+                0x03fda9ac                _ctype
+ .data          0x03fdaaac        0x8 board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
+                0x03fdaaac                SrcAddr
+ .data          0x03fdaab4        0x0 board/bf537-stamp/libbf537-stamp.a(at45.o)
+ .data          0x03fdaab4        0x0 lib_blackfin/libblackfin.a(memcmp.o)
+ .data          0x03fdaab4        0x0 lib_blackfin/libblackfin.a(memmove.o)
+ .data          0x03fdaab4        0x0 lib_blackfin/libblackfin.a(bf533_linux.o)
+ .data          0x03fdaab4        0x0 lib_blackfin/libblackfin.a(cache.o)
+ .data          0x03fdaab4        0x0 lib_blackfin/libblackfin.a(muldi3.o)
+ .data          0x03fdaab4        0x0 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
+ .data          0x03fdaab4        0x0 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
+ .data          0x03fdaab4        0x0 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
+ .data          0x03fdaab4        0x0 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
  *(.data1)
  *(.sdata)
  *(.sdata2)
  *(.dynamic)
-                0x03fdaac8                _edata = .
-                0x03fdaac8                PROVIDE (edata, .)
-                0x03fdaac8                ___u_boot_cmd_start = .
+                0x03fdaab4                _edata = .
+                0x03fdaab4                PROVIDE (edata, .)
+                0x03fdaab4                ___u_boot_cmd_start = .
 
-.u_boot_cmd     0x03fdaac8      0x408
+.u_boot_cmd     0x03fdaab4      0x408
  *(.u_boot_cmd)
- .u_boot_cmd    0x03fdaac8       0x18 board/bf537-stamp/libbf537-stamp.a(bf537-stamp.o)
-                0x03fdaac8                __u_boot_cmd_bootldr
- .u_boot_cmd    0x03fdaae0       0x18 common/libcommon.a(cmd_autoscript.o)
-                0x03fdaae0                __u_boot_cmd_autoscr
- .u_boot_cmd    0x03fdaaf8       0x18 common/libcommon.a(cmd_bdinfo.o)
-                0x03fdaaf8                __u_boot_cmd_bdinfo
- .u_boot_cmd    0x03fdab10       0x30 common/libcommon.a(cmd_boot.o)
-                0x03fdab28                __u_boot_cmd_reset
-                0x03fdab10                __u_boot_cmd_go
- .u_boot_cmd    0x03fdab40       0x60 common/libcommon.a(cmd_bootm.o)
-                0x03fdab88                __u_boot_cmd_iminfo
-                0x03fdab40                __u_boot_cmd_bootm
-                0x03fdab70                __u_boot_cmd_bootd
-                0x03fdab58                __u_boot_cmd_boot
- .u_boot_cmd    0x03fdaba0       0x30 common/libcommon.a(cmd_cache.o)
-                0x03fdaba0                __u_boot_cmd_icache
-                0x03fdabb8                __u_boot_cmd_dcache
- .u_boot_cmd    0x03fdabd0       0x18 common/libcommon.a(cmd_console.o)
-                0x03fdabd0                __u_boot_cmd_coninfo
- .u_boot_cmd    0x03fdabe8       0x30 common/libcommon.a(cmd_elf.o)
-                0x03fdac00                __u_boot_cmd_bootvx
-                0x03fdabe8                __u_boot_cmd_bootelf
- .u_boot_cmd    0x03fdac18       0x18 common/libcommon.a(cmd_itest.o)
-                0x03fdac18                __u_boot_cmd_itest
- .u_boot_cmd    0x03fdac30       0x48 common/libcommon.a(cmd_load.o)
-                0x03fdac30                __u_boot_cmd_loads
-                0x03fdac48                __u_boot_cmd_loadb
-                0x03fdac60                __u_boot_cmd_loady
- .u_boot_cmd    0x03fdac78       0xf0 common/libcommon.a(cmd_mem.o)
-                0x03fdac90                __u_boot_cmd_mm
-                0x03fdac78                __u_boot_cmd_md
-                0x03fdad20                __u_boot_cmd_base
-                0x03fdacd8                __u_boot_cmd_cp
-                0x03fdacf0                __u_boot_cmd_cmp
-                0x03fdad50                __u_boot_cmd_mtest
-                0x03fdad08                __u_boot_cmd_crc32
-                0x03fdad38                __u_boot_cmd_loop
-                0x03fdaca8                __u_boot_cmd_nm
-                0x03fdacc0                __u_boot_cmd_mw
- .u_boot_cmd    0x03fdad68       0x18 common/libcommon.a(cmd_mii.o)
-                0x03fdad68                __u_boot_cmd_mii
- .u_boot_cmd    0x03fdad80       0x18 common/libcommon.a(cmd_misc.o)
-                0x03fdad80                __u_boot_cmd_sleep
- .u_boot_cmd    0x03fdad98       0x90 common/libcommon.a(cmd_net.o)
-                0x03fdad98                __u_boot_cmd_bootp
-                0x03fdadf8                __u_boot_cmd_nfs
-                0x03fdae10                __u_boot_cmd_ping
-                0x03fdadb0                __u_boot_cmd_tftpboot
-                0x03fdade0                __u_boot_cmd_dhcp
-                0x03fdadc8                __u_boot_cmd_rarpboot
- .u_boot_cmd    0x03fdae28       0x48 common/libcommon.a(cmd_nvedit.o)
-                0x03fdae40                __u_boot_cmd_setenv
-                0x03fdae28                __u_boot_cmd_printenv
-                0x03fdae58                __u_boot_cmd_run
- .u_boot_cmd    0x03fdae70       0x60 common/libcommon.a(command.o)
-                0x03fdae88                __u_boot_cmd_echo
-                0x03fdaeb8                __u_boot_cmd_question_mark
-                0x03fdae70                __u_boot_cmd_version
-                0x03fdaea0                __u_boot_cmd_help
-                0x03fdaed0                ___u_boot_cmd_end = .
-                0x03fdaed0                __start___ex_table = .
+ .u_boot_cmd    0x03fdaab4       0x18 board/bf537-stamp/libbf537-stamp.a(bf537-stamp.o)
+                0x03fdaab4                __u_boot_cmd_bootldr
+ .u_boot_cmd    0x03fdaacc       0x18 common/libcommon.a(cmd_autoscript.o)
+                0x03fdaacc                __u_boot_cmd_autoscr
+ .u_boot_cmd    0x03fdaae4       0x18 common/libcommon.a(cmd_bdinfo.o)
+                0x03fdaae4                __u_boot_cmd_bdinfo
+ .u_boot_cmd    0x03fdaafc       0x30 common/libcommon.a(cmd_boot.o)
+                0x03fdab14                __u_boot_cmd_reset
+                0x03fdaafc                __u_boot_cmd_go
+ .u_boot_cmd    0x03fdab2c       0x60 common/libcommon.a(cmd_bootm.o)
+                0x03fdab74                __u_boot_cmd_iminfo
+                0x03fdab2c                __u_boot_cmd_bootm
+                0x03fdab5c                __u_boot_cmd_bootd
+                0x03fdab44                __u_boot_cmd_boot
+ .u_boot_cmd    0x03fdab8c       0x30 common/libcommon.a(cmd_cache.o)
+                0x03fdab8c                __u_boot_cmd_icache
+                0x03fdaba4                __u_boot_cmd_dcache
+ .u_boot_cmd    0x03fdabbc       0x18 common/libcommon.a(cmd_console.o)
+                0x03fdabbc                __u_boot_cmd_coninfo
+ .u_boot_cmd    0x03fdabd4       0x30 common/libcommon.a(cmd_elf.o)
+                0x03fdabec                __u_boot_cmd_bootvx
+                0x03fdabd4                __u_boot_cmd_bootelf
+ .u_boot_cmd    0x03fdac04       0x18 common/libcommon.a(cmd_itest.o)
+                0x03fdac04                __u_boot_cmd_itest
+ .u_boot_cmd    0x03fdac1c       0x48 common/libcommon.a(cmd_load.o)
+                0x03fdac1c                __u_boot_cmd_loads
+                0x03fdac34                __u_boot_cmd_loadb
+                0x03fdac4c                __u_boot_cmd_loady
+ .u_boot_cmd    0x03fdac64       0xf0 common/libcommon.a(cmd_mem.o)
+                0x03fdac7c                __u_boot_cmd_mm
+                0x03fdac64                __u_boot_cmd_md
+                0x03fdad0c                __u_boot_cmd_base
+                0x03fdacc4                __u_boot_cmd_cp
+                0x03fdacdc                __u_boot_cmd_cmp
+                0x03fdad3c                __u_boot_cmd_mtest
+                0x03fdacf4                __u_boot_cmd_crc32
+                0x03fdad24                __u_boot_cmd_loop
+                0x03fdac94                __u_boot_cmd_nm
+                0x03fdacac                __u_boot_cmd_mw
+ .u_boot_cmd    0x03fdad54       0x18 common/libcommon.a(cmd_mii.o)
+                0x03fdad54                __u_boot_cmd_mii
+ .u_boot_cmd    0x03fdad6c       0x18 common/libcommon.a(cmd_misc.o)
+                0x03fdad6c                __u_boot_cmd_sleep
+ .u_boot_cmd    0x03fdad84       0x90 common/libcommon.a(cmd_net.o)
+                0x03fdad84                __u_boot_cmd_bootp
+                0x03fdade4                __u_boot_cmd_nfs
+                0x03fdadfc                __u_boot_cmd_ping
+                0x03fdad9c                __u_boot_cmd_tftpboot
+                0x03fdadcc                __u_boot_cmd_dhcp
+                0x03fdadb4                __u_boot_cmd_rarpboot
+ .u_boot_cmd    0x03fdae14       0x48 common/libcommon.a(cmd_nvedit.o)
+                0x03fdae2c                __u_boot_cmd_setenv
+                0x03fdae14                __u_boot_cmd_printenv
+                0x03fdae44                __u_boot_cmd_run
+ .u_boot_cmd    0x03fdae5c       0x60 common/libcommon.a(command.o)
+                0x03fdae74                __u_boot_cmd_echo
+                0x03fdaea4                __u_boot_cmd_question_mark
+                0x03fdae5c                __u_boot_cmd_version
+                0x03fdae8c                __u_boot_cmd_help
+                0x03fdaebc                ___u_boot_cmd_end = .
+                0x03fdaebc                __start___ex_table = .
 
 __ex_table
  *(__ex_table)
-                0x03fdaed0                __stop___ex_table = .
+                0x03fdaebc                __stop___ex_table = .
                 0x03fdaf00                . = ALIGN (0x100)
                 0x03fdaf00                __init_begin = .
 
@@ -1119,180 +1119,180 @@ __ex_table
                 0x03fdaf00                . = ALIGN (0x100)
                 0x03fdaf00                __init_end = .
 
-.bss            0x03fdaed0     0x60f0
-                0x03fdaed0                __bss_start = .
+.bss            0x03fdaebc     0x60f0
+                0x03fdaebc                __bss_start = .
  *(.sbss)
  *(.scommon)
  *(.dynbss)
  *(.bss)
- .bss           0x03fdaed0        0x0 cpu/bf537/start.o
- .bss           0x03fdaed0        0x0 cpu/bf537/start1.o
- .bss           0x03fdaed0        0x0 cpu/bf537/traps.o
- .bss           0x03fdaed0        0x0 cpu/bf537/interrupt.o
- .bss           0x03fdaed0        0x0 cpu/bf537/serial.o
- .bss           0x03fdaed0       0x38 common/dlmalloc.o
- .bss           0x03fdaf08        0x0 lib_generic/crc32.o
- .bss           0x03fdaf08        0x0 common/environment.o
- .bss           0x03fdaf08        0x0 board/bf537-stamp/post-memory.o
- .bss           0x03fdaf08        0x0 cpu/bf537/cache.o
- .bss           0x03fdaf08        0x0 cpu/bf537/flush.o
- .bss           0x03fdaf08        0x0 cpu/bf537/init_sdram.o
- .bss           0x03fdaf08        0x0 board/bf537-stamp/libbf537-stamp.a(bf537-stamp.o)
- .bss           0x03fdaf08        0x0 cpu/bf537/libbf537.a(cpu.o)
- .bss           0x03fdaf08        0x0 cpu/bf537/libbf537.a(ints.o)
- .bss           0x03fdaf08        0xc cpu/bf537/libbf537.a(interrupts.o)
- .bss           0x03fdaf14        0x0 lib_blackfin/libblackfin.a(memset.o)
- .bss           0x03fdaf14        0xc lib_blackfin/libblackfin.a(board.o)
- .bss           0x03fdaf20        0x0 lib_blackfin/libblackfin.a(bf533_string.o)
- .bss           0x03fdaf20        0x0 lib_blackfin/libblackfin.a(memcpy.o)
- .bss           0x03fdaf20       0xc8 net/libnet.a(net.o)
-                0x03fdafae                NetServerEther
-                0x03fdaf24                NetOurGatewayIP
-                0x03fdaf4c                NetOurHostName
-                0x03fdaf28                NetOurDNSIP
-                0x03fdaf6c                NetOurRootPath
-                0x03fdafc0                NetTxPacket
-                0x03fdafb4                NetEtherNullAddr
-                0x03fdafac                NetBootFileSize
-                0x03fdaf20                NetOurSubnetMask
-                0x03fdaf2c                NetOurNISDomain
-                0x03fdafbc                NetRestartWrap
- .bss           0x03fdafe8       0x34 net/libnet.a(tftp.o)
- .bss           0x03fdb01c        0xc net/libnet.a(bootp.o)
-                0x03fdb01c                dhcp_state
-                0x03fdb024                NetDHCPServerIP
-                0x03fdb020                dhcp_leasetime
- .bss           0x03fdb028        0x0 net/libnet.a(rarp.o)
- .bss           0x03fdb028        0xc net/libnet.a(eth.o)
- .bss           0x03fdb034      0x8b0 net/libnet.a(nfs.o)
- .bss           0x03fdb8e4        0x8 drivers/libdrivers.a(dataflash.o)
- .bss           0x03fdb8ec      0x22c drivers/libdrivers.a(netconsole.o)
- .bss           0x03fdbb18      0x118 common/libcommon.a(main.o)
-                0x03fdbb18                hist_num
- .bss           0x03fdbc30        0x0 common/libcommon.a(cmd_autoscript.o)
- .bss           0x03fdbc30        0x0 common/libcommon.a(cmd_bdinfo.o)
- .bss           0x03fdbc30        0x0 common/libcommon.a(cmd_boot.o)
- .bss           0x03fdbc30        0x0 common/libcommon.a(cmd_bootm.o)
- .bss           0x03fdbc30        0x0 common/libcommon.a(cmd_cache.o)
- .bss           0x03fdbc30        0x0 common/libcommon.a(cmd_console.o)
- .bss           0x03fdbc30        0x0 common/libcommon.a(cmd_elf.o)
- .bss           0x03fdbc30        0x0 common/libcommon.a(cmd_itest.o)
- .bss           0x03fdbc30       0x38 common/libcommon.a(cmd_load.o)
- .bss           0x03fdbc68        0x4 common/libcommon.a(cmd_mem.o)
- .bss           0x03fdbc6c        0x0 common/libcommon.a(cmd_mii.o)
- .bss           0x03fdbc6c        0x0 common/libcommon.a(cmd_misc.o)
- .bss           0x03fdbc6c        0x0 common/libcommon.a(cmd_net.o)
- .bss           0x03fdbc6c        0x0 common/libcommon.a(cmd_nvedit.o)
- .bss           0x03fdbc6c        0x0 common/libcommon.a(command.o)
- .bss           0x03fdbc6c        0x8 common/libcommon.a(console.o)
- .bss           0x03fdbc74       0x10 common/libcommon.a(devices.o)
-                0x03fdbc78                stdio_devices
-                0x03fdbc74                devlist
- .bss           0x03fdbc84        0x0 common/libcommon.a(env_common.o)
- .bss           0x03fdbc84        0x0 common/libcommon.a(env_flash.o)
- .bss           0x03fdbc84        0x0 common/libcommon.a(exports.o)
- .bss           0x03fdbc84        0x0 common/libcommon.a(lists.o)
- .bss           0x03fdbc84        0xc common/libcommon.a(miiphyutil.o)
- .bss           0x03fdbc90        0x0 common/libcommon.a(s_record.o)
- .bss           0x03fdbc90      0x43c common/libcommon.a(xyzModem.o)
- .bss           0x03fdc0cc        0x0 common/libcommon.a(crc16.o)
- .bss           0x03fdc0cc        0x0 lib_generic/libgeneric.a(display_options.o)
- .bss           0x03fdc0cc        0x0 lib_generic/libgeneric.a(string.o)
- .bss           0x03fdc0cc        0x0 lib_generic/libgeneric.a(vsprintf.o)
- .bss           0x03fdc0cc     0x10a8 lib_generic/libgeneric.a(zlib.o)
- .bss           0x03fdd174        0x0 lib_generic/libgeneric.a(ctype.o)
- .bss           0x03fdd174        0x4 board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
- .bss           0x03fdd178        0x0 board/bf537-stamp/libbf537-stamp.a(at45.o)
- .bss           0x03fdd178        0x0 lib_blackfin/libblackfin.a(memcmp.o)
- .bss           0x03fdd178        0x0 lib_blackfin/libblackfin.a(memmove.o)
- .bss           0x03fdd178        0x0 lib_blackfin/libblackfin.a(bf533_linux.o)
- .bss           0x03fdd178        0x0 lib_blackfin/libblackfin.a(cache.o)
- .bss           0x03fdd178        0x0 lib_blackfin/libblackfin.a(muldi3.o)
- .bss           0x03fdd178        0x0 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
- .bss           0x03fdd178        0x0 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
- .bss           0x03fdd178        0x0 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
- .bss           0x03fdd178        0x0 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
+ .bss           0x03fdaebc        0x0 cpu/bf537/start.o
+ .bss           0x03fdaebc        0x0 cpu/bf537/start1.o
+ .bss           0x03fdaebc        0x0 cpu/bf537/traps.o
+ .bss           0x03fdaebc        0x0 cpu/bf537/interrupt.o
+ .bss           0x03fdaebc        0x0 cpu/bf537/serial.o
+ .bss           0x03fdaebc       0x38 common/dlmalloc.o
+ .bss           0x03fdaef4        0x0 lib_generic/crc32.o
+ .bss           0x03fdaef4        0x0 common/environment.o
+ .bss           0x03fdaef4        0x0 board/bf537-stamp/post-memory.o
+ .bss           0x03fdaef4        0x0 cpu/bf537/cache.o
+ .bss           0x03fdaef4        0x0 cpu/bf537/flush.o
+ .bss           0x03fdaef4        0x0 cpu/bf537/init_sdram.o
+ .bss           0x03fdaef4        0x0 board/bf537-stamp/libbf537-stamp.a(bf537-stamp.o)
+ .bss           0x03fdaef4        0x0 cpu/bf537/libbf537.a(cpu.o)
+ .bss           0x03fdaef4        0x0 cpu/bf537/libbf537.a(ints.o)
+ .bss           0x03fdaef4        0xc cpu/bf537/libbf537.a(interrupts.o)
+ .bss           0x03fdaf00        0x0 lib_blackfin/libblackfin.a(memset.o)
+ .bss           0x03fdaf00        0xc lib_blackfin/libblackfin.a(board.o)
+ .bss           0x03fdaf0c        0x0 lib_blackfin/libblackfin.a(bf533_string.o)
+ .bss           0x03fdaf0c        0x0 lib_blackfin/libblackfin.a(memcpy.o)
+ .bss           0x03fdaf0c       0xc8 net/libnet.a(net.o)
+                0x03fdaf9a                NetServerEther
+                0x03fdaf10                NetOurGatewayIP
+                0x03fdaf38                NetOurHostName
+                0x03fdaf14                NetOurDNSIP
+                0x03fdaf58                NetOurRootPath
+                0x03fdafac                NetTxPacket
+                0x03fdafa0                NetEtherNullAddr
+                0x03fdaf98                NetBootFileSize
+                0x03fdaf0c                NetOurSubnetMask
+                0x03fdaf18                NetOurNISDomain
+                0x03fdafa8                NetRestartWrap
+ .bss           0x03fdafd4       0x34 net/libnet.a(tftp.o)
+ .bss           0x03fdb008        0xc net/libnet.a(bootp.o)
+                0x03fdb008                dhcp_state
+                0x03fdb010                NetDHCPServerIP
+                0x03fdb00c                dhcp_leasetime
+ .bss           0x03fdb014        0x0 net/libnet.a(rarp.o)
+ .bss           0x03fdb014        0xc net/libnet.a(eth.o)
+ .bss           0x03fdb020      0x8b0 net/libnet.a(nfs.o)
+ .bss           0x03fdb8d0        0x8 drivers/libdrivers.a(dataflash.o)
+ .bss           0x03fdb8d8      0x22c drivers/libdrivers.a(netconsole.o)
+ .bss           0x03fdbb04      0x118 common/libcommon.a(main.o)
+                0x03fdbb04                hist_num
+ .bss           0x03fdbc1c        0x0 common/libcommon.a(cmd_autoscript.o)
+ .bss           0x03fdbc1c        0x0 common/libcommon.a(cmd_bdinfo.o)
+ .bss           0x03fdbc1c        0x0 common/libcommon.a(cmd_boot.o)
+ .bss           0x03fdbc1c        0x0 common/libcommon.a(cmd_bootm.o)
+ .bss           0x03fdbc1c        0x0 common/libcommon.a(cmd_cache.o)
+ .bss           0x03fdbc1c        0x0 common/libcommon.a(cmd_console.o)
+ .bss           0x03fdbc1c        0x0 common/libcommon.a(cmd_elf.o)
+ .bss           0x03fdbc1c        0x0 common/libcommon.a(cmd_itest.o)
+ .bss           0x03fdbc1c       0x38 common/libcommon.a(cmd_load.o)
+ .bss           0x03fdbc54        0x4 common/libcommon.a(cmd_mem.o)
+ .bss           0x03fdbc58        0x0 common/libcommon.a(cmd_mii.o)
+ .bss           0x03fdbc58        0x0 common/libcommon.a(cmd_misc.o)
+ .bss           0x03fdbc58        0x0 common/libcommon.a(cmd_net.o)
+ .bss           0x03fdbc58        0x0 common/libcommon.a(cmd_nvedit.o)
+ .bss           0x03fdbc58        0x0 common/libcommon.a(command.o)
+ .bss           0x03fdbc58        0x8 common/libcommon.a(console.o)
+ .bss           0x03fdbc60       0x10 common/libcommon.a(devices.o)
+                0x03fdbc64                stdio_devices
+                0x03fdbc60                devlist
+ .bss           0x03fdbc70        0x0 common/libcommon.a(env_common.o)
+ .bss           0x03fdbc70        0x0 common/libcommon.a(env_flash.o)
+ .bss           0x03fdbc70        0x0 common/libcommon.a(exports.o)
+ .bss           0x03fdbc70        0x0 common/libcommon.a(lists.o)
+ .bss           0x03fdbc70        0xc common/libcommon.a(miiphyutil.o)
+ .bss           0x03fdbc7c        0x0 common/libcommon.a(s_record.o)
+ .bss           0x03fdbc7c      0x43c common/libcommon.a(xyzModem.o)
+ .bss           0x03fdc0b8        0x0 common/libcommon.a(crc16.o)
+ .bss           0x03fdc0b8        0x0 lib_generic/libgeneric.a(display_options.o)
+ .bss           0x03fdc0b8        0x0 lib_generic/libgeneric.a(string.o)
+ .bss           0x03fdc0b8        0x0 lib_generic/libgeneric.a(vsprintf.o)
+ .bss           0x03fdc0b8     0x10a8 lib_generic/libgeneric.a(zlib.o)
+ .bss           0x03fdd160        0x0 lib_generic/libgeneric.a(ctype.o)
+ .bss           0x03fdd160        0x4 board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
+ .bss           0x03fdd164        0x0 board/bf537-stamp/libbf537-stamp.a(at45.o)
+ .bss           0x03fdd164        0x0 lib_blackfin/libblackfin.a(memcmp.o)
+ .bss           0x03fdd164        0x0 lib_blackfin/libblackfin.a(memmove.o)
+ .bss           0x03fdd164        0x0 lib_blackfin/libblackfin.a(bf533_linux.o)
+ .bss           0x03fdd164        0x0 lib_blackfin/libblackfin.a(cache.o)
+ .bss           0x03fdd164        0x0 lib_blackfin/libblackfin.a(muldi3.o)
+ .bss           0x03fdd164        0x0 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
+ .bss           0x03fdd164        0x0 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
+ .bss           0x03fdd164        0x0 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
+ .bss           0x03fdd164        0x0 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
  *(COMMON)
- COMMON         0x03fdd178        0x4 cpu/bf537/traps.o
-                0x03fdd178                last_cplb_fault_retx
- COMMON         0x03fdd17c       0x10 cpu/bf537/serial.o
-                0x03fdd17c                hw_baud_table
-                0x03fdd188                pll_div_fact
- COMMON         0x03fdd18c        0x4 cpu/bf537/libbf537.a(interrupts.o)
-                0x03fdd18c                irq_flags
- COMMON         0x03fdd190      0x1c0 lib_blackfin/libblackfin.a(board.o)
-                0x03fdd190                version_string
-                0x03fdd228                g_addr
-                0x03fdd22c                icplb_table
-                0x03fdd2bc                dcplb_table
-                0x03fdd34c                monitor_flash_len
- COMMON         0x03fdd350     0x2514 net/libnet.a(net.o)
-                0x03fdd350                NetArpWaitPacketMAC
-                0x03fdd354                NetRxPackets
-                0x03fdd364                NetBootFileXferSize
-                0x03fdd368                NetArpWaitPacketBuf
-                0x03fdd988                NetArpWaitReplyIP
-                0x03fdd98c                NetPingIP
-                0x03fdd990                NetArpWaitPacketIP
-                0x03fdd994                NetState
-                0x03fdd998                NetArpWaitTry
-                0x03fdd99c                NetArpWaitTxPacket
-                0x03fdd9a0                NetArpWaitTxPacketSize
-                0x03fdd9a4                NetServerIP
-                0x03fdd9a8                NetOurEther
-                0x03fdd9b0                NetIPID
-                0x03fdd9b4                NetArpWaitTimerStart
-                0x03fdd9b8                PktBuf
-                0x03fdf7d8                NetRxPktLen
-                0x03fdf7dc                NetRxPkt
-                0x03fdf7e0                BootFile
-                0x03fdf860                NetOurIP
- COMMON         0x03fdf864        0x8 net/libnet.a(bootp.o)
-                0x03fdf864                BootpTry
-                0x03fdf868                BootpID
- COMMON         0x03fdf86c        0x4 net/libnet.a(rarp.o)
-                0x03fdf86c                RarpTry
- COMMON         0x03fdf870       0xf0 drivers/libdrivers.a(dataflash.o)
-                0x03fdf870                dataflash_info
- COMMON         0x03fdf960     0x1550 common/libcommon.a(main.o)
-                0x03fdf960                console_buffer
-                0x03fdfa60                hist_lines
-                0x03fe0e60                hist_list
- COMMON         0x03fe0eb0       0x40 common/libcommon.a(cmd_bootm.o)
-                0x03fe0eb0                header
- COMMON         0x03fe0ef0       0x4e common/libcommon.a(cmd_load.o)
-                0x03fe0ef0                send_ptr
-                0x03fe0ef4                his_quote
-                0x03fe0ef8                os_data_char
-                0x03fe0efc                os_data_header
-                0x03fe0f1c                his_pad_count
-                0x03fe0f20                os_data_count
-                0x03fe0f24                os_data_init
-                0x03fe0f28                his_eol
-                0x03fe0f29                his_pad_char
-                0x03fe0f2a                send_parms
- *fill*         0x03fe0f3e        0x2 00
- COMMON         0x03fe0f40       0x10 common/libcommon.a(cmd_mem.o)
-                0x03fe0f40                mm_last_addr
-                0x03fe0f44                mm_last_size
-                0x03fe0f48                dp_last_size
-                0x03fe0f4c                dp_last_addr
- COMMON         0x03fe0f50       0x16 common/libcommon.a(cmd_mii.o)
-                0x03fe0f50                last_reg_hi
-                0x03fe0f54                last_addr_lo
-                0x03fe0f58                last_data
-                0x03fe0f5c                last_reg_lo
-                0x03fe0f60                last_addr_hi
-                0x03fe0f64                last_op
- *fill*         0x03fe0f66        0x2 00
- COMMON         0x03fe0f68        0x4 lib_generic/libgeneric.a(string.o)
-                0x03fe0f68                ___strtok
- COMMON         0x03fe0f6c       0x54 board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
-                0x03fe0f6c                PHYregs
-                0x03fe0fac                txbuf
-                0x03fe0fb0                rxbuf
-                0x03fe0fc0                _end = .
-                0x03fe0fc0                PROVIDE (end, .)
+ COMMON         0x03fdd164        0x4 cpu/bf537/traps.o
+                0x03fdd164                last_cplb_fault_retx
+ COMMON         0x03fdd168       0x10 cpu/bf537/serial.o
+                0x03fdd168                hw_baud_table
+                0x03fdd174                pll_div_fact
+ COMMON         0x03fdd178        0x4 cpu/bf537/libbf537.a(interrupts.o)
+                0x03fdd178                irq_flags
+ COMMON         0x03fdd17c      0x1c0 lib_blackfin/libblackfin.a(board.o)
+                0x03fdd17c                version_string
+                0x03fdd214                g_addr
+                0x03fdd218                icplb_table
+                0x03fdd2a8                dcplb_table
+                0x03fdd338                monitor_flash_len
+ COMMON         0x03fdd33c     0x2514 net/libnet.a(net.o)
+                0x03fdd33c                NetArpWaitPacketMAC
+                0x03fdd340                NetRxPackets
+                0x03fdd350                NetBootFileXferSize
+                0x03fdd354                NetArpWaitPacketBuf
+                0x03fdd974                NetArpWaitReplyIP
+                0x03fdd978                NetPingIP
+                0x03fdd97c                NetArpWaitPacketIP
+                0x03fdd980                NetState
+                0x03fdd984                NetArpWaitTry
+                0x03fdd988                NetArpWaitTxPacket
+                0x03fdd98c                NetArpWaitTxPacketSize
+                0x03fdd990                NetServerIP
+                0x03fdd994                NetOurEther
+                0x03fdd99c                NetIPID
+                0x03fdd9a0                NetArpWaitTimerStart
+                0x03fdd9a4                PktBuf
+                0x03fdf7c4                NetRxPktLen
+                0x03fdf7c8                NetRxPkt
+                0x03fdf7cc                BootFile
+                0x03fdf84c                NetOurIP
+ COMMON         0x03fdf850        0x8 net/libnet.a(bootp.o)
+                0x03fdf850                BootpTry
+                0x03fdf854                BootpID
+ COMMON         0x03fdf858        0x4 net/libnet.a(rarp.o)
+                0x03fdf858                RarpTry
+ COMMON         0x03fdf85c       0xf0 drivers/libdrivers.a(dataflash.o)
+                0x03fdf85c                dataflash_info
+ COMMON         0x03fdf94c     0x1550 common/libcommon.a(main.o)
+                0x03fdf94c                console_buffer
+                0x03fdfa4c                hist_lines
+                0x03fe0e4c                hist_list
+ COMMON         0x03fe0e9c       0x40 common/libcommon.a(cmd_bootm.o)
+                0x03fe0e9c                header
+ COMMON         0x03fe0edc       0x4e common/libcommon.a(cmd_load.o)
+                0x03fe0edc                send_ptr
+                0x03fe0ee0                his_quote
+                0x03fe0ee4                os_data_char
+                0x03fe0ee8                os_data_header
+                0x03fe0f08                his_pad_count
+                0x03fe0f0c                os_data_count
+                0x03fe0f10                os_data_init
+                0x03fe0f14                his_eol
+                0x03fe0f15                his_pad_char
+                0x03fe0f16                send_parms
+ *fill*         0x03fe0f2a        0x2 00
+ COMMON         0x03fe0f2c       0x10 common/libcommon.a(cmd_mem.o)
+                0x03fe0f2c                mm_last_addr
+                0x03fe0f30                mm_last_size
+                0x03fe0f34                dp_last_size
+                0x03fe0f38                dp_last_addr
+ COMMON         0x03fe0f3c       0x16 common/libcommon.a(cmd_mii.o)
+                0x03fe0f3c                last_reg_hi
+                0x03fe0f40                last_addr_lo
+                0x03fe0f44                last_data
+                0x03fe0f48                last_reg_lo
+                0x03fe0f4c                last_addr_hi
+                0x03fe0f50                last_op
+ *fill*         0x03fe0f52        0x2 00
+ COMMON         0x03fe0f54        0x4 lib_generic/libgeneric.a(string.o)
+                0x03fe0f54                ___strtok
+ COMMON         0x03fe0f58       0x54 board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
+                0x03fe0f58                PHYregs
+                0x03fe0f98                txbuf
+                0x03fe0f9c                rxbuf
+                0x03fe0fac                _end = .
+                0x03fe0fac                PROVIDE (end, .)
 LOAD cpu/bf537/start.o
 LOAD cpu/bf537/start1.o
 LOAD cpu/bf537/interrupt.o
@@ -1320,152 +1320,152 @@ LOAD drivers/nand_legacy/libnand_legacy.a
 LOAD drivers/sk98lin/libsk98lin.a
 LOAD common/libcommon.a
 END GROUP
-LOAD /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a
+LOAD /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a
 OUTPUT(u-boot elf32-bfin)
 
-.debug_line     0x00000000     0x5f2d
+.debug_line     0x00000000     0x5ed7
  .debug_line    0x00000000      0x135 cpu/bf537/start.o
  .debug_line    0x00000135       0x3a cpu/bf537/start1.o
- .debug_line    0x0000016f       0xd1 cpu/bf537/traps.o
- .debug_line    0x00000240       0xe6 cpu/bf537/interrupt.o
- .debug_line    0x00000326      0x129 cpu/bf537/serial.o
- .debug_line    0x0000044f      0x369 common/dlmalloc.o
- .debug_line    0x000007b8       0xb3 lib_generic/crc32.o
- .debug_line    0x0000086b       0x65 common/environment.o
- .debug_line    0x000008d0       0x1d board/bf537-stamp/post-memory.o
- .debug_line    0x000008ed       0x7c cpu/bf537/cache.o
- .debug_line    0x00000969      0x113 cpu/bf537/flush.o
- .debug_line    0x00000a7c       0x63 cpu/bf537/init_sdram.o
- .debug_line    0x00000adf      0x11f board/bf537-stamp/libbf537-stamp.a(bf537-stamp.o)
- .debug_line    0x00000bfe      0x11a cpu/bf537/libbf537.a(cpu.o)
- .debug_line    0x00000d18       0xab cpu/bf537/libbf537.a(ints.o)
- .debug_line    0x00000dc3       0xc5 cpu/bf537/libbf537.a(interrupts.o)
- .debug_line    0x00000e88       0x61 lib_blackfin/libblackfin.a(memset.o)
- .debug_line    0x00000ee9      0x1e0 lib_blackfin/libblackfin.a(board.o)
- .debug_line    0x000010c9       0xff lib_blackfin/libblackfin.a(bf533_string.o)
- .debug_line    0x000011c8       0x6b lib_blackfin/libblackfin.a(memcpy.o)
- .debug_line    0x00001233      0x4da net/libnet.a(net.o)
- .debug_line    0x0000170d      0x222 net/libnet.a(tftp.o)
- .debug_line    0x0000192f      0x319 net/libnet.a(bootp.o)
- .debug_line    0x00001c48       0xe5 net/libnet.a(rarp.o)
- .debug_line    0x00001d2d      0x18e net/libnet.a(eth.o)
- .debug_line    0x00001ebb      0x2f8 net/libnet.a(nfs.o)
- .debug_line    0x000021b3      0x1a8 drivers/libdrivers.a(dataflash.o)
- .debug_line    0x0000235b      0x1dd drivers/libdrivers.a(netconsole.o)
- .debug_line    0x00002538      0x2e1 common/libcommon.a(main.o)
- .debug_line    0x00002819      0x175 common/libcommon.a(cmd_autoscript.o)
- .debug_line    0x0000298e      0x113 common/libcommon.a(cmd_bdinfo.o)
- .debug_line    0x00002aa1       0xb9 common/libcommon.a(cmd_boot.o)
- .debug_line    0x00002b5a      0x2d1 common/libcommon.a(cmd_bootm.o)
- .debug_line    0x00002e2b       0x95 common/libcommon.a(cmd_cache.o)
- .debug_line    0x00002ec0       0xa9 common/libcommon.a(cmd_console.o)
- .debug_line    0x00002f69      0x1a0 common/libcommon.a(cmd_elf.o)
- .debug_line    0x00003109       0xfa common/libcommon.a(cmd_itest.o)
- .debug_line    0x00003203      0x391 common/libcommon.a(cmd_load.o)
- .debug_line    0x00003594      0x267 common/libcommon.a(cmd_mem.o)
- .debug_line    0x000037fb      0x196 common/libcommon.a(cmd_mii.o)
- .debug_line    0x00003991       0xb2 common/libcommon.a(cmd_misc.o)
- .debug_line    0x00003a43      0x129 common/libcommon.a(cmd_net.o)
- .debug_line    0x00003b6c      0x25a common/libcommon.a(cmd_nvedit.o)
- .debug_line    0x00003dc6       0xe9 common/libcommon.a(command.o)
- .debug_line    0x00003eaf      0x25c common/libcommon.a(console.o)
- .debug_line    0x0000410b      0x122 common/libcommon.a(devices.o)
- .debug_line    0x0000422d      0x100 common/libcommon.a(env_common.o)
- .debug_line    0x0000432d       0xe0 common/libcommon.a(env_flash.o)
- .debug_line    0x0000440d       0x90 common/libcommon.a(exports.o)
- .debug_line    0x0000449d      0x113 common/libcommon.a(lists.o)
- .debug_line    0x000045b0      0x177 common/libcommon.a(miiphyutil.o)
- .debug_line    0x00004727       0xd7 common/libcommon.a(s_record.o)
- .debug_line    0x000047fe      0x1e1 common/libcommon.a(xyzModem.o)
- .debug_line    0x000049df       0xab common/libcommon.a(crc16.o)
- .debug_line    0x00004a8a       0x9b lib_generic/libgeneric.a(display_options.o)
- .debug_line    0x00004b25      0x1a1 lib_generic/libgeneric.a(string.o)
- .debug_line    0x00004cc6      0x25c lib_generic/libgeneric.a(vsprintf.o)
- .debug_line    0x00004f22      0x78a lib_generic/libgeneric.a(zlib.o)
- .debug_line    0x000056ac       0x28 lib_generic/libgeneric.a(ctype.o)
- .debug_line    0x000056d4      0x215 board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
- .debug_line    0x000058e9      0x1df board/bf537-stamp/libbf537-stamp.a(at45.o)
- .debug_line    0x00005ac8       0x63 lib_blackfin/libblackfin.a(memcmp.o)
- .debug_line    0x00005b2b       0x6a lib_blackfin/libblackfin.a(memmove.o)
- .debug_line    0x00005b95      0x142 lib_blackfin/libblackfin.a(bf533_linux.o)
- .debug_line    0x00005cd7       0x46 lib_blackfin/libblackfin.a(cache.o)
- .debug_line    0x00005d1d       0x4d lib_blackfin/libblackfin.a(muldi3.o)
- .debug_line    0x00005d6a       0x74 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
- .debug_line    0x00005dde       0x6e /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
- .debug_line    0x00005e4c       0x71 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
- .debug_line    0x00005ebd       0x70 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
+ .debug_line    0x0000016f       0xd0 cpu/bf537/traps.o
+ .debug_line    0x0000023f       0xe6 cpu/bf537/interrupt.o
+ .debug_line    0x00000325      0x127 cpu/bf537/serial.o
+ .debug_line    0x0000044c      0x366 common/dlmalloc.o
+ .debug_line    0x000007b2       0xb1 lib_generic/crc32.o
+ .debug_line    0x00000863       0x64 common/environment.o
+ .debug_line    0x000008c7       0x1d board/bf537-stamp/post-memory.o
+ .debug_line    0x000008e4       0x7c cpu/bf537/cache.o
+ .debug_line    0x00000960      0x113 cpu/bf537/flush.o
+ .debug_line    0x00000a73       0x63 cpu/bf537/init_sdram.o
+ .debug_line    0x00000ad6      0x11c board/bf537-stamp/libbf537-stamp.a(bf537-stamp.o)
+ .debug_line    0x00000bf2      0x118 cpu/bf537/libbf537.a(cpu.o)
+ .debug_line    0x00000d0a       0xaa cpu/bf537/libbf537.a(ints.o)
+ .debug_line    0x00000db4       0xc4 cpu/bf537/libbf537.a(interrupts.o)
+ .debug_line    0x00000e78       0x61 lib_blackfin/libblackfin.a(memset.o)
+ .debug_line    0x00000ed9      0x1dd lib_blackfin/libblackfin.a(board.o)
+ .debug_line    0x000010b6       0xfd lib_blackfin/libblackfin.a(bf533_string.o)
+ .debug_line    0x000011b3       0x6b lib_blackfin/libblackfin.a(memcpy.o)
+ .debug_line    0x0000121e      0x4d6 net/libnet.a(net.o)
+ .debug_line    0x000016f4      0x21e net/libnet.a(tftp.o)
+ .debug_line    0x00001912      0x315 net/libnet.a(bootp.o)
+ .debug_line    0x00001c27       0xe3 net/libnet.a(rarp.o)
+ .debug_line    0x00001d0a      0x18c net/libnet.a(eth.o)
+ .debug_line    0x00001e96      0x2f4 net/libnet.a(nfs.o)
+ .debug_line    0x0000218a      0x1a6 drivers/libdrivers.a(dataflash.o)
+ .debug_line    0x00002330      0x1da drivers/libdrivers.a(netconsole.o)
+ .debug_line    0x0000250a      0x2de common/libcommon.a(main.o)
+ .debug_line    0x000027e8      0x171 common/libcommon.a(cmd_autoscript.o)
+ .debug_line    0x00002959      0x110 common/libcommon.a(cmd_bdinfo.o)
+ .debug_line    0x00002a69       0xb7 common/libcommon.a(cmd_boot.o)
+ .debug_line    0x00002b20      0x2cd common/libcommon.a(cmd_bootm.o)
+ .debug_line    0x00002ded       0x94 common/libcommon.a(cmd_cache.o)
+ .debug_line    0x00002e81       0xa8 common/libcommon.a(cmd_console.o)
+ .debug_line    0x00002f29      0x19d common/libcommon.a(cmd_elf.o)
+ .debug_line    0x000030c6       0xf8 common/libcommon.a(cmd_itest.o)
+ .debug_line    0x000031be      0x38e common/libcommon.a(cmd_load.o)
+ .debug_line    0x0000354c      0x265 common/libcommon.a(cmd_mem.o)
+ .debug_line    0x000037b1      0x194 common/libcommon.a(cmd_mii.o)
+ .debug_line    0x00003945       0xb0 common/libcommon.a(cmd_misc.o)
+ .debug_line    0x000039f5      0x127 common/libcommon.a(cmd_net.o)
+ .debug_line    0x00003b1c      0x256 common/libcommon.a(cmd_nvedit.o)
+ .debug_line    0x00003d72       0xe8 common/libcommon.a(command.o)
+ .debug_line    0x00003e5a      0x267 common/libcommon.a(console.o)
+ .debug_line    0x000040c1      0x11f common/libcommon.a(devices.o)
+ .debug_line    0x000041e0       0xfe common/libcommon.a(env_common.o)
+ .debug_line    0x000042de       0xde common/libcommon.a(env_flash.o)
+ .debug_line    0x000043bc       0x8f common/libcommon.a(exports.o)
+ .debug_line    0x0000444b      0x112 common/libcommon.a(lists.o)
+ .debug_line    0x0000455d      0x176 common/libcommon.a(miiphyutil.o)
+ .debug_line    0x000046d3       0xd6 common/libcommon.a(s_record.o)
+ .debug_line    0x000047a9      0x1e0 common/libcommon.a(xyzModem.o)
+ .debug_line    0x00004989       0xa9 common/libcommon.a(crc16.o)
+ .debug_line    0x00004a32       0x9a lib_generic/libgeneric.a(display_options.o)
+ .debug_line    0x00004acc      0x19f lib_generic/libgeneric.a(string.o)
+ .debug_line    0x00004c6b      0x269 lib_generic/libgeneric.a(vsprintf.o)
+ .debug_line    0x00004ed4      0x789 lib_generic/libgeneric.a(zlib.o)
+ .debug_line    0x0000565d       0x28 lib_generic/libgeneric.a(ctype.o)
+ .debug_line    0x00005685      0x213 board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
+ .debug_line    0x00005898      0x1de board/bf537-stamp/libbf537-stamp.a(at45.o)
+ .debug_line    0x00005a76       0x63 lib_blackfin/libblackfin.a(memcmp.o)
+ .debug_line    0x00005ad9       0x6a lib_blackfin/libblackfin.a(memmove.o)
+ .debug_line    0x00005b43      0x13e lib_blackfin/libblackfin.a(bf533_linux.o)
+ .debug_line    0x00005c81       0x46 lib_blackfin/libblackfin.a(cache.o)
+ .debug_line    0x00005cc7       0x4d lib_blackfin/libblackfin.a(muldi3.o)
+ .debug_line    0x00005d14       0x74 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
+ .debug_line    0x00005d88       0x6e /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
+ .debug_line    0x00005df6       0x71 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
+ .debug_line    0x00005e67       0x70 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
 
-.debug_info     0x00000000    0x145fb
- .debug_info    0x00000000       0x56 cpu/bf537/start.o
- .debug_info    0x00000056       0x57 cpu/bf537/start1.o
- .debug_info    0x000000ad      0x5cb cpu/bf537/traps.o
- .debug_info    0x00000678       0x5a cpu/bf537/interrupt.o
- .debug_info    0x000006d2      0x424 cpu/bf537/serial.o
- .debug_info    0x00000af6      0xbdb common/dlmalloc.o
- .debug_info    0x000016d1      0x138 lib_generic/crc32.o
- .debug_info    0x00001809       0xa5 common/environment.o
- .debug_info    0x000018ae       0x7a board/bf537-stamp/post-memory.o
- .debug_info    0x00001928       0x56 cpu/bf537/cache.o
- .debug_info    0x0000197e       0x56 cpu/bf537/flush.o
- .debug_info    0x000019d4       0x5b cpu/bf537/init_sdram.o
- .debug_info    0x00001a2f      0x392 board/bf537-stamp/libbf537-stamp.a(bf537-stamp.o)
- .debug_info    0x00001dc1      0x363 cpu/bf537/libbf537.a(cpu.o)
- .debug_info    0x00002124      0x3ec cpu/bf537/libbf537.a(ints.o)
- .debug_info    0x00002510      0x22a cpu/bf537/libbf537.a(interrupts.o)
- .debug_info    0x0000273a       0x5a lib_blackfin/libblackfin.a(memset.o)
- .debug_info    0x00002794      0x5d7 lib_blackfin/libblackfin.a(board.o)
- .debug_info    0x00002d6b      0x2be lib_blackfin/libblackfin.a(bf533_string.o)
- .debug_info    0x00003029       0x5a lib_blackfin/libblackfin.a(memcpy.o)
- .debug_info    0x00003083     0x13fa net/libnet.a(net.o)
- .debug_info    0x0000447d      0x3f3 net/libnet.a(tftp.o)
- .debug_info    0x00004870      0x916 net/libnet.a(bootp.o)
- .debug_info    0x00005186      0x258 net/libnet.a(rarp.o)
- .debug_info    0x000053de      0x621 net/libnet.a(eth.o)
- .debug_info    0x000059ff      0xca2 net/libnet.a(nfs.o)
- .debug_info    0x000066a1      0x784 drivers/libdrivers.a(dataflash.o)
- .debug_info    0x00006e25      0x826 drivers/libdrivers.a(netconsole.o)
- .debug_info    0x0000764b      0xa7c common/libcommon.a(main.o)
- .debug_info    0x000080c7      0x3b8 common/libcommon.a(cmd_autoscript.o)
- .debug_info    0x0000847f      0x373 common/libcommon.a(cmd_bdinfo.o)
- .debug_info    0x000087f2      0x1d8 common/libcommon.a(cmd_boot.o)
- .debug_info    0x000089ca      0xedb common/libcommon.a(cmd_bootm.o)
- .debug_info    0x000098a5      0x230 common/libcommon.a(cmd_cache.o)
- .debug_info    0x00009ad5      0x388 common/libcommon.a(cmd_console.o)
- .debug_info    0x00009e5d      0x654 common/libcommon.a(cmd_elf.o)
- .debug_info    0x0000a4b1      0x444 common/libcommon.a(cmd_itest.o)
- .debug_info    0x0000a8f5      0xdc2 common/libcommon.a(cmd_load.o)
- .debug_info    0x0000b6b7      0xb1b common/libcommon.a(cmd_mem.o)
- .debug_info    0x0000c1d2      0x780 common/libcommon.a(cmd_mii.o)
- .debug_info    0x0000c952      0x1b8 common/libcommon.a(cmd_misc.o)
- .debug_info    0x0000cb0a      0x5d9 common/libcommon.a(cmd_net.o)
- .debug_info    0x0000d0e3      0x7e0 common/libcommon.a(cmd_nvedit.o)
- .debug_info    0x0000d8c3      0x41c common/libcommon.a(command.o)
- .debug_info    0x0000dcdf      0x8ae common/libcommon.a(console.o)
- .debug_info    0x0000e58d      0x49b common/libcommon.a(devices.o)
- .debug_info    0x0000ea28      0x368 common/libcommon.a(env_common.o)
- .debug_info    0x0000ed90      0x2f9 common/libcommon.a(env_flash.o)
- .debug_info    0x0000f089      0x246 common/libcommon.a(exports.o)
- .debug_info    0x0000f2cf      0x53a common/libcommon.a(lists.o)
- .debug_info    0x0000f809      0x5e6 common/libcommon.a(miiphyutil.o)
- .debug_info    0x0000fdef      0x196 common/libcommon.a(s_record.o)
- .debug_info    0x0000ff85      0x688 common/libcommon.a(xyzModem.o)
- .debug_info    0x0001060d      0x112 common/libcommon.a(crc16.o)
- .debug_info    0x0001071f      0x127 lib_generic/libgeneric.a(display_options.o)
- .debug_info    0x00010846      0x5e3 lib_generic/libgeneric.a(string.o)
- .debug_info    0x00010e29      0x46f lib_generic/libgeneric.a(vsprintf.o)
- .debug_info    0x00011298     0x1785 lib_generic/libgeneric.a(zlib.o)
- .debug_info    0x00012a1d       0x56 lib_generic/libgeneric.a(ctype.o)
- .debug_info    0x00012a73      0x9b3 board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
- .debug_info    0x00013426      0x97b board/bf537-stamp/libbf537-stamp.a(at45.o)
- .debug_info    0x00013da1       0x5a lib_blackfin/libblackfin.a(memcmp.o)
- .debug_info    0x00013dfb       0x5b lib_blackfin/libblackfin.a(memmove.o)
- .debug_info    0x00013e56      0x357 lib_blackfin/libblackfin.a(bf533_linux.o)
- .debug_info    0x000141ad       0xae lib_blackfin/libblackfin.a(cache.o)
- .debug_info    0x0001425b      0x198 lib_blackfin/libblackfin.a(muldi3.o)
- .debug_info    0x000143f3       0x82 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
- .debug_info    0x00014475       0x82 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
- .debug_info    0x000144f7       0x82 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
- .debug_info    0x00014579       0x82 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
+.debug_info     0x00000000    0x145f1
+ .debug_info    0x00000000       0x55 cpu/bf537/start.o
+ .debug_info    0x00000055       0x56 cpu/bf537/start1.o
+ .debug_info    0x000000ab      0x5cb cpu/bf537/traps.o
+ .debug_info    0x00000676       0x59 cpu/bf537/interrupt.o
+ .debug_info    0x000006cf      0x424 cpu/bf537/serial.o
+ .debug_info    0x00000af3      0xbdb common/dlmalloc.o
+ .debug_info    0x000016ce      0x138 lib_generic/crc32.o
+ .debug_info    0x00001806       0xa5 common/environment.o
+ .debug_info    0x000018ab       0x7a board/bf537-stamp/post-memory.o
+ .debug_info    0x00001925       0x55 cpu/bf537/cache.o
+ .debug_info    0x0000197a       0x55 cpu/bf537/flush.o
+ .debug_info    0x000019cf       0x5a cpu/bf537/init_sdram.o
+ .debug_info    0x00001a29      0x392 board/bf537-stamp/libbf537-stamp.a(bf537-stamp.o)
+ .debug_info    0x00001dbb      0x363 cpu/bf537/libbf537.a(cpu.o)
+ .debug_info    0x0000211e      0x3ec cpu/bf537/libbf537.a(ints.o)
+ .debug_info    0x0000250a      0x22a cpu/bf537/libbf537.a(interrupts.o)
+ .debug_info    0x00002734       0x59 lib_blackfin/libblackfin.a(memset.o)
+ .debug_info    0x0000278d      0x5d7 lib_blackfin/libblackfin.a(board.o)
+ .debug_info    0x00002d64      0x2be lib_blackfin/libblackfin.a(bf533_string.o)
+ .debug_info    0x00003022       0x59 lib_blackfin/libblackfin.a(memcpy.o)
+ .debug_info    0x0000307b     0x13fa net/libnet.a(net.o)
+ .debug_info    0x00004475      0x3f3 net/libnet.a(tftp.o)
+ .debug_info    0x00004868      0x916 net/libnet.a(bootp.o)
+ .debug_info    0x0000517e      0x258 net/libnet.a(rarp.o)
+ .debug_info    0x000053d6      0x621 net/libnet.a(eth.o)
+ .debug_info    0x000059f7      0xca2 net/libnet.a(nfs.o)
+ .debug_info    0x00006699      0x784 drivers/libdrivers.a(dataflash.o)
+ .debug_info    0x00006e1d      0x826 drivers/libdrivers.a(netconsole.o)
+ .debug_info    0x00007643      0xa7c common/libcommon.a(main.o)
+ .debug_info    0x000080bf      0x3b8 common/libcommon.a(cmd_autoscript.o)
+ .debug_info    0x00008477      0x373 common/libcommon.a(cmd_bdinfo.o)
+ .debug_info    0x000087ea      0x1d8 common/libcommon.a(cmd_boot.o)
+ .debug_info    0x000089c2      0xedb common/libcommon.a(cmd_bootm.o)
+ .debug_info    0x0000989d      0x230 common/libcommon.a(cmd_cache.o)
+ .debug_info    0x00009acd      0x388 common/libcommon.a(cmd_console.o)
+ .debug_info    0x00009e55      0x654 common/libcommon.a(cmd_elf.o)
+ .debug_info    0x0000a4a9      0x444 common/libcommon.a(cmd_itest.o)
+ .debug_info    0x0000a8ed      0xdc2 common/libcommon.a(cmd_load.o)
+ .debug_info    0x0000b6af      0xb1b common/libcommon.a(cmd_mem.o)
+ .debug_info    0x0000c1ca      0x780 common/libcommon.a(cmd_mii.o)
+ .debug_info    0x0000c94a      0x1b8 common/libcommon.a(cmd_misc.o)
+ .debug_info    0x0000cb02      0x5d9 common/libcommon.a(cmd_net.o)
+ .debug_info    0x0000d0db      0x7e0 common/libcommon.a(cmd_nvedit.o)
+ .debug_info    0x0000d8bb      0x41c common/libcommon.a(command.o)
+ .debug_info    0x0000dcd7      0x8ae common/libcommon.a(console.o)
+ .debug_info    0x0000e585      0x49b common/libcommon.a(devices.o)
+ .debug_info    0x0000ea20      0x368 common/libcommon.a(env_common.o)
+ .debug_info    0x0000ed88      0x2f9 common/libcommon.a(env_flash.o)
+ .debug_info    0x0000f081      0x246 common/libcommon.a(exports.o)
+ .debug_info    0x0000f2c7      0x53a common/libcommon.a(lists.o)
+ .debug_info    0x0000f801      0x5e6 common/libcommon.a(miiphyutil.o)
+ .debug_info    0x0000fde7      0x196 common/libcommon.a(s_record.o)
+ .debug_info    0x0000ff7d      0x688 common/libcommon.a(xyzModem.o)
+ .debug_info    0x00010605      0x112 common/libcommon.a(crc16.o)
+ .debug_info    0x00010717      0x127 lib_generic/libgeneric.a(display_options.o)
+ .debug_info    0x0001083e      0x5e3 lib_generic/libgeneric.a(string.o)
+ .debug_info    0x00010e21      0x46f lib_generic/libgeneric.a(vsprintf.o)
+ .debug_info    0x00011290     0x1785 lib_generic/libgeneric.a(zlib.o)
+ .debug_info    0x00012a15       0x56 lib_generic/libgeneric.a(ctype.o)
+ .debug_info    0x00012a6b      0x9b3 board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
+ .debug_info    0x0001341e      0x97b board/bf537-stamp/libbf537-stamp.a(at45.o)
+ .debug_info    0x00013d99       0x59 lib_blackfin/libblackfin.a(memcmp.o)
+ .debug_info    0x00013df2       0x5a lib_blackfin/libblackfin.a(memmove.o)
+ .debug_info    0x00013e4c      0x357 lib_blackfin/libblackfin.a(bf533_linux.o)
+ .debug_info    0x000141a3       0xae lib_blackfin/libblackfin.a(cache.o)
+ .debug_info    0x00014251      0x198 lib_blackfin/libblackfin.a(muldi3.o)
+ .debug_info    0x000143e9       0x82 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
+ .debug_info    0x0001446b       0x82 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
+ .debug_info    0x000144ed       0x82 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
+ .debug_info    0x0001456f       0x82 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
 
 .debug_abbrev   0x00000000     0x5a86
  .debug_abbrev  0x00000000       0x14 cpu/bf537/start.o
@@ -1534,10 +1534,10 @@ OUTPUT(u-boot elf32-bfin)
  .debug_abbrev  0x000057ca      0x139 lib_blackfin/libblackfin.a(bf533_linux.o)
  .debug_abbrev  0x00005903       0x4e lib_blackfin/libblackfin.a(cache.o)
  .debug_abbrev  0x00005951       0xe5 lib_blackfin/libblackfin.a(muldi3.o)
- .debug_abbrev  0x00005a36       0x14 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
- .debug_abbrev  0x00005a4a       0x14 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
- .debug_abbrev  0x00005a5e       0x14 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
- .debug_abbrev  0x00005a72       0x14 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
+ .debug_abbrev  0x00005a36       0x14 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x00005a4a       0x14 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
+ .debug_abbrev  0x00005a5e       0x14 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
+ .debug_abbrev  0x00005a72       0x14 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
 
 .debug_aranges  0x00000000      0x860
  .debug_aranges
@@ -1667,13 +1667,13 @@ OUTPUT(u-boot elf32-bfin)
  .debug_aranges
                 0x000007c0       0x20 lib_blackfin/libblackfin.a(muldi3.o)
  .debug_aranges
-                0x000007e0       0x20 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
+                0x000007e0       0x20 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_udivsi3.o)
  .debug_aranges
-                0x00000800       0x20 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
+                0x00000800       0x20 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umodsi3.o)
  .debug_aranges
-                0x00000820       0x20 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
+                0x00000820       0x20 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_umulsi3_highpart.o)
  .debug_aranges
-                0x00000840       0x20 /home/lcv/build/bfin-uclinux/lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
+                0x00000840       0x20 /opt/uCLinux_Toolchain/bfin-uclinux/bin/../lib/gcc/bfin-uclinux/4.1.2/libgcc.a(_smulsi3_highpart.o)
 
 .debug_frame    0x00000000     0x3544
  .debug_frame   0x00000000       0x7c cpu/bf537/traps.o
@@ -1898,119 +1898,119 @@ OUTPUT(u-boot elf32-bfin)
  .debug_pubnames
                 0x0000239a       0x1f lib_blackfin/libblackfin.a(muldi3.o)
 
-.debug_str      0x00000000     0x4020
- .debug_str     0x00000000      0x147 cpu/bf537/traps.o
-                                0x1a2 (size before relaxing)
- .debug_str     0x00000147      0x19d cpu/bf537/serial.o
-                                0x288 (size before relaxing)
- .debug_str     0x000002e4      0x2e9 common/dlmalloc.o
-                                0x4ca (size before relaxing)
- .debug_str     0x000005cd       0x5a lib_generic/crc32.o
-                                0x104 (size before relaxing)
- .debug_str     0x00000627       0x2b common/environment.o
-                                 0x97 (size before relaxing)
- .debug_str     0x00000652       0x3e board/bf537-stamp/post-memory.o
-                                 0xdd (size before relaxing)
- .debug_str     0x00000690       0x89 board/bf537-stamp/libbf537-stamp.a(bf537-stamp.o)
-                                0x26a (size before relaxing)
- .debug_str     0x00000719       0x8d cpu/bf537/libbf537.a(cpu.o)
-                                0x1cc (size before relaxing)
- .debug_str     0x000007a6       0x51 cpu/bf537/libbf537.a(ints.o)
-                                0x16f (size before relaxing)
- .debug_str     0x000007f7       0xb3 cpu/bf537/libbf537.a(interrupts.o)
-                                0x1a6 (size before relaxing)
- .debug_str     0x000008aa      0x146 lib_blackfin/libblackfin.a(board.o)
-                                0x325 (size before relaxing)
- .debug_str     0x000009f0       0x4c lib_blackfin/libblackfin.a(bf533_string.o)
-                                0x144 (size before relaxing)
- .debug_str     0x00000a3c      0x61f net/libnet.a(net.o)
-                                0x828 (size before relaxing)
- .debug_str     0x0000105b       0xe4 net/libnet.a(tftp.o)
-                                0x27c (size before relaxing)
- .debug_str     0x0000113f      0x252 net/libnet.a(bootp.o)
-                                0x436 (size before relaxing)
- .debug_str     0x00001391       0x4c net/libnet.a(rarp.o)
-                                0x198 (size before relaxing)
- .debug_str     0x000013dd      0x146 net/libnet.a(eth.o)
-                                0x2e5 (size before relaxing)
- .debug_str     0x00001523      0x26b net/libnet.a(nfs.o)
-                                0x461 (size before relaxing)
- .debug_str     0x0000178e      0x33f drivers/libdrivers.a(dataflash.o)
-                                0x471 (size before relaxing)
- .debug_str     0x00001acd      0x13b drivers/libdrivers.a(netconsole.o)
-                                0x39c (size before relaxing)
- .debug_str     0x00001c08      0x20b common/libcommon.a(main.o)
-                                0x336 (size before relaxing)
- .debug_str     0x00001e13       0xc2 common/libcommon.a(cmd_autoscript.o)
-                                0x224 (size before relaxing)
- .debug_str     0x00001ed5       0x35 common/libcommon.a(cmd_bdinfo.o)
-                                0x23e (size before relaxing)
- .debug_str     0x00001f0a       0x34 common/libcommon.a(cmd_boot.o)
-                                0x155 (size before relaxing)
- .debug_str     0x00001f3e      0x1e5 common/libcommon.a(cmd_bootm.o)
-                                0x4fb (size before relaxing)
- .debug_str     0x00002123       0x4f common/libcommon.a(cmd_cache.o)
-                                0x15f (size before relaxing)
- .debug_str     0x00002172       0xb7 common/libcommon.a(cmd_console.o)
-                                0x1f4 (size before relaxing)
- .debug_str     0x00002229      0x214 common/libcommon.a(cmd_elf.o)
-                                0x381 (size before relaxing)
- .debug_str     0x0000243d       0x8a common/libcommon.a(cmd_itest.o)
-                                0x1b0 (size before relaxing)
- .debug_str     0x000024c7      0x311 common/libcommon.a(cmd_load.o)
-                                0x5bb (size before relaxing)
- .debug_str     0x000027d8      0x224 common/libcommon.a(cmd_mem.o)
-                                0x389 (size before relaxing)
- .debug_str     0x000029fc      0x1b0 common/libcommon.a(cmd_mii.o)
-                                0x33f (size before relaxing)
- .debug_str     0x00002bac       0x27 common/libcommon.a(cmd_misc.o)
-                                0x149 (size before relaxing)
- .debug_str     0x00002bd3       0xd2 common/libcommon.a(cmd_net.o)
-                                0x2c9 (size before relaxing)
- .debug_str     0x00002ca5       0xb5 common/libcommon.a(cmd_nvedit.o)
-                                0x305 (size before relaxing)
- .debug_str     0x00002d5a       0xd1 common/libcommon.a(command.o)
-                                0x1fe (size before relaxing)
- .debug_str     0x00002e2b       0xe6 common/libcommon.a(console.o)
-                                0x3a6 (size before relaxing)
- .debug_str     0x00002f11       0x56 common/libcommon.a(devices.o)
-                                0x2c8 (size before relaxing)
- .debug_str     0x00002f67       0x78 common/libcommon.a(env_common.o)
-                                0x25b (size before relaxing)
- .debug_str     0x00002fdf       0x47 common/libcommon.a(env_flash.o)
-                                0x245 (size before relaxing)
- .debug_str     0x00003026       0x25 common/libcommon.a(exports.o)
-                                0x1dc (size before relaxing)
- .debug_str     0x0000304b      0x1d5 common/libcommon.a(lists.o)
-                                0x318 (size before relaxing)
- .debug_str     0x00003220      0x13a common/libcommon.a(miiphyutil.o)
-                                0x241 (size before relaxing)
- .debug_str     0x0000335a       0x3a common/libcommon.a(s_record.o)
-                                0x11a (size before relaxing)
- .debug_str     0x00003394      0x1b7 common/libcommon.a(xyzModem.o)
-                                0x2db (size before relaxing)
- .debug_str     0x0000354b       0x1c common/libcommon.a(crc16.o)
-                                 0xf5 (size before relaxing)
- .debug_str     0x00003567       0x2d lib_generic/libgeneric.a(display_options.o)
-                                0x110 (size before relaxing)
- .debug_str     0x00003594       0x86 lib_generic/libgeneric.a(string.o)
+.debug_str      0x00000000     0x4019
+ .debug_str     0x00000000      0x146 cpu/bf537/traps.o
+                                0x1a1 (size before relaxing)
+ .debug_str     0x00000146      0x19d cpu/bf537/serial.o
+                                0x287 (size before relaxing)
+ .debug_str     0x000002e3      0x2e8 common/dlmalloc.o
+                                0x4c9 (size before relaxing)
+ .debug_str     0x000005cb       0x59 lib_generic/crc32.o
+                                0x103 (size before relaxing)
+ .debug_str     0x00000624       0x2b common/environment.o
+                                 0x96 (size before relaxing)
+ .debug_str     0x0000064f       0x3d board/bf537-stamp/post-memory.o
+                                 0xdc (size before relaxing)
+ .debug_str     0x0000068c       0x89 board/bf537-stamp/libbf537-stamp.a(bf537-stamp.o)
+                                0x269 (size before relaxing)
+ .debug_str     0x00000715       0x8d cpu/bf537/libbf537.a(cpu.o)
+                                0x1cb (size before relaxing)
+ .debug_str     0x000007a2       0x51 cpu/bf537/libbf537.a(ints.o)
+                                0x16e (size before relaxing)
+ .debug_str     0x000007f3       0xb3 cpu/bf537/libbf537.a(interrupts.o)
+                                0x1a5 (size before relaxing)
+ .debug_str     0x000008a6      0x145 lib_blackfin/libblackfin.a(board.o)
+                                0x324 (size before relaxing)
+ .debug_str     0x000009eb       0x4c lib_blackfin/libblackfin.a(bf533_string.o)
+                                0x143 (size before relaxing)
+ .debug_str     0x00000a37      0x61e net/libnet.a(net.o)
+                                0x827 (size before relaxing)
+ .debug_str     0x00001055       0xe4 net/libnet.a(tftp.o)
+                                0x27b (size before relaxing)
+ .debug_str     0x00001139      0x252 net/libnet.a(bootp.o)
+                                0x435 (size before relaxing)
+ .debug_str     0x0000138b       0x4c net/libnet.a(rarp.o)
                                 0x197 (size before relaxing)
- .debug_str     0x0000361a       0x79 lib_generic/libgeneric.a(vsprintf.o)
-                                0x1a6 (size before relaxing)
- .debug_str     0x00003693      0x3ca lib_generic/libgeneric.a(zlib.o)
-                                0x5b8 (size before relaxing)
- .debug_str     0x00003a5d        0x8 lib_generic/libgeneric.a(ctype.o)
-                                 0x6f (size before relaxing)
- .debug_str     0x00003a65      0x28c board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
-                                0x461 (size before relaxing)
- .debug_str     0x00003cf1      0x29e board/bf537-stamp/libbf537-stamp.a(at45.o)
-                                0x567 (size before relaxing)
- .debug_str     0x00003f8f       0x1d lib_blackfin/libblackfin.a(bf533_linux.o)
-                                0x220 (size before relaxing)
- .debug_str     0x00003fac       0x1a lib_blackfin/libblackfin.a(cache.o)
-                                 0xec (size before relaxing)
- .debug_str     0x00003fc6       0x5a lib_blackfin/libblackfin.a(muldi3.o)
-                                 0xc2 (size before relaxing)
+ .debug_str     0x000013d7      0x146 net/libnet.a(eth.o)
+                                0x2e4 (size before relaxing)
+ .debug_str     0x0000151d      0x26b net/libnet.a(nfs.o)
+                                0x460 (size before relaxing)
+ .debug_str     0x00001788      0x33e drivers/libdrivers.a(dataflash.o)
+                                0x470 (size before relaxing)
+ .debug_str     0x00001ac6      0x13b drivers/libdrivers.a(netconsole.o)
+                                0x39b (size before relaxing)
+ .debug_str     0x00001c01      0x20b common/libcommon.a(main.o)
+                                0x335 (size before relaxing)
+ .debug_str     0x00001e0c       0xc2 common/libcommon.a(cmd_autoscript.o)
+                                0x223 (size before relaxing)
+ .debug_str     0x00001ece       0x35 common/libcommon.a(cmd_bdinfo.o)
+                                0x23d (size before relaxing)
+ .debug_str     0x00001f03       0x34 common/libcommon.a(cmd_boot.o)
+                                0x154 (size before relaxing)
+ .debug_str     0x00001f37      0x1e5 common/libcommon.a(cmd_bootm.o)
+                                0x4fa (size before relaxing)
+ .debug_str     0x0000211c       0x4f common/libcommon.a(cmd_cache.o)
+                                0x15e (size before relaxing)
+ .debug_str     0x0000216b       0xb7 common/libcommon.a(cmd_console.o)
+                                0x1f3 (size before relaxing)
+ .debug_str     0x00002222      0x214 common/libcommon.a(cmd_elf.o)
+                                0x380 (size before relaxing)
+ .debug_str     0x00002436       0x8a common/libcommon.a(cmd_itest.o)
+                                0x1af (size before relaxing)
+ .debug_str     0x000024c0      0x311 common/libcommon.a(cmd_load.o)
+                                0x5ba (size before relaxing)
+ .debug_str     0x000027d1      0x224 common/libcommon.a(cmd_mem.o)
+                                0x388 (size before relaxing)
+ .debug_str     0x000029f5      0x1b0 common/libcommon.a(cmd_mii.o)
+                                0x33e (size before relaxing)
+ .debug_str     0x00002ba5       0x27 common/libcommon.a(cmd_misc.o)
+                                0x148 (size before relaxing)
+ .debug_str     0x00002bcc       0xd2 common/libcommon.a(cmd_net.o)
+                                0x2c8 (size before relaxing)
+ .debug_str     0x00002c9e       0xb5 common/libcommon.a(cmd_nvedit.o)
+                                0x304 (size before relaxing)
+ .debug_str     0x00002d53       0xd1 common/libcommon.a(command.o)
+                                0x1fd (size before relaxing)
+ .debug_str     0x00002e24       0xe6 common/libcommon.a(console.o)
+                                0x3a5 (size before relaxing)
+ .debug_str     0x00002f0a       0x56 common/libcommon.a(devices.o)
+                                0x2c7 (size before relaxing)
+ .debug_str     0x00002f60       0x78 common/libcommon.a(env_common.o)
+                                0x25a (size before relaxing)
+ .debug_str     0x00002fd8       0x47 common/libcommon.a(env_flash.o)
+                                0x244 (size before relaxing)
+ .debug_str     0x0000301f       0x25 common/libcommon.a(exports.o)
+                                0x1db (size before relaxing)
+ .debug_str     0x00003044      0x1d5 common/libcommon.a(lists.o)
+                                0x317 (size before relaxing)
+ .debug_str     0x00003219      0x13a common/libcommon.a(miiphyutil.o)
+                                0x240 (size before relaxing)
+ .debug_str     0x00003353       0x3a common/libcommon.a(s_record.o)
+                                0x119 (size before relaxing)
+ .debug_str     0x0000338d      0x1b7 common/libcommon.a(xyzModem.o)
+                                0x2da (size before relaxing)
+ .debug_str     0x00003544       0x1c common/libcommon.a(crc16.o)
+                                 0xf4 (size before relaxing)
+ .debug_str     0x00003560       0x2d lib_generic/libgeneric.a(display_options.o)
+                                0x10f (size before relaxing)
+ .debug_str     0x0000358d       0x86 lib_generic/libgeneric.a(string.o)
+                                0x196 (size before relaxing)
+ .debug_str     0x00003613       0x79 lib_generic/libgeneric.a(vsprintf.o)
+                                0x1a5 (size before relaxing)
+ .debug_str     0x0000368c      0x3ca lib_generic/libgeneric.a(zlib.o)
+                                0x5b7 (size before relaxing)
+ .debug_str     0x00003a56        0x8 lib_generic/libgeneric.a(ctype.o)
+                                 0x6e (size before relaxing)
+ .debug_str     0x00003a5e      0x28c board/bf537-stamp/libbf537-stamp.a(ether_bf537.o)
+                                0x460 (size before relaxing)
+ .debug_str     0x00003cea      0x29e board/bf537-stamp/libbf537-stamp.a(at45.o)
+                                0x566 (size before relaxing)
+ .debug_str     0x00003f88       0x1d lib_blackfin/libblackfin.a(bf533_linux.o)
+                                0x21f (size before relaxing)
+ .debug_str     0x00003fa5       0x1a lib_blackfin/libblackfin.a(cache.o)
+                                 0xeb (size before relaxing)
+ .debug_str     0x00003fbf       0x5a lib_blackfin/libblackfin.a(muldi3.o)
+                                 0xc1 (size before relaxing)
 
 .comment        0x00000000      0x620
  .comment       0x00000000       0x1c cpu/bf537/traps.o
