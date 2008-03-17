@@ -148,7 +148,7 @@ MAC address in the address range of the industrial LCV board. */
 #define CFG_LONGHELP			1
 //#define CONFIG_BOOTDELAY	        -1 //disable autoboot
 #define CONFIG_BOOT_RETRY_TIME		-1	/* Enable this if bootretry required, currently its disabled */
-#define CONFIG_BOOTCOMMAND 		"run boot"
+#define CONFIG_BOOTCOMMAND 		"run tstlinux"
 //#define CONFIG_BOOTCOMMAND 		"help"
 
 #if (BFIN_BOOT_MODE == BF537_BYPASS_BOOT) && defined(CONFIG_POST_TEST)
