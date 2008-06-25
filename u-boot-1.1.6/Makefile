@@ -259,6 +259,7 @@ $(obj)u-boot.bin:	$(obj)u-boot
 $(obj)u-boot.ldr: u-boot.bin u-boot
 		$(MAKE) -C tools/bin2ldr
 		cp tools/bin2ldr/app.ldr u-boot.ldr
+		cp u-boot.ldr /tftpboot
 
 $(obj)u-boot.img:	$(obj)u-boot.bin
 		./tools/mkimage -A $(ARCH) -T firmware -C none \
