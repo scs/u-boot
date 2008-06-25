@@ -130,10 +130,10 @@
  */
 /* network support */
 #if (BFIN_CPU != ADSP_BF534)
-#define CONFIG_IPADDR           192.168.1.1
+#define CONFIG_IPADDR           192.168.11.10
 #define CONFIG_NETMASK          255.255.255.0
-#define CONFIG_GATEWAYIP        192.168.1.1
-#define CONFIG_SERVERIP         192.168.1.3
+#define CONFIG_GATEWAYIP        192.168.11.1
+#define CONFIG_SERVERIP         172.18.1.76
 #define CONFIG_HOSTNAME         BF537-LCV
 #define CONFIG_DP83848                         
 #define CONFIG_MII              
@@ -148,8 +148,8 @@ MAC address in the address range of the industrial LCV board. */
 #define CFG_LONGHELP			1
 //#define CONFIG_BOOTDELAY	        -1 //disable autoboot
 #define CONFIG_BOOT_RETRY_TIME		-1	/* Enable this if bootretry required, currently its disabled */
-#define CONFIG_BOOTCOMMAND 		"run tstlinux"
-//#define CONFIG_BOOTCOMMAND 		"help"
+//#define CONFIG_BOOTCOMMAND 		"run tstlinux"  /* tftp boot  */
+#define CONFIG_BOOTCOMMAND 		"run boot"      /* flash boot */
 
 #if (BFIN_BOOT_MODE == BF537_BYPASS_BOOT) && defined(CONFIG_POST_TEST)
 /* POST support */
