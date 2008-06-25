@@ -2,3 +2,4 @@ app*
 bin2ldr
 init_sdram_bootrom_initblock*
 jump
+jump.bin

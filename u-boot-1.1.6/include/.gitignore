@@ -1,2 +1,4 @@
 bmp_logo.h
 asm
+config.h
+config.mk
