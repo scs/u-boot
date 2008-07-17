@@ -134,7 +134,7 @@
 #define CONFIG_NETMASK          255.255.255.0
 #define CONFIG_GATEWAYIP        192.168.11.1
 #define CONFIG_SERVERIP         172.18.1.76
-#define CONFIG_HOSTNAME         BF537-LCV
+#define CONFIG_HOSTNAME         BF537-OSCAR
 #define CONFIG_DP83848                         
 #define CONFIG_MII              
 #endif
@@ -227,15 +227,15 @@ MAC address in the address range of the industrial LCV board. */
 #if ((BFIN_BOOT_MODE == BF537_BYPASS_BOOT) || (BFIN_BOOT_MODE == BF537_UART_BOOT))
 #if (BFIN_CPU != ADSP_BF534)
 #define CONFIG_EXTRA_ENV_SETTINGS                               \
-	"boot=bootm 0x10020000\0" \
+	"boot=bootm 0x10030000\0" \
 	"nokgdbargs=setenv bootargs root=/dev/mtdblock0 rw console=ttyBF0,115200\0"	\
         "nfsargs=setenv bootargs root=/dev/nfs rw \0"             \
         "nfsroot=$(serverip):$(rootpath) console=ttyBF0,57600\0"                     \
         "upduboot=tftp 0x1000000 u-boot.ldr; cp.b 0x1000000 0x10000000 $(filesize) \0"                 \
-	"updlinux=tftp 0x2000000 uImage; cp.b 0x2000000 0x10020000 $(filesize)\0"    \
+	"updlinux=tftp 0x2000000 uImage; cp.b 0x2000000 0x10030000 $(filesize)\0"    \
 	"tstuboot=tftp 0x1000000 u-boot.bin; go 0x1000000\0"  \
 	"tstlinux=tftp 0x2000000 uImage; bootm 0x2000000\0" \
-	"updatedhcp=dhcp;set serverip 172.18.128.16; tftp 1000000 u-boot.bin; go 1000000\0"\
+	"updatedhcp=dhcp;set serverip 172.18.128.16; tftp 1000000 u-boot.bin; go 1000000\0"\ 	
 	""
 #else
 #define CONFIG_EXTRA_ENV_SETTINGS                               \
@@ -258,7 +258,7 @@ MAC address in the address range of the industrial LCV board. */
         "run nfsargs;run addip;bootelf\0"				\
         "flashboot=bootm 0x20100000\0"					\
         "update=tftpboot $(loadaddr) u-boot.ldr;"				\
-        "eeprom write $(loadaddr) 0x0 $(filesize);\0"			\
+        "eeprom write $(loadaddr) 0x0 $(filesize);\0"			\       
         ""
 #else
 #define CONFIG_EXTRA_ENV_SETTINGS                               \
@@ -431,9 +431,12 @@ MAC address in the address range of the industrial LCV board. */
 #define VDSP_ENTRY_ADDR		0xFFA00000
 #endif
 
+
+
+
 #if defined(CONFIG_BFIN_IDE)
-
 #define CONFIG_DOS_PARTITION            1
-
 #endif
+
+
 #endif
