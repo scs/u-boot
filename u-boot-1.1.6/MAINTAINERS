@@ -601,6 +601,11 @@ Blackfin Team <u-boot-devel@blackfin.uclinux.org>
 	CM-BF548		BF548
 	CM-BF561		BF561
 
+Markus Berner <markus.berner@scs.ch>
+Samuel Zahnd <samuel.zahnd@scs.ch>
+
+	BF537-LEANXCAM		BF537
+
 #########################################################################
 # End of MAINTAINERS list						#
 #########################################################################

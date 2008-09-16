@@ -320,6 +320,7 @@ LIST_blackfin=" \
 	bf537-minotaur
 	bf537-pnav
 	bf537-stamp
+	bf537-leanxcam
 	bf537-srv1
 	bf538f-ezkit
 	bf548-ezkit

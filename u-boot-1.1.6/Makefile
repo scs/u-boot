@@ -2263,6 +2263,7 @@ BFIN_BOARDS += cm-bf533 cm-bf537e cm-bf548 cm-bf561
 
 # Misc third party boards
 BFIN_BOARDS += bf537-minotaur bf537-srv1
+BFIN_BOARDS += bf537-leanxcam
 
 $(BFIN_BOARDS:%=%_config)	: unconfig
 	@$(MKCONFIG) $(@:_config=) blackfin blackfin $(@:_config=)
