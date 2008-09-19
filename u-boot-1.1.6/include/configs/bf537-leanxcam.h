@@ -79,6 +79,10 @@
 #define CFG_MALLOC_LEN		(384 * 1024)	/* Reserve 384 kB for malloc() (video/spi are big) */
 #define CFG_GBL_DATA_SIZE	0x4000
 
+/*
+ *	Serial console Settings 
+ */
+ populate here...
 
 /*
  * Network Settings
@@ -251,6 +255,8 @@
  */
 #define CONFIG_MISC_INIT_R
 #define CONFIG_RTC_BFIN
+#define CFG_LONGHELP		
+#define CONFIG_CMDLINE_EDITING	
 
 /* #define CONFIG_BF537_STAMP_LEDCMD	1 */
 
