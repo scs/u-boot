@@ -26,7 +26,8 @@
 
 #include <config.h>
 #include <common.h>
-//#include <asm/hardware.h>
+#include <asm/arch/hardware.h>
+#include <asm/mach-common/bits/spi.h>
 
 //static inline int __attribute__ ((format (printf, 1, 2))) pr_debug(const char * fmt, ...)
 //{
@@ -56,7 +57,7 @@ the Continuous Array Read function */
 /* FUNCTIONS SPECIFIC TO BF537*/
 /*--------------------------------------------------------------------------------------*/
 
-void AT45F_SpiInit(void) {
+void AT91F_SpiInit(void) {
   
   /*-------------------------------------------------------------------*/
   /*	SPI DataFlash Init								*/
@@ -112,7 +113,7 @@ unsigned char * AT45F_TransferByte(unsigned char* b)
   return b;
 }
 
-unsigned int AT45F_SpiWrite (int cs, AT45PS_DataflashDesc pDesc )
+unsigned int AT45F_SpiWrite (int cs, AT91PS_DataflashDesc pDesc )
 {
 	unsigned int timeout;
 	int i;
@@ -157,8 +158,8 @@ unsigned int AT45F_SpiWrite (int cs, AT45PS_DataflashDesc pDesc )
 /* \fn    AT45F_DataFlashSendCommand					*/
 /* \brief Generic function to send a command to the dataflash		*/
 /*----------------------------------------------------------------------*/
-AT45S_DataFlashStatus AT45F_DataFlashSendCommand(
-	AT45PS_DataFlash pDataFlash,
+AT91S_DataFlashStatus AT45F_DataFlashSendCommand(
+	AT91PS_DataFlash pDataFlash,
 	unsigned char OpCode,
 	unsigned int CmdSize,
 	unsigned int DataflashAddress)
@@ -201,9 +202,9 @@ AT45S_DataFlashStatus AT45F_DataFlashSendCommand(
 /* \fn    AT45F_DataFlashGetStatus					*/
 /* \brief Read the status register of the dataflash			*/
 /*----------------------------------------------------------------------*/
-AT45S_DataFlashStatus AT45F_DataFlashGetStatus(int cs, AT45PS_DataflashDesc pDesc)
+AT91S_DataFlashStatus AT45F_DataFlashGetStatus(int cs, AT91PS_DataflashDesc pDesc)
 {
-	AT45S_DataFlashStatus status;
+	AT91S_DataFlashStatus status;
 
 	/* if a transfert is in progress ==> return 0 */
 	if( (pDesc->state) != IDLE)
@@ -231,7 +232,7 @@ AT45S_DataFlashStatus AT45F_DataFlashGetStatus(int cs, AT45PS_DataflashDesc pDes
 /* \fn    AT45F_Data					*/
 /* \brief wait for dataflash ready (bit7 of the status register == 1)	*/
 /*----------------------------------------------------------------------*/
-AT45S_DataFlashStatus AT45F_DataFlashWaitReady(int cs, AT45PS_DataflashDesc pDataFlashDesc, unsigned int timeout)
+AT91S_DataFlashStatus AT45F_DataFlashWaitReady(int cs, AT91PS_DataflashDesc pDataFlashDesc, unsigned int timeout)
 {
 	pDataFlashDesc->DataFlash_state = IDLE;
 
@@ -256,13 +257,13 @@ AT45S_DataFlashStatus AT45F_DataFlashWaitReady(int cs, AT45PS_DataflashDesc pDat
 /*                     : <sizeToRead> = data buffer size			*/
 /* Return value		: State of the dataflash				*/
 /*------------------------------------------------------------------------------*/
-AT45S_DataFlashStatus AT45F_DataFlashContinuousRead (
-	AT45PS_DataFlash pDataFlash,
+AT91S_DataFlashStatus AT45F_DataFlashContinuousRead (
+	AT91PS_DataFlash pDataFlash,
 	int src,
 	unsigned char *dataBuffer,
 	int sizeToRead )
 {
-	AT45S_DataFlashStatus status;
+	AT91S_DataFlashStatus status;
 	/* Test the size to read in the device */
 	if ( (src + sizeToRead) > (pDataFlash->pDevice->pages_size * (pDataFlash->pDevice->pages_number)))
 		return DATAFLASH_MEMORY_OVERFLOW;
@@ -287,8 +288,8 @@ AT45S_DataFlashStatus AT45F_DataFlashContinuousRead (
 /*                     : <SizeToWrite> = data buffer size			*/
 /* Return value		: State of the dataflash				*/
 /*------------------------------------------------------------------------------*/
-AT45S_DataFlashStatus AT45F_DataFlashPagePgmBuf(
-	AT45PS_DataFlash pDataFlash,
+AT91S_DataFlashStatus AT45F_DataFlashPagePgmBuf(
+	AT91PS_DataFlash pDataFlash,
 	unsigned char *src,
 	unsigned int dest,
 	unsigned int SizeToWrite)
@@ -315,8 +316,8 @@ AT45S_DataFlashStatus AT45F_DataFlashPagePgmBuf(
 /*                     : 							*/
 /* Return value		: State of the dataflash				*/
 /*------------------------------------------------------------------------------*/
-AT45S_DataFlashStatus AT45F_MainMemoryToBufferTransfert(
-	AT45PS_DataFlash pDataFlash,
+AT91S_DataFlashStatus AT45F_MainMemoryToBufferTransfert(
+	AT91PS_DataFlash pDataFlash,
 	unsigned char BufferCommand,
 	unsigned int page)
 {
@@ -344,8 +345,8 @@ AT45S_DataFlashStatus AT45F_MainMemoryToBufferTransfert(
 /*                     : <SizeToWrite> = data buffer size			*/
 /* Return value		: State of the dataflash				*/
 /*------------------------------------------------------------------------------*/
-AT45S_DataFlashStatus AT45F_DataFlashWriteBuffer (
-	AT45PS_DataFlash pDataFlash,
+AT91S_DataFlashStatus AT45F_DataFlashWriteBuffer (
+	AT91PS_DataFlash pDataFlash,
 	unsigned char BufferCommand,
 	unsigned char *dataBuffer,
 	unsigned int bufferAddress,
@@ -399,8 +400,8 @@ AT45S_DataFlashStatus AT45F_DataFlashWriteBuffer (
 /*                     : 							*/
 /* Return value		: State of the dataflash				*/
 /*------------------------------------------------------------------------------*/
-AT45S_DataFlashStatus AT45F_PageErase(
-	AT45PS_DataFlash pDataFlash,
+AT91S_DataFlashStatus AT45F_PageErase(
+	AT91PS_DataFlash pDataFlash,
 	unsigned int page)
 {
 	int cmdsize;
@@ -423,8 +424,8 @@ AT45S_DataFlashStatus AT45F_PageErase(
 /*                     : 							*/
 /* Return value		: State of the dataflash				*/
 /*------------------------------------------------------------------------------*/
-AT45S_DataFlashStatus AT45F_BlockErase(
-	AT45PS_DataFlash pDataFlash,
+AT91S_DataFlashStatus AT45F_BlockErase(
+	AT91PS_DataFlash pDataFlash,
 	unsigned int block)
 {
 	int cmdsize;
@@ -445,8 +446,8 @@ AT45S_DataFlashStatus AT45F_BlockErase(
 /*                     : <dest> = main memory address				*/
 /* Return value		: State of the dataflash				*/
 /*------------------------------------------------------------------------------*/
-AT45S_DataFlashStatus AT45F_WriteBufferToMain (
-	AT45PS_DataFlash pDataFlash,
+AT91S_DataFlashStatus AT45F_WriteBufferToMain (
+	AT91PS_DataFlash pDataFlash,
 	unsigned char BufferCommand,
 	unsigned int dest )
 {
@@ -476,8 +477,8 @@ AT45S_DataFlashStatus AT45F_WriteBufferToMain (
 /*			: <AdrInpage> = adr to begin the fading			*/
 /*                     : <length> = Number of bytes to erase			*/
 /*------------------------------------------------------------------------------*/
-AT45S_DataFlashStatus AT45F_PartialPageWrite (
-	AT45PS_DataFlash pDataFlash,
+AT91S_DataFlashStatus AT45F_PartialPageWrite (
+	AT91PS_DataFlash pDataFlash,
 	unsigned char *src,
 	unsigned int dest,
 	unsigned int size)
@@ -509,14 +510,14 @@ AT45S_DataFlashStatus AT45F_PartialPageWrite (
 
 
 /*------------------------------------------------------------------------------*/
-/* Function Name       : AT45F_DataFlashWrite					*/
+/* Function Name       : AT91F_DataFlashWrite					*/
 /* Object              :							*/
 /* Input Parameters    : <*src> = Source buffer					*/
 /*                     : <dest> = dataflash adress				*/
 /*                     : <size> = data buffer size				*/
 /*------------------------------------------------------------------------------*/
-AT45S_DataFlashStatus AT45F_DataFlashWrite(
-	AT45PS_DataFlash pDataFlash,
+AT91S_DataFlashStatus AT91F_DataFlashWrite(
+	AT91PS_DataFlash pDataFlash,
 	unsigned char *src,
 	int dest,
 	int size )
@@ -583,13 +584,13 @@ AT45S_DataFlashStatus AT45F_DataFlashWrite(
 
 
 /*------------------------------------------------------------------------------*/
-/* Function Name       : AT45F_DataFlashRead 					*/
+/* Function Name       : AT91F_DataFlashRead 					*/
 /* Object              : Read a block in dataflash				*/
 /* Input Parameters    : 							*/
 /* Return value		: 							*/
 /*------------------------------------------------------------------------------*/
-int AT45F_DataFlashRead(
-	AT45PS_DataFlash pDataFlash,
+int AT91F_DataFlashRead(
+	AT91PS_DataFlash pDataFlash,
 	unsigned long addr,
 	unsigned long size,
 	char *buffer)
@@ -618,12 +619,12 @@ int AT45F_DataFlashRead(
 
 
 /*------------------------------------------------------------------------------*/
-/* Function Name       : AT45F_DataflashProbe 					*/
+/* Function Name       : AT91F_DataflashProbe 					*/
 /* Object              : 							*/
 /* Input Parameters    : 							*/
 /* Return value	       : Dataflash status register				*/
 /*------------------------------------------------------------------------------*/
-int AT45F_DataflashProbe(int cs, AT45PS_DataflashDesc pDesc)
+int AT91F_DataflashProbe(int cs, AT91PS_DataflashDesc pDesc)
 {
 	AT45F_DataFlashGetStatus(cs, pDesc);	
 	return((pDesc->command[1] == 0xFF)? 0: pDesc->command[1] & 0x3C);
@@ -636,13 +637,13 @@ int AT45F_DataflashProbe(int cs, AT45PS_DataflashDesc pDesc)
 //c.f. blackfin anomaly list: atmel flash must be programmed
 //to have "power of 2" page size
 
-void AT45F_SpiEnsurePowerOf2(AT45PS_DATAFLASH_INFO pDataFlashInfo)
+void AT45F_SpiEnsurePowerOf2(AT91PS_DATAFLASH_INFO pDataFlashInfo)
 {
   unsigned char OpCode = 0x3D;
   unsigned int CmdSize = 4;
   unsigned int RestOpCode = 0x2A80A6;
   
-  AT45PS_DataFlash pDataFlash;
+  AT91PS_DataFlash pDataFlash;
   pDataFlash->pDataFlashDesc = &pDataFlashInfo->Desc;
   pDataFlash->pDevice = &pDataFlashInfo->Device;
 

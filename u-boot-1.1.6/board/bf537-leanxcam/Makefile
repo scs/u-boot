@@ -29,7 +29,7 @@ include $(TOPDIR)/config.mk
 
 LIB	= $(obj)lib$(BOARD).a
 
-COBJS	:= $(BOARD).o post-memory.o spi_flash.o cmd_bf537led.o at45.o
+COBJS	:= $(BOARD).o post-memory.o spi_flash.o cmd_bf537led.o at45.o tools-updater-flash.o
 
 SRCS	:= $(SOBJS:.o=.S) $(COBJS:.o=.c)
 OBJS	:= $(addprefix $(obj),$(COBJS))
