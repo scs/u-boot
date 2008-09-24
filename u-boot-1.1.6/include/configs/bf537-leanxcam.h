@@ -102,13 +102,18 @@
 
 #define CFG_FLASH_BASE		0x20000000
 
-#define CONFIG_LOADADDR		0x1000000	
-#define	CFG_LOAD_ADDR		CONFIG_LOADADDR	/* default load address */
+#define CONFIG_LOADADDR			0x1000000
+#define CFG_LOADADDR_LINUX		0x2000000		
+#define	CFG_LOAD_ADDR			CONFIG_LOADADDR	/* default load address */
 
 
 /*
  *	Serial console Settings 
  */
+#define CONFIG_UART_CONSOLE	0
+//#define DEBUG 1
+//#define CONFIG_DEBUG_EARLY_SERIAL	1
+//#define CONFIG_DEBUG_SERIAL	1
 #define	CFG_MAXARGS		16	/* max number of command args */
 #define CFG_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200 }
 #define CONFIG_BAUDRATE		115200
@@ -116,31 +121,54 @@
 /*
  * Network Settings
  */
-#define CONFIG_HOSTNAME			bf537-leanXcam 
 #define CONFIG_IPADDR           192.168.11.10
 #define CONFIG_NETMASK          255.255.255.0
 #define CONFIG_GATEWAYIP        192.168.11.1
 #define CONFIG_SERVERIP         172.18.1.76
 #define CONFIG_ETHADDR          00:20:e3:23:00:00 
+#define CONFIG_HOSTNAME			bf537-leanXcam 
 
-#define CONFIG_DP83848                         
-#define CONFIG_MII 
+//#define CONFIG_DP83848                         
+//#define CONFIG_MII 
 
-//#define ADI_CMDS_NETWORK	1 	--?
-//#define CONFIG_BFIN_MAC		--?
+#define ADI_CMDS_NETWORK	1 	
+#define CONFIG_BFIN_MAC		
 #define CONFIG_NETCONSOLE	1
 #define CONFIG_NET_MULTI	1
 
 
 /*
  * Dataflash Settings
+ * 
+ * 0x0	monitor (size=CFG_MONITOR_LEN)
+ * 		env_uboot (size=CFG_ENV_SIZE)
+ * 		env_uboot redundant (size=CFG_ENV_SIZE_REDUND)
+ * 		env board (size=CFG_ENV_BOARD_SIZE)
+ * 		env user (size=CFG_ENV_USER_SIZE)
+ * 		linux...
  */
+
+#define CFG_ENV_SIZE			0x2000	/* 8k environment; twice due to redundency */
+#define CFG_ENV_SIZE_REDUND		CFG_ENV_SIZE	/* same for redundency */ 
+#define CFG_ENV_BOARD_SIZE 		800		/* 2k, board specific information: MAC */
+#define CFG_ENV_USER_SIZE 		7800	/* 30k, linux user specific information */
+#define CFG_DATAFLASH_LOGIC_ADDR_CS0    0x10000000      /*Logical adress for Flash 1 (CS0, cs=0) */
+#define CFG_DATAFLASH_LOGIC_ADDR_CS3    0x20000000      /*Logical adress for Flash 2 (CS3, cs=3)*/
+
+
+
+#define CFG_FLASH_BASE_MONITOR		CFG_DATAFLASH_LOGIC_ADDR_CS0
+#define CFG_FLASH_BASE_ENV_UBOOT	(CFG_FLASH_BASE_MONITOR + CFG_MONITOR_LEN)
+#define CFG_FLASH_BASE_ENV_REDUND	(CFG_FLASH_BASE_ENV_UBOOT + CFG_ENV_SIZE)
+#define CFG_FLASH_BASE_ENV_BOARD	(CFG_FLASH_BASE_ENV_REDUND + CFG_ENV_SIZE_REDUND)
+#define CFG_FLASH_BASE_ENV_USER		(CFG_FLASH_BASE_ENV_BOARD + CFG_ENV_BOARD_SIZE)
+//#define CFG_FLASH_BASE_LINUX		(CFG_FLASH_BASE_ENV_USER + CFG_ENV_USER_SIZE)
+#define CFG_FLASH_BASE_LINUX		0x10030000
+ 
 #define CONFIG_HAS_DATAFLASH            1
 #define CFG_SPI_WRITE_TOUT              (5*CFG_HZ)
 #define CFG_MAX_DATAFLASH_BANKS         2        /*2 dataflash chips present */
 #define CFG_MAX_DATAFLASH_PAGES         8192
-#define CFG_DATAFLASH_LOGIC_ADDR_CS0    0x10000000      /*Logical adress for Flash 1 (CS0, cs=0) */
-#define CFG_DATAFLASH_LOGIC_ADDR_CS3    0x20000000      /*Logical adress for Flash 2 (CS3, cs=3)*/
 
 #define CFG_NO_FLASH 
 #define CFG_MAX_FLASH_BANKS	0	/* max number of memory banks */
@@ -150,41 +178,38 @@
 /*
  * Environment variables
  */
- 
-#define	CFG_ENV_IS_IN_DATAFLASH	1
 
-#define CFG_ENV_SIZE			0x4000	/* 16k environment; twice due to redundency */
-#define CFG_ENV_SIZE_REDUND		CFG_ENV_SIZE	/* same for redundency */
-#define CONFIG_BOARD_ENV_SIZE	0x800	/* 2k board specific information */
-#define CONFIG_USER_ENV_SIZE	0x7800	/* 30k user specific information */
+//#define	CFG_ENV_IS_IN_DATAFLASH	1
+#define	CFG_ENV_IS_IN_FLASH	1
 
+#ifdef CFG_ENV_IS_IN_DATAFLASH
+	#define CONFIG_BOARD_ENV_SIZE	0x800	/* 2k board specific information */
+	#define CONFIG_USER_ENV_SIZE	0x7800	/* 30k user specific information */
+	#define CFG_ENV_ADDR			CFG_FLASH_BASE_ENV_UBOOT
+	#define CFG_ENV_ADDR_REDUND		CFG_FLASH_BASE_ENV_REDUND
+	#define	CFG_ENV_SECT_SIZE		CFG_ENV_SIZE	/* Total Size of Environment Sector */
+#endif /* CFG_ENV_IS_IN_DATAFLASH */
 
-#define CFG_ENV_OFFSET			CFG_MONITOR_LEN
-#define CFG_ENV_ADDR			(CFG_FLASH_BASE + CFG_ENV_OFFSET)
-#define CFG_ENV_ADDR_REDUND		(CFG_ENV_ADDR + CFG_ENV_SIZE_REDUND)
- 
-#define	CFG_ENV_SECT_SIZE		CFG_ENV_SIZE	/* Total Size of Environment Sector */
-//#define ENV_IS_EMBEDDED_CUSTOM
-
-#if 0 
-	#define	CFG_ENV_IS_IN_FLASH	1
-	#define CFG_ENV_SIZE		0x2000
-	#define CFG_ENV_ADDR		0x20004000
-	#define CFG_ENV_OFFSET		(CFG_ENV_ADDR - CFG_FLASH_BASE)
+#ifdef CFG_ENV_IS_IN_FLASH
+	#define CFG_ENV_ADDR		0x20004000 /* warum 0x4000? */
+	#define CFG_ENV_OFFSET		(CFG_ENV_ADDR - CFG_FLASH_BASE)	
 	#define	CFG_ENV_SECT_SIZE	0x2000	/* Total Size of Environment Sector */
 	#define ENV_IS_EMBEDDED
-#endif
+#endif /* CFG_ENV_IS_IN_FLASH */
+
 
 #define CONFIG_EXTRA_ENV_SETTINGS                               \
-	"boot=bootm 0x10030000\0" \
+	"flash_base_linux=" MK_STR(CFG_FLASH_BASE_LINUX) "\0" \
+	"flash_base_monitor=" MK_STR(CFG_FLASH_BASE_MONITOR) "\0" \
+	"loadaddr-linux="  MK_STR(CFG_LOADADDR_LINUX) "\0" \
+	"boot=bootm $(flash_base_linux)\0" \
 	"nokgdbargs=setenv bootargs root=/dev/mtdblock0 rw console=ttyBF0,115200\0"	\
-        "nfsargs=setenv bootargs root=/dev/nfs rw \0"             \
-        "nfsroot=$(serverip):$(rootpath) console=ttyBF0,57600\0"                     \
-        "upduboot=tftp 0x1000000 u-boot.ldr; cp.b 0x1000000 0x10000000 $(filesize) \0"                 \
-	"updlinux=tftp 0x2000000 uImage; cp.b 0x2000000 0x10030000 $(filesize)\0"    \
-	"tstuboot=tftp 0x1000000 u-boot.bin; go 0x1000000\0"  \
-	"tstlinux=tftp 0x2000000 uImage; bootm 0x2000000\0" \
-	"updatedhcp=dhcp;set serverip 172.18.1.76; tftp 1000000 u-boot.bin; go 1000000\0"\ 	
+    "nfsargs=setenv bootargs root=/dev/nfs rw \0"             \
+    "nfsroot=$(serverip):$(rootpath) console=ttyBF0,57600\0"                     \    
+    "upduboot=tftp $(loadaddr) u-boot.ldr; cp.b $(loadaddr) $(flash_base_monitor) $(filesize) \0"                 \
+	"updlinux=tftp $(loadaddr-linux) uImage; cp.b $(loadaddr-linux) $(flash_base_linux) $(filesize)\0"    \	
+	"tstuboot=tftp $(loadaddr) u-boot.bin; go $(loadaddr)\0"  \
+	"tstlinux=tftp $(loadaddr-linux) uImage; bootm $(loadaddr-linux)\0" \ 	
 	""
 
 
@@ -196,50 +221,6 @@
 #define CONFIG_SPI_BAUD			4
 #define CONFIG_SPI_BAUD_INITBLOCK	4
 
-
-/*
- * I2C Settings - not configured in u-boot.
- */
-
-
-/*
- * NAND Settings
- */
-/* #define CONFIG_BF537_NAND */
-#ifdef CONFIG_BF537_NAND
-# define ADD_NAND_CMD		CFG_CMD_NAND
-#else
-# define ADD_NAND_CMD		0
-#endif
-
-//#define CFG_NAND_ADDR		0x20212000
-//#define CFG_NAND_BASE		CFG_NAND_ADDR
-//#define CFG_MAX_NAND_DEVICE	1
-//#define SECTORSIZE		512
-//#define ADDR_COLUMN		1
-//#define ADDR_PAGE		2
-//#define ADDR_COLUMN_PAGE	3
-//#define NAND_ChipID_UNKNOWN	0x00
-//#define NAND_MAX_FLOORS		1
-//#define NAND_MAX_CHIPS		1
-//#define BFIN_NAND_READY		PF3
-//
-//#define NAND_WAIT_READY(nand)  			\
-//	do { 					\
-//		int timeout = 0; 		\
-//		while(!(*pPORTFIO & PF3)) 	\
-//			if (timeout++ > 100000)	\
-//				break;		\
-//	} while (0)
-//
-//#define BFIN_NAND_CLE		(1<<2)	/* A2 -> Command Enable */
-//#define BFIN_NAND_ALE		(1<<1)	/* A1 -> Address Enable */
-//
-//#define WRITE_NAND_COMMAND(d, adr) do{ *(volatile __u8 *)((unsigned long)adr | BFIN_NAND_CLE) = (__u8)(d); } while(0)
-//#define WRITE_NAND_ADDRESS(d, adr) do{ *(volatile __u8 *)((unsigned long)adr | BFIN_NAND_ALE) = (__u8)(d); } while(0)
-//#define WRITE_NAND(d, adr) do{ *(volatile __u8 *)((unsigned long)adr) = (__u8)d; } while(0)
-//#define READ_NAND(adr) ((volatile unsigned char)(*(volatile __u8 *)(unsigned long)adr))
-//
 
 /*
  * Boot behaviour
@@ -258,7 +239,7 @@
  * Linux parameters
  */
  #define CONFIG_ROOTPATH		/romfs
- #define CONFIG_BOOTARGS "root=/dev/mtdblock0 rw console=ttyBF0,115200 kgdboe=@192.168.1.1/,@192.168.1.3/"
+ #define CONFIG_BOOTARGS "root=/dev/mtdblock0 rw console=ttyBF0,115200 kgdboe=@$(ipaddr)/,@$(serverip)/"
  #define CFG_BOOTMAPSZ		(8 * 1024*1024)	/* Initial Memory map for Linux */
 
 /*
@@ -302,21 +283,16 @@
 					 CFG_CMD_CACHE  | \
 					 CFG_CMD_DHCP   | \
 					 ADD_IDE_CMD	| \
-					 CFG_CMD_FLASH  | \
+					 CFG_CMD_FLASH  | \				 
 					 CFG_CMD_ENV	| \
+					 CFG_CMD_ASKENV	| \
 					 CFG_CMD_MII    | \
 					 CFG_CMD_NET    | \
-					 CFG_CMD_POST_DIAG) & ~(CFG_CMD_FLASH)) & ~(CFG_CMD_IMLS))
+					 CFG_CMD_POST_DIAG) & ~(CFG_CMD_IMLS))  & ~(CFG_CMD_FLASH)) 
 
 /* this must be included AFTER the definition of CONFIG_COMMANDS (if any) */
 #include <cmd_confdefs.h>					 
 					 
-
-/*
- * Pull in common ADI header for remaining command/environment setup
- */
- 
-#include <configs/bfin_adi_common.h>
 
 #include <asm/blackfin-config-post.h>
 
