@@ -244,6 +244,7 @@ $(obj)u-boot.srec:	$(obj)u-boot
 
 $(obj)u-boot.bin:	$(obj)u-boot
 		$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
+		cp u-boot.bin /tftpboot
 
 $(obj)u-boot.ldr:	$(obj)u-boot
 		./tools/envcrc --binary > $(obj)env-ldr.o
