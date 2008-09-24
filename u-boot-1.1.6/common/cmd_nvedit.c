@@ -536,6 +536,7 @@ int getenv_r (char *name, char *buf, unsigned len)
 }
 
 #if defined(CFG_ENV_IS_IN_NVRAM) || defined(CFG_ENV_IS_IN_EEPROM) || \
+    defined(CFG_ENV_IS_IN_DATAFLASH) || \
     ((CONFIG_COMMANDS & (CFG_CMD_ENV|CFG_CMD_FLASH)) == \
       (CFG_CMD_ENV|CFG_CMD_FLASH)) || \
     ((CONFIG_COMMANDS & (CFG_CMD_ENV|CFG_CMD_NAND)) == \
@@ -594,6 +595,7 @@ U_BOOT_CMD(
 );
 
 #if defined(CFG_ENV_IS_IN_NVRAM) || defined(CFG_ENV_IS_IN_EEPROM) || \
+    defined(CFG_ENV_IS_IN_DATAFLASH) || \
     ((CONFIG_COMMANDS & (CFG_CMD_ENV|CFG_CMD_FLASH)) == \
       (CFG_CMD_ENV|CFG_CMD_FLASH)) || \
     ((CONFIG_COMMANDS & (CFG_CMD_ENV|CFG_CMD_NAND)) == \
