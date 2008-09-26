@@ -61,7 +61,6 @@ int AT91F_DataflashInit (void)
 		dataflash_info[i].id = 0;
 		dataflash_info[i].Device.pages_number = 0;
 		dfcode = AT91F_DataflashProbe (cs[i][1], &dataflash_info[i].Desc);
-
 		switch (dfcode) {
 		case AT45DB161:
 			dataflash_info[i].Device.pages_number = 4096;
@@ -76,8 +75,8 @@ int AT91F_DataflashInit (void)
 
 		case AT45DB321:
 			dataflash_info[i].Device.pages_number = 8192;
-			dataflash_info[i].Device.pages_size = 528;
-			dataflash_info[i].Device.page_offset = 10;
+			dataflash_info[i].Device.pages_size = 512;
+			dataflash_info[i].Device.page_offset = 9;
 			dataflash_info[i].Device.byte_mask = 0x300;
 			dataflash_info[i].Device.cs = cs[i][1];
 			dataflash_info[i].Desc.DataFlash_state = IDLE;
@@ -243,7 +242,7 @@ int area;
 	}
 	if (area == NB_DATAFLASH_AREA) return -1;
 	/*test protection value*/
-	if (pdataFlash->pDevice->area_list[area].protected == FLAG_PROTECT_SET) return 0;
+	//if (pdataFlash->pDevice->area_list[area].protected == FLAG_PROTECT_SET) return 0;
 
 	return 1;
 }

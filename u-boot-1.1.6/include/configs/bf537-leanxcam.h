@@ -100,7 +100,7 @@
 #define CFG_GBL_DATA_ADDR	(CFG_MALLOC_BASE - CFG_GBL_DATA_SIZE)
 #define CONFIG_STACKBASE	(CFG_GBL_DATA_ADDR  - 4)
 
-#define CFG_FLASH_BASE		0x20000000
+#define CFG_FLASH_BASE		0x10000000
 
 #define CONFIG_LOADADDR			0x1000000
 #define CFG_LOADADDR_LINUX		0x2000000		
@@ -111,9 +111,9 @@
  *	Serial console Settings 
  */
 #define CONFIG_UART_CONSOLE	0
-//#define DEBUG 1
-//#define CONFIG_DEBUG_EARLY_SERIAL	1
-//#define CONFIG_DEBUG_SERIAL	1
+/*#define DEBUG 1*/
+/*#define CONFIG_DEBUG_EARLY_SERIAL	1
+  #define CONFIG_DEBUG_SERIAL	1*/
 #define	CFG_MAXARGS		16	/* max number of command args */
 #define CFG_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200 }
 #define CONFIG_BAUDRATE		115200
@@ -148,7 +148,8 @@
  * 		linux...
  */
 
-#define CFG_ENV_SIZE			0x2000	/* 8k environment; twice due to redundency */
+#define CFG_MONITOR_SIZE                0x20000 /* 128k partition on flash reserved for U-boot image. */
+#define CFG_ENV_SIZE			0x4000	/* 8k environment; twice due to redundency */
 #define CFG_ENV_SIZE_REDUND		CFG_ENV_SIZE	/* same for redundency */ 
 #define CFG_ENV_BOARD_SIZE 		800		/* 2k, board specific information: MAC */
 #define CFG_ENV_USER_SIZE 		7800	/* 30k, linux user specific information */
@@ -158,11 +159,11 @@
 
 
 #define CFG_FLASH_BASE_MONITOR		CFG_DATAFLASH_LOGIC_ADDR_CS0
-#define CFG_FLASH_BASE_ENV_UBOOT	(CFG_FLASH_BASE_MONITOR + CFG_MONITOR_LEN)
+#define CFG_FLASH_BASE_ENV_UBOOT	(CFG_FLASH_BASE_MONITOR + CFG_MONITOR_SIZE)
 #define CFG_FLASH_BASE_ENV_REDUND	(CFG_FLASH_BASE_ENV_UBOOT + CFG_ENV_SIZE)
 #define CFG_FLASH_BASE_ENV_BOARD	(CFG_FLASH_BASE_ENV_REDUND + CFG_ENV_SIZE_REDUND)
 #define CFG_FLASH_BASE_ENV_USER		(CFG_FLASH_BASE_ENV_BOARD + CFG_ENV_BOARD_SIZE)
-//#define CFG_FLASH_BASE_LINUX		(CFG_FLASH_BASE_ENV_USER + CFG_ENV_USER_SIZE)
+/*#define CFG_FLASH_BASE_LINUX		(CFG_FLASH_BASE_ENV_USER + CFG_ENV_USER_SIZE)*/
 #define CFG_FLASH_BASE_LINUX		0x10030000
  
 #define CONFIG_HAS_DATAFLASH            1
@@ -179,8 +180,8 @@
  * Environment variables
  */
 
-//#define	CFG_ENV_IS_IN_DATAFLASH	1
-#define	CFG_ENV_IS_IN_FLASH	1
+#define	CFG_ENV_IS_IN_DATAFLASH	1
+//#define	CFG_ENV_IS_IN_FLASH	1
 
 #ifdef CFG_ENV_IS_IN_DATAFLASH
 	#define CONFIG_BOARD_ENV_SIZE	0x800	/* 2k board specific information */
@@ -191,9 +192,9 @@
 #endif /* CFG_ENV_IS_IN_DATAFLASH */
 
 #ifdef CFG_ENV_IS_IN_FLASH
-	#define CFG_ENV_ADDR		0x20004000 /* warum 0x4000? */
+	#define CFG_ENV_ADDR		0x10004000 /* warum 0x4000? */
 	#define CFG_ENV_OFFSET		(CFG_ENV_ADDR - CFG_FLASH_BASE)	
-	#define	CFG_ENV_SECT_SIZE	0x2000	/* Total Size of Environment Sector */
+	#define	CFG_ENV_SECT_SIZE	0x4000	/* Total Size of Environment Sector */
 	#define ENV_IS_EMBEDDED
 #endif /* CFG_ENV_IS_IN_FLASH */
 
@@ -205,11 +206,11 @@
 	"boot=bootm $(flash_base_linux)\0" \
 	"nokgdbargs=setenv bootargs root=/dev/mtdblock0 rw console=ttyBF0,115200\0"	\
     "nfsargs=setenv bootargs root=/dev/nfs rw \0"             \
-    "nfsroot=$(serverip):$(rootpath) console=ttyBF0,57600\0"                     \    
+    "nfsroot=$(serverip):$(rootpath) console=ttyBF0,57600\0"                     \
     "upduboot=tftp $(loadaddr) u-boot.ldr; cp.b $(loadaddr) $(flash_base_monitor) $(filesize) \0"                 \
-	"updlinux=tftp $(loadaddr-linux) uImage; cp.b $(loadaddr-linux) $(flash_base_linux) $(filesize)\0"    \	
+	"updlinux=tftp $(loadaddr-linux) uImage; cp.b $(loadaddr-linux) $(flash_base_linux) $(filesize)\0"    \
 	"tstuboot=tftp $(loadaddr) u-boot.bin; go $(loadaddr)\0"  \
-	"tstlinux=tftp $(loadaddr-linux) uImage; bootm $(loadaddr-linux)\0" \ 	
+	"tstlinux=tftp $(loadaddr-linux) uImage; bootm $(loadaddr-linux)\0" \
 	""
 
 
@@ -252,10 +253,11 @@
 
 /* #define CONFIG_BF537_STAMP_LEDCMD	1 */
 
-//#define ADI_CMDS_EXTRA (ADD_IDE_CMD | ADD_NAND_CMD)
-//#define CONFIG_BFIN_COMMANDS \
-//	( CFG_BFIN_CMD_BOOTLDR | \
-//	  CFG_BFIN_CMD_CPLBINFO )
+/*#define ADI_CMDS_EXTRA (ADD_IDE_CMD | ADD_NAND_CMD)
+#define CONFIG_BFIN_COMMANDS \
+	( CFG_BFIN_CMD_BOOTLDR | \
+	  CFG_BFIN_CMD_CPLBINFO )
+*/
 
 /*
  * PowerOn Self Test; POST
@@ -283,7 +285,7 @@
 					 CFG_CMD_CACHE  | \
 					 CFG_CMD_DHCP   | \
 					 ADD_IDE_CMD	| \
-					 CFG_CMD_FLASH  | \				 
+					 CFG_CMD_FLASH  | \
 					 CFG_CMD_ENV	| \
 					 CFG_CMD_ASKENV	| \
 					 CFG_CMD_MII    | \
