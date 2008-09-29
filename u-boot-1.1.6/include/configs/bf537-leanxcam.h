@@ -34,6 +34,7 @@
  */
 #define CONFIG_BFIN_CPU             bf537-0.2
 
+#define CONFIG_BF537_LEANXCAM
 
 /*
  * Clock Settings
@@ -165,11 +166,31 @@
 #define CFG_FLASH_BASE_ENV_USER		(CFG_FLASH_BASE_ENV_BOARD + CFG_ENV_BOARD_SIZE)
 /*#define CFG_FLASH_BASE_LINUX		(CFG_FLASH_BASE_ENV_USER + CFG_ENV_USER_SIZE)*/
 #define CFG_FLASH_BASE_LINUX		0x10030000
+#define CFG_DATAFLASH_SIZE              0x400000 /* 4 MB */
  
 #define CONFIG_HAS_DATAFLASH            1
 #define CFG_SPI_WRITE_TOUT              (5*CFG_HZ)
 #define CFG_MAX_DATAFLASH_BANKS         2        /*2 dataflash chips present */
 #define CFG_MAX_DATAFLASH_PAGES         8192
+
+#define CONFIG_DATAFLASH_CUSTOM_AREAS   /* Customize the areas in the dataflash and their protection */
+/* Area 0: U-Boot */
+#define CFG_DATAFLASH_AREA0_START       0x0
+#define CFG_DATAFLASH_AREA0_END         CFG_DATAFLASH_AREA0_START + CFG_MONITOR_SIZE
+#define CFG_DATAFLASH_AREA0_PROTECT     0
+/* Area 1: U-Boot environment */
+#define CFG_DATAFLASH_AREA1_START       CFG_DATAFLASH_AREA0_END
+#define CFG_DATAFLASH_AREA1_END         CFG_DATAFLASH_AREA1_START + 2*CFG_ENV_SIZE
+#define CFG_DATAFLASH_AREA1_PROTECT     0
+/* Area 2: Board environment */
+#define CFG_DATAFLASH_AREA2_START       CFG_DATAFLASH_AREA1_END
+#define CFG_DATAFLASH_AREA2_END         CFG_DATAFLASH_AREA2_START + CFG_ENV_BOARD_SIZE + CFG_ENV_USER_SIZE
+#define CFG_DATAFLASH_AREA2_PROTECT     0
+/* Area 1: Linux */
+#define CFG_DATAFLASH_AREA3_START       CFG_DATAFLASH_AREA2_END
+#define CFG_DATAFLASH_AREA3_END         CFG_DATAFLASH_SIZE
+#define CFG_DATAFLASH_AREA3_PROTECT     0
+
 
 #define CFG_NO_FLASH 
 #define CFG_MAX_FLASH_BANKS	0	/* max number of memory banks */

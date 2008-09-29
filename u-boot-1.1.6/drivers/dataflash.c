@@ -31,6 +31,14 @@ int cs[][CFG_MAX_DATAFLASH_BANKS] = {
 	{CFG_DATAFLASH_LOGIC_ADDR_CS3, 3}
 };
 
+#ifdef CONFIG_DATAFLASH_CUSTOM_AREAS
+dataflash_protect_t area_list[NB_DATAFLASH_AREA] = {
+  {CFG_DATAFLASH_AREA0_START, CFG_DATAFLASH_AREA0_END, CFG_DATAFLASH_AREA0_PROTECT ? FLAG_PROTECT_SET : FLAG_PROTECT_CLEAR},
+  {CFG_DATAFLASH_AREA1_START, CFG_DATAFLASH_AREA1_END, CFG_DATAFLASH_AREA1_PROTECT ? FLAG_PROTECT_SET : FLAG_PROTECT_CLEAR},
+  {CFG_DATAFLASH_AREA2_START, CFG_DATAFLASH_AREA2_END, CFG_DATAFLASH_AREA2_PROTECT ? FLAG_PROTECT_SET : FLAG_PROTECT_CLEAR},
+  {CFG_DATAFLASH_AREA3_START, CFG_DATAFLASH_AREA3_END, CFG_DATAFLASH_AREA3_PROTECT ? FLAG_PROTECT_SET : FLAG_PROTECT_CLEAR},
+};
+#else  /* CONFIG_DATAFLASH_CUSTOM_AREAS */
 /*define the area offsets*/
 dataflash_protect_t area_list[NB_DATAFLASH_AREA] = {
 	{0, 0x7fff, FLAG_PROTECT_SET},			/* ROM code */
@@ -38,6 +46,7 @@ dataflash_protect_t area_list[NB_DATAFLASH_AREA] = {
 	{0x20000, 0x27fff, FLAG_PROTECT_CLEAR},		/* u-boot environment */
 	{0x28000, 0x1fffff, FLAG_PROTECT_CLEAR},	/* data area size to tune */
 };
+#endif /* CONFIG_DATAFLASH_CUSTOM_AREAS */
 
 extern void AT91F_SpiInit (void);
 extern int AT91F_DataflashProbe (int i, AT91PS_DataflashDesc pDesc);
@@ -66,6 +75,12 @@ int AT91F_DataflashInit (void)
 			dataflash_info[i].Device.pages_number = 4096;
 			dataflash_info[i].Device.pages_size = 528;
 			dataflash_info[i].Device.page_offset = 10;
+		        if(dataflash_info[i].Desc.DataFlash_state & 0x1)
+			  {
+			    /* Power of 2 page size configured. */
+			    dataflash_info[i].Device.pages_size = 512;
+			    dataflash_info[i].Device.page_offset = 9;
+			  }		    
 			dataflash_info[i].Device.byte_mask = 0x300;
 			dataflash_info[i].Device.cs = cs[i][1];
 			dataflash_info[i].Desc.DataFlash_state = IDLE;
@@ -75,8 +90,14 @@ int AT91F_DataflashInit (void)
 
 		case AT45DB321:
 			dataflash_info[i].Device.pages_number = 8192;
-			dataflash_info[i].Device.pages_size = 512;
-			dataflash_info[i].Device.page_offset = 9;
+			dataflash_info[i].Device.pages_size = 528;
+			dataflash_info[i].Device.page_offset = 10;
+		        if(dataflash_info[i].Desc.DataFlash_state & 0x1)
+			  {
+			    /* Power of 2 page size configured. */
+			    dataflash_info[i].Device.pages_size = 512;
+			    dataflash_info[i].Device.page_offset = 9;
+			  }		    
 			dataflash_info[i].Device.byte_mask = 0x300;
 			dataflash_info[i].Device.cs = cs[i][1];
 			dataflash_info[i].Desc.DataFlash_state = IDLE;
@@ -88,6 +109,12 @@ int AT91F_DataflashInit (void)
 			dataflash_info[i].Device.pages_number = 8192;
 			dataflash_info[i].Device.pages_size = 1056;
 			dataflash_info[i].Device.page_offset = 11;
+		        if(dataflash_info[i].Desc.DataFlash_state & 0x1)
+			  {
+			    /* Power of 2 page size configured. */
+			    dataflash_info[i].Device.pages_size = 1024;
+			    dataflash_info[i].Device.page_offset = 10;
+			  }		    
 			dataflash_info[i].Device.byte_mask = 0x700;
 			dataflash_info[i].Device.cs = cs[i][1];
 			dataflash_info[i].Desc.DataFlash_state = IDLE;
@@ -98,6 +125,12 @@ int AT91F_DataflashInit (void)
 			dataflash_info[i].Device.pages_number = 16384;
 			dataflash_info[i].Device.pages_size = 1056;
 			dataflash_info[i].Device.page_offset = 11;
+		        if(dataflash_info[i].Desc.DataFlash_state & 0x1)
+			  {
+			    /* Power of 2 page size configured. */
+			    dataflash_info[i].Device.pages_size = 1024;
+			    dataflash_info[i].Device.page_offset = 10;
+			  }		    
 			dataflash_info[i].Device.byte_mask = 0x700;
 			dataflash_info[i].Device.cs = cs[i][1];
 			dataflash_info[i].Desc.DataFlash_state = IDLE;
@@ -242,7 +275,7 @@ int area;
 	}
 	if (area == NB_DATAFLASH_AREA) return -1;
 	/*test protection value*/
-	//if (pdataFlash->pDevice->area_list[area].protected == FLAG_PROTECT_SET) return 0;
+	if (pdataFlash->pDevice->area_list[area].protected == FLAG_PROTECT_SET) return 0;
 
 	return 1;
 }
