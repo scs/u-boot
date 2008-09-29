@@ -27,7 +27,9 @@
 #ifndef __CONFIG_BF537_LEANXCAM_H__
 #define __CONFIG_BF537_LEANXCAM_H__
 
-#include <asm/blackfin-config-pre.h>
+#ifndef NO_HEADERS
+# include <asm/blackfin-config-pre.h>
+#endif
 
 /*
  * Processor Settings
@@ -125,8 +127,8 @@
 #define CONFIG_IPADDR           192.168.11.10
 #define CONFIG_NETMASK          255.255.255.0
 #define CONFIG_GATEWAYIP        192.168.11.1
-#define CONFIG_SERVERIP         172.18.1.76
-#define CONFIG_ETHADDR          00:20:e3:23:00:00 
+#define CONFIG_SERVERIP         192.168.11.2
+//#define CONFIG_ETHADDR          00:20:e3:23:00:00 
 #define CONFIG_HOSTNAME			bf537-leanXcam 
 
 //#define CONFIG_DP83848                         
@@ -152,8 +154,7 @@
 #define CFG_MONITOR_SIZE                0x20000 /* 128k partition on flash reserved for U-boot image. */
 #define CFG_ENV_SIZE			0x4000	/* 8k environment; twice due to redundency */
 #define CFG_ENV_SIZE_REDUND		CFG_ENV_SIZE	/* same for redundency */ 
-#define CFG_ENV_BOARD_SIZE 		800		/* 2k, board specific information: MAC */
-#define CFG_ENV_USER_SIZE 		7800	/* 30k, linux user specific information */
+#define CFG_DATAFLASH_SIZE              0x400000 /* 4 MB */
 #define CFG_DATAFLASH_LOGIC_ADDR_CS0    0x10000000      /*Logical adress for Flash 1 (CS0, cs=0) */
 #define CFG_DATAFLASH_LOGIC_ADDR_CS3    0x20000000      /*Logical adress for Flash 2 (CS3, cs=3)*/
 
@@ -162,11 +163,8 @@
 #define CFG_FLASH_BASE_MONITOR		CFG_DATAFLASH_LOGIC_ADDR_CS0
 #define CFG_FLASH_BASE_ENV_UBOOT	(CFG_FLASH_BASE_MONITOR + CFG_MONITOR_SIZE)
 #define CFG_FLASH_BASE_ENV_REDUND	(CFG_FLASH_BASE_ENV_UBOOT + CFG_ENV_SIZE)
-#define CFG_FLASH_BASE_ENV_BOARD	(CFG_FLASH_BASE_ENV_REDUND + CFG_ENV_SIZE_REDUND)
-#define CFG_FLASH_BASE_ENV_USER		(CFG_FLASH_BASE_ENV_BOARD + CFG_ENV_BOARD_SIZE)
-/*#define CFG_FLASH_BASE_LINUX		(CFG_FLASH_BASE_ENV_USER + CFG_ENV_USER_SIZE)*/
-#define CFG_FLASH_BASE_LINUX		0x10030000
-#define CFG_DATAFLASH_SIZE              0x400000 /* 4 MB */
+/*#define CFG_FLASH_BASE_LINUX		(CFG_FLASH_BASE_ENV_REDUND + CFG_ENV_SIZE)*/
+#define CFG_FLASH_BASE_LINUX		0x10028000
  
 #define CONFIG_HAS_DATAFLASH            1
 #define CFG_SPI_WRITE_TOUT              (5*CFG_HZ)
@@ -180,11 +178,11 @@
 #define CFG_DATAFLASH_AREA0_PROTECT     0
 /* Area 1: U-Boot environment */
 #define CFG_DATAFLASH_AREA1_START       CFG_DATAFLASH_AREA0_END
-#define CFG_DATAFLASH_AREA1_END         CFG_DATAFLASH_AREA1_START + 2*CFG_ENV_SIZE
+#define CFG_DATAFLASH_AREA1_END         CFG_DATAFLASH_AREA1_START + CFG_ENV_SIZE
 #define CFG_DATAFLASH_AREA1_PROTECT     0
-/* Area 2: Board environment */
+/* Area 2: U-Boot environment redundant */
 #define CFG_DATAFLASH_AREA2_START       CFG_DATAFLASH_AREA1_END
-#define CFG_DATAFLASH_AREA2_END         CFG_DATAFLASH_AREA2_START + CFG_ENV_BOARD_SIZE + CFG_ENV_USER_SIZE
+#define CFG_DATAFLASH_AREA2_END         CFG_DATAFLASH_AREA2_START + CFG_ENV_SIZE
 #define CFG_DATAFLASH_AREA2_PROTECT     0
 /* Area 1: Linux */
 #define CFG_DATAFLASH_AREA3_START       CFG_DATAFLASH_AREA2_END
@@ -261,8 +259,9 @@
  * Linux parameters
  */
  #define CONFIG_ROOTPATH		/romfs
- #define CONFIG_BOOTARGS "root=/dev/mtdblock0 rw console=ttyBF0,115200 kgdboe=@$(ipaddr)/,@$(serverip)/"
+ #define CONFIG_BOOTARGS "root=/dev/mtdblock0 rw console=ttyBF0,115200"
  #define CFG_BOOTMAPSZ		(8 * 1024*1024)	/* Initial Memory map for Linux */
+
 
 /*
  * Misc Settings
@@ -313,11 +312,13 @@
 					 CFG_CMD_NET    | \
 					 CFG_CMD_POST_DIAG) & ~(CFG_CMD_IMLS))  & ~(CFG_CMD_FLASH)) 
 
+#ifndef NO_HEADERS
 /* this must be included AFTER the definition of CONFIG_COMMANDS (if any) */
 #include <cmd_confdefs.h>					 
-					 
+		 
 
 #include <asm/blackfin-config-post.h>
+#endif
 
 /*-----------------------------------------------------------------------
  * return codes from flash_write():

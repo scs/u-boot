@@ -105,15 +105,6 @@ int board_get_enetaddr(uchar *mac_addr)
 #else
 # define USE_MAC_IN_FLASH 1
 #endif
-	if (USE_MAC_IN_FLASH) {
-		/* we cram the MAC in the last flash sector */
-		uchar *board_mac_addr = (uchar *)0x203F0000;
-
-		if (is_valid_ether_addr(board_mac_addr)) {
-			memcpy(mac_addr, board_mac_addr, 6);
-			return 0;
-		}
-	}
 
 	puts("Warning: Generating 'random' MAC address\n");
 

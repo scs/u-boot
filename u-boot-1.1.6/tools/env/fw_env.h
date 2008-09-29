@@ -39,13 +39,9 @@
 #define ENV2_SIZE         0x4000
 #define DEVICE2_ESIZE     0x4000
 
-#define CONFIG_BAUDRATE		115200
-#define CONFIG_BOOTDELAY	5	/* autoboot after 5 seconds	*/
-#define CONFIG_BOOTCOMMAND							\
-	"bootp; " 								\
-	"setenv bootargs root=/dev/nfs nfsroot=${serverip}:${rootpath} " 	\
-	"ip=${ipaddr}:${serverip}:${gatewayip}:${netmask}:${hostname}::off; " 	\
-	"bootm"
+# define NO_HEADERS
+# include "../../include/configs/bf537-leanxcam.h"
+# undef NO_HEADERS
 
 extern		void  fw_printenv(int argc, char *argv[]);
 extern unsigned char *fw_getenv  (unsigned char *name);

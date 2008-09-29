@@ -31,7 +31,7 @@
 #include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include <linux/mtd/mtd.h>
+#include <mtd/mtd-user.h>
 #include "fw_env.h"
 
 typedef unsigned char uchar;
@@ -40,7 +40,7 @@ typedef unsigned char uchar;
 #define	CMD_SETENV	"fw_setenv"
 
 typedef struct envdev_s {
-	uchar devname[16];		/* Device name */
+	char devname[16];		/* Device name */
 	ulong devoff;			/* Device offset */
 	ulong env_size;			/* environment size */
 	ulong erase_size;		/* device erase size */
@@ -241,8 +241,8 @@ void fw_printenv (int argc, char *argv[])
 	}
 
 	for (i = 1; i < argc; ++i) {	/* print single env variables   */
-		uchar *name = argv[i];
-		uchar *val = NULL;
+		char *name = argv[i];
+		char *val = NULL;
 
 		for (env = environment.data; *env; env = nxt + 1) {
 
@@ -253,7 +253,7 @@ void fw_printenv (int argc, char *argv[])
 					return;
 				}
 			}
-			val = envmatch (name, env);
+			val = (char *)envmatch ((uchar *)name, env);
 			if (val) {
 				if (!n_flag) {
 					fputs (name, stdout);
@@ -281,7 +281,7 @@ int fw_setenv (int argc, char *argv[])
 	int i, len;
 	uchar *env, *nxt;
 	uchar *oldval = NULL;
-	uchar *name;
+	char *name;
 
 	if (argc < 2) {
 		return (EINVAL);
@@ -303,7 +303,7 @@ int fw_setenv (int argc, char *argv[])
 				return (EINVAL);
 			}
 		}
-		if ((oldval = envmatch (name, env)) != NULL)
+		if ((oldval = envmatch ((uchar *)name, env)) != NULL)
 			break;
 	}
 
@@ -361,7 +361,7 @@ int fw_setenv (int argc, char *argv[])
 	while ((*env = *name++) != '\0')
 		env++;
 	for (i = 2; i < argc; ++i) {
-		uchar *val = argv[i];
+		char *val = argv[i];
 
 		*env = (i == 2) ? '=' : ' ';
 		while ((*++env = *val++) != '\0');

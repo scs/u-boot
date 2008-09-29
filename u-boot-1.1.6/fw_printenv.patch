@@ -1,0 +1,191 @@
+>From u-boot-users-bounces@lists.sourceforge.net Mon Feb 19 12:38:23 2007
+X-Apparently-To: bwarren@qstreams.com via 68.142.199.183; Mon, 19 Feb 2007
+	12:38:23 -0800
+X-Originating-IP: [66.35.250.225]
+Authentication-Results: mta106.biz.mail.mud.yahoo.com 
+	from=lists.sourceforge.net; domainkeys=neutral (no sig)
+Received: from 66.35.250.225  (EHLO lists-outbound.sourceforge.net)
+	(66.35.250.225) by mta106.biz.mail.mud.yahoo.com with SMTP; Mon, 19 Feb
+	2007 12:38:23 -0800
+Received: from sc8-sf-list1-new.sourceforge.net
+	(sc8-sf-list1-new-b.sourceforge.net [10.3.1.93]) by
+	sc8-sf-spam2.sourceforge.net (Postfix) with ESMTP id D71C612AAB; Mon, 19
+	Feb 2007 12:38:17 -0800 (PST)
+Received: from sc8-sf-mx1-b.sourceforge.net ([10.3.1.91]
+	helo=mail.sourceforge.net) by sc8-sf-list1-new.sourceforge.net with esmtp
+	(Exim 4.43) id 1HJFGo-0006rd-Ey for u-boot-users@lists.sourceforge.net;
+	Mon, 19 Feb 2007 12:37:58 -0800
+Received: from smtp103.biz.mail.re2.yahoo.com ([68.142.229.217]) by
+	mail.sourceforge.net with smtp (Exim 4.44) id 1HJFGm-00074V-VH for
+	u-boot-users@lists.sourceforge.net; Mon, 19 Feb 2007 12:37:58 -0800
+Received: (qmail 97249 invoked from network); 19 Feb 2007 20:37:48 -0000
+Received: from unknown (HELO ?10.69.69.24?)
+	(bwarren@qstreams.com@66.16.59.121 with plain) by
+	smtp103.biz.mail.re2.yahoo.com with SMTP; 19 Feb 2007 20:37:47 -0000
+X-YMail-OSG:
+	kkDqEQQVM1kmJ2A7BsL0KYjdN5o_2QcMC6wdMu6kFpSzbho8E0vru5UkHGgwDaXuo2yQNhiZnKS8v7YX4M9ifvGlygAu5hpcwhal_y7nBTpxqEUPjMFquF5AA7fnxQ1ph5GrUlw4nZJPag--
+From: Ben Warren <bwarren@qstreams.com>
+To: U-boot list <u-boot-users@lists.sourceforge.net>
+Organization: Qstreams Networks
+Date: Mon, 19 Feb 2007 15:37:46 -0500
+Message-Id: <1171917466.22834.48.camel@saruman.qstreams.net>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.8.1 
+X-Spam-Score: 0.0 (/)
+X-Spam-Report: Spam Filtering performed by sourceforge.net. See
+	http://spamassassin.org/tag/ for more details. Report problems to
+	http://sf.net/tracker/?func=add&group_id=1&atid=200001
+Cc: U-boot patches <u-boot-patches@denx.de>
+Subject: [U-Boot-Users] [PATCH] fw_printenv - changed MTD include and fixed
+	compiler	warnings
+X-BeenThere: u-boot-users@lists.sourceforge.net
+X-Mailman-Version: 2.1.8
+Precedence: list
+Reply-To: bwarren@qstreams.com
+List-Id: Universal Boot Loader general discussion
+	<u-boot-users.lists.sourceforge.net>
+List-Unsubscribe:
+	<https://lists.sourceforge.net/lists/listinfo/u-boot-users>, 
+	<mailto:u-boot-users-request@lists.sourceforge.net?subject=unsubscribe>
+List-Archive:
+	<http://sourceforge.net/mailarchive/forum.php?forum=u-boot-users>
+List-Post: <mailto:u-boot-users@lists.sourceforge.net>
+List-Help: <mailto:u-boot-users-request@lists.sourceforge.net?subject=help>
+List-Subscribe:
+	<https://lists.sourceforge.net/lists/listinfo/u-boot-users>,
+	<mailto:u-boot-users-request@lists.sourceforge.net?subject=subscribe>
+Content-Type: text/plain; charset="us-ascii"
+Sender: u-boot-users-bounces@lists.sourceforge.net
+Errors-To: u-boot-users-bounces@lists.sourceforge.net
+X-Evolution-Source: pop://bwarren%40qstreams.com@pop.bizmail.yahoo.com/
+Content-Transfer-Encoding: 8bit
+
+This user-space program was including a kernel header, which prevented
+compilation.  Compiler warnings were 'fixed' by some casts.  If anyone
+stores binary data in environment variables this may not work.
+
+The DULG mentions a 'fw_setenv' command, which doesn't technically
+exist.  The Makefile was modified to create a link that becomes this
+command. 
+
+Signed-off-by: Ben Warren <bwarren@qstreams.com>
+---
+ tools/env/Makefile |    3 ++-
+ tools/env/README   |    3 ++-
+ tools/env/fw_env.c |   16 ++++++++--------
+ 3 files changed, 12 insertions(+), 10 deletions(-)
+
+diff --git a/tools/env/Makefile b/tools/env/Makefile
+index 1f16768..90dac5e 100644
+--- a/tools/env/Makefile
++++ b/tools/env/Makefile
+@@ -32,9 +32,10 @@ all:	$(obj)fw_printenv
+ 
+ $(obj)fw_printenv:	$(SRCS) $(HEADERS)
+ 	$(CROSS_COMPILE)gcc $(CPPFLAGS) $(SRCS) -o $(obj)fw_printenv
++	ln -s $(obj)fw_printenv $(obj)fw_setenv
+ 
+ clean:
+-	rm -f $(obj)fw_printenv $(obj)crc32.c
++	rm -f $(obj)fw_printenv $(obj)crc32.c $(obj)fw_setenv
+ 
+ $(obj)crc32.c:
+ 	ln -s $(src)../../lib_generic/crc32.c $(obj)crc32.c
+diff --git a/tools/env/README b/tools/env/README
+index d8386f7..2f3adc1 100644
+--- a/tools/env/README
++++ b/tools/env/README
+@@ -34,7 +34,8 @@ The DEVICEx_NAME constants define which 
+ be used to access the environment.
+ 
+ The DEVICEx_OFFSET constants define the environment offset within the
+-MTD character device.
++MTD character device.  Note that if your Linux kernel is compiled with
++MTD PARTITION support, this value will probably be 0.
+ 
+ ENVx_SIZE defines the size in bytes taken by the environment, which
+ may be less then flash sector size, if the environment takes less
+diff --git a/tools/env/fw_env.c b/tools/env/fw_env.c
+index f723b5b..ad89f54 100644
+--- a/tools/env/fw_env.c
++++ b/tools/env/fw_env.c
+@@ -31,7 +31,7 @@ #include <sys/types.h>
+ #include <sys/ioctl.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
+-#include <linux/mtd/mtd.h>
++#include <mtd/mtd-user.h>
+ #include "fw_env.h"
+ 
+ typedef unsigned char uchar;
+@@ -40,7 +40,7 @@ #define	CMD_GETENV	"fw_printenv"
+ #define	CMD_SETENV	"fw_setenv"
+ 
+ typedef struct envdev_s {
+-	uchar devname[16];		/* Device name */
++	char devname[16];		/* Device name */
+ 	ulong devoff;			/* Device offset */
+ 	ulong env_size;			/* environment size */
+ 	ulong erase_size;		/* device erase size */
+@@ -241,8 +241,8 @@ void fw_printenv (int argc, char *argv[]
+ 	}
+ 
+ 	for (i = 1; i < argc; ++i) {	/* print single env variables   */
+-		uchar *name = argv[i];
+-		uchar *val = NULL;
++		char *name = argv[i];
++		char *val = NULL;
+ 
+ 		for (env = environment.data; *env; env = nxt + 1) {
+ 
+@@ -253,7 +253,7 @@ void fw_printenv (int argc, char *argv[]
+ 					return;
+ 				}
+ 			}
+-			val = envmatch (name, env);
++			val = (char *)envmatch ((uchar *)name, env);
+ 			if (val) {
+ 				if (!n_flag) {
+ 					fputs (name, stdout);
+@@ -281,7 +281,7 @@ int fw_setenv (int argc, char *argv[])
+ 	int i, len;
+ 	uchar *env, *nxt;
+ 	uchar *oldval = NULL;
+-	uchar *name;
++	char *name;
+ 
+ 	if (argc < 2) {
+ 		return (EINVAL);
+@@ -303,7 +303,7 @@ int fw_setenv (int argc, char *argv[])
+ 				return (EINVAL);
+ 			}
+ 		}
+-		if ((oldval = envmatch (name, env)) != NULL)
++		if ((oldval = envmatch ((uchar *)name, env)) != NULL)
+ 			break;
+ 	}
+ 
+@@ -361,7 +361,7 @@ int fw_setenv (int argc, char *argv[])
+ 	while ((*env = *name++) != '\0')
+ 		env++;
+ 	for (i = 2; i < argc; ++i) {
+-		uchar *val = argv[i];
++		char *val = argv[i];
+ 
+ 		*env = (i == 2) ? '=' : ' ';
+ 		while ((*++env = *val++) != '\0');
+-- 
+1.4.1
+
+
+
+
+-------------------------------------------------------------------------
+Take Surveys. Earn Cash. Influence the Future of IT
+Join SourceForge.net's Techsay panel and you'll get the chance to share your
+opinions on IT & business topics through brief surveys-and earn cash
+http://www.techsay.com/default.php?page=join.php&p=sourceforge&CID=DEVDEV
+_______________________________________________
+U-Boot-Users mailing list
+U-Boot-Users@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/u-boot-users
