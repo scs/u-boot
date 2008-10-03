@@ -1,5 +1,10 @@
 #! /usr/bin/env bash
-# do-build <results-dir> This script is used to generate a binary to release.
+# do-build <platform> <results-dir> This script is used to generate a binary to release.
+
+if [ $# -ne 2 ]; then
+	echo "wrong number of arguments"
+	exit 1
+fi
 
 PLATFORM=$1
 RESULTS_DIR=$2
@@ -12,6 +17,7 @@ elif [ "$PLATFORM" == "indXcam" ]; then
 	exit 1 # do not use, mockup!
 	make bf537-indxcam_config || exit $?
 else
+	echo "Unknown architecture!"
 	exit 1
 fi
 
