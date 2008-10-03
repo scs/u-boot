@@ -244,12 +244,12 @@ $(obj)u-boot.srec:	$(obj)u-boot
 
 $(obj)u-boot.bin:	$(obj)u-boot
 		$(OBJCOPY) ${OBJCFLAGS} -O binary $< $@
-		cp u-boot.bin /tftpboot
+#		cp u-boot.bin /tftpboot
 
 $(obj)u-boot.ldr:	$(obj)u-boot
 		./tools/envcrc --binary > $(obj)env-ldr.o
 		$(LDR) -T $(CONFIG_CPU) -f -c $@ $< $(LDR_FLAGS)
-		cp u-boot.ldr /tftpboot
+#		cp u-boot.ldr /tftpboot
 
 $(obj)u-boot.ldr.hex:	$(obj)u-boot.ldr
 		$(OBJCOPY) ${OBJCFLAGS} -O ihex $< $@ -I binary

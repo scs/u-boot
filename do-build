@@ -1,0 +1,15 @@
+#! /usr/bin/env bash
+# This script is used to generate a binary to release.
+
+cd "u-boot-1.1.6"
+
+if [ "$1" == "leanXcam" ]; then
+	make bf537-leanxcam_config || exit $?
+elif [ "$1" == "indXcam" ]; then
+	exit 1 # do not use, mockup!
+	make bf537-indxcam_config || exit $?
+else
+	exit 1
+fi
+
+make || exit $?
