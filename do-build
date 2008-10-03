@@ -1,11 +1,14 @@
 #! /usr/bin/env bash
-# This script is used to generate a binary to release.
+# do-build <results-dir> This script is used to generate a binary to release.
 
-cd "u-boot-1.1.6"
+PLATFORM=$1
+RESULTS_DIR=$2
 
-if [ "$1" == "leanXcam" ]; then
+pushd "u-boot-1.1.6"
+
+if [ "$PLATFORM" == "leanXcam" ]; then
 	make bf537-leanxcam_config || exit $?
-elif [ "$1" == "indXcam" ]; then
+elif [ "$PLATFORM" == "indXcam" ]; then
 	exit 1 # do not use, mockup!
 	make bf537-indxcam_config || exit $?
 else
@@ -13,3 +16,7 @@ else
 fi
 
 make || exit $?
+
+popd
+
+cp "u-boot-1.1.6/u-boot.ldr" "$RESULTS_DIR/u-boot.ldr" || exit $?
