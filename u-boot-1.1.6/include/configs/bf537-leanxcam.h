@@ -34,7 +34,7 @@
 /*
  * Processor Settings
  */
-#define CONFIG_BFIN_CPU             bf537-0.2
+#define CONFIG_BFIN_CPU             bf537-0.3
 
 #define CONFIG_BF537_LEANXCAM
 
