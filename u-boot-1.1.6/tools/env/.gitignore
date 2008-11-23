@@ -1,0 +1,4 @@
+# built files
+/crc32.c
+/fw_printenv
+/fw_printenv.gdb
