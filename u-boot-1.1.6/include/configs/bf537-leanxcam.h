@@ -34,7 +34,7 @@
 /*
  * Processor Settings
  */
-#define CONFIG_BFIN_CPU             bf537-0.3
+#define CONFIG_BFIN_CPU			bf537-0.3
 
 #define CONFIG_BF537_LEANXCAM
 
@@ -65,7 +65,7 @@
 #define CONFIG_CCLK_HZ          ( CONFIG_VCO_HZ / CONFIG_CCLK_DIV )
 #define CONFIG_SCLK_HZ          ( CONFIG_VCO_HZ / CONFIG_SCLK_DIV )
 
-#define	CFG_HZ			1000	/* decrementer freq: 10 ms ticks */
+#define	CFG_HZ					1000	/* decrementer freq: 10 ms ticks */
 
 /*
  * Cache Settings
@@ -117,22 +117,18 @@
 /*#define DEBUG 1*/
 /*#define CONFIG_DEBUG_EARLY_SERIAL	1
   #define CONFIG_DEBUG_SERIAL	1*/
-#define	CFG_MAXARGS		16	/* max number of command args */
+#define	CFG_MAXARGS			16	/* max number of command args */
 #define CFG_BAUDRATE_TABLE	{ 9600, 19200, 38400, 57600, 115200 }
 #define CONFIG_BAUDRATE		115200
 
 /*
  * Network Settings
  */
-#define CONFIG_IPADDR           192.168.11.10
-#define CONFIG_NETMASK          255.255.255.0
-#define CONFIG_GATEWAYIP        192.168.11.1
-#define CONFIG_SERVERIP         192.168.11.2
-//#define CONFIG_ETHADDR          00:20:e3:23:00:00 
-#define CONFIG_HOSTNAME			bf537-leanXcam 
-
-//#define CONFIG_DP83848                         
-//#define CONFIG_MII 
+#define CONFIG_IPADDR		192.168.1.10
+#define CONFIG_GATEWAYIP	192.168.1.1
+#define CONFIG_SERVERIP		192.168.1.2
+#define CONFIG_NETMASK		255.255.255.0
+#define CONFIG_HOSTNAME		bf537-leanXcam 
 
 #define ADI_CMDS_NETWORK	1 	
 #define CONFIG_BFIN_MAC		
@@ -143,21 +139,18 @@
 /*
  * Dataflash Settings
  * 
- * 0x0	monitor (size=CFG_MONITOR_LEN)
- * 		env_uboot (size=CFG_ENV_SIZE)
- * 		env_uboot redundant (size=CFG_ENV_SIZE_REDUND)
- * 		env board (size=CFG_ENV_BOARD_SIZE)
- * 		env user (size=CFG_ENV_USER_SIZE)
- * 		linux...
+ * 0x0	aera0: monitor (size=CFG_MONITOR_LEN)
+ * 		aera1: env_uboot (size=CFG_ENV_SIZE)
+ * 		aera2: env_uboot redundant (size=CFG_ENV_SIZE_REDUND)
+ * 		aera3: linux...
  */
 
-#define CFG_MONITOR_SIZE                0x20000 /* 128k partition on flash reserved for U-boot image. */
-#define CFG_ENV_SIZE			0x4000	/* 8k environment; twice due to redundency */
-#define CFG_ENV_SIZE_REDUND		CFG_ENV_SIZE	/* same for redundency */ 
-#define CFG_DATAFLASH_SIZE              0x400000 /* 4 MB */
+#define CFG_MONITOR_SIZE                0x20000 		/* 128k partition on flash reserved for U-boot image. */
+#define CFG_ENV_SIZE					0x4000			/* 8k environment; twice due to redundency */
+#define CFG_ENV_SIZE_REDUND				CFG_ENV_SIZE	/* same for redundency */ 
+#define CFG_DATAFLASH_SIZE              0x400000 		/* 4 MB */
 #define CFG_DATAFLASH_LOGIC_ADDR_CS0    0x10000000      /*Logical adress for Flash 1 (CS0, cs=0) */
 #define CFG_DATAFLASH_LOGIC_ADDR_CS3    0x20000000      /*Logical adress for Flash 2 (CS3, cs=3)*/
-
 
 
 #define CFG_FLASH_BASE_MONITOR		CFG_DATAFLASH_LOGIC_ADDR_CS0
@@ -168,11 +161,11 @@
  
 #define CONFIG_HAS_DATAFLASH            1
 #define CFG_SPI_WRITE_TOUT              (5*CFG_HZ)
-#define CFG_MAX_DATAFLASH_BANKS         2        /*2 dataflash chips present */
+#define CFG_MAX_DATAFLASH_BANKS         2        /* 2 flash chips (program / data) */
 #define CFG_MAX_DATAFLASH_PAGES         8192
 
 #define CONFIG_DATAFLASH_CUSTOM_AREAS   /* Customize the areas in the dataflash and their protection */
-/* Area 0: U-Boot */
+/* Area 0: U-Boot monitor */
 #define CFG_DATAFLASH_AREA0_START       0x0
 #define CFG_DATAFLASH_AREA0_END         CFG_DATAFLASH_AREA0_START + CFG_MONITOR_SIZE
 #define CFG_DATAFLASH_AREA0_PROTECT     0
@@ -198,24 +191,13 @@
 /*
  * Environment variables
  */
-
 #define	CFG_ENV_IS_IN_DATAFLASH	1
-//#define	CFG_ENV_IS_IN_FLASH	1
 
 #ifdef CFG_ENV_IS_IN_DATAFLASH
-	#define CONFIG_BOARD_ENV_SIZE	0x800	/* 2k board specific information */
-	#define CONFIG_USER_ENV_SIZE	0x7800	/* 30k user specific information */
 	#define CFG_ENV_ADDR			CFG_FLASH_BASE_ENV_UBOOT
 	#define CFG_ENV_ADDR_REDUND		CFG_FLASH_BASE_ENV_REDUND
 	#define	CFG_ENV_SECT_SIZE		CFG_ENV_SIZE	/* Total Size of Environment Sector */
 #endif /* CFG_ENV_IS_IN_DATAFLASH */
-
-#ifdef CFG_ENV_IS_IN_FLASH
-	#define CFG_ENV_ADDR		0x10004000 /* warum 0x4000? */
-	#define CFG_ENV_OFFSET		(CFG_ENV_ADDR - CFG_FLASH_BASE)	
-	#define	CFG_ENV_SECT_SIZE	0x4000	/* Total Size of Environment Sector */
-	#define ENV_IS_EMBEDDED
-#endif /* CFG_ENV_IS_IN_FLASH */
 
 
 #define CONFIG_EXTRA_ENV_SETTINGS                               \
@@ -245,39 +227,28 @@
 /*
  * Boot behaviour
  */
-#define CONFIG_BFIN_BOOT_MODE       BFIN_BOOT_UART
-#define CONFIG_BOOTDELAY	2		/* Delay before linux launch. */
-#define CONFIG_PANIC_HANG 1			/* No automatic reboot when panic. */
-#define CONFIG_LOADS_ECHO 1  		/* Echo on for serial download  */
-#define CFG_AUTOLOAD   "no"    		/*rarpb, bootp or dhcp commands will perform only a */
-									/* configuration lookup from the BOOTP/DHCP server, */
-
-#define CONFIG_BOOTCOMMAND 		"run boot"      /* flash boot */
+#define CONFIG_BFIN_BOOT_MODE	BFIN_BOOT_UART
+#define CONFIG_BOOTDELAY	2			/* Delay before linux launch. */
+#define CONFIG_PANIC_HANG	1			/* No automatic reboot when panic. */
+#define CONFIG_LOADS_ECHO	1  			/* Echo on for serial download  */
+#define CFG_AUTOLOAD   		"no"		/*rarpb, bootp or dhcp commands will perform only a */
+										/* configuration lookup from the BOOTP/DHCP server, */
+#define CONFIG_BOOTCOMMAND 	"run boot"	/* flash boot */
 
 
 /*
  * Linux parameters
  */
- #define CONFIG_ROOTPATH		/romfs
- #define CONFIG_BOOTARGS "root=/dev/mtdblock0 rw console=ttyBF0,115200"
+ #define CONFIG_ROOTPATH	/romfs
+ #define CONFIG_BOOTARGS 	"root=/dev/mtdblock0 rw console=ttyBF0,115200"
  #define CFG_BOOTMAPSZ		(8 * 1024*1024)	/* Initial Memory map for Linux */
 
 
 /*
  * Misc Settings
  */
-//#define CONFIG_MISC_INIT_R 1
-//#define CONFIG_RTC_BFIN 1
 #define CFG_LONGHELP 1				/* Long help comments */
 #define CONFIG_CMDLINE_EDITING 1	/* Extra console functionality: editing, history */
-
-/* #define CONFIG_BF537_STAMP_LEDCMD	1 */
-
-/*#define ADI_CMDS_EXTRA (ADD_IDE_CMD | ADD_NAND_CMD)
-#define CONFIG_BFIN_COMMANDS \
-	( CFG_BFIN_CMD_BOOTLDR | \
-	  CFG_BFIN_CMD_CPLBINFO )
-*/
 
 /*
  * PowerOn Self Test; POST
@@ -323,15 +294,15 @@
 /*-----------------------------------------------------------------------
  * return codes from flash_write():
  */
-#define ERR_OK				0
-#define ERR_TIMOUT			1
-#define ERR_NOT_ERASED			2
-#define ERR_PROTECTED			4
-#define ERR_INVAL			8
-#define ERR_ALIGN			16
+#define ERR_OK						0
+#define ERR_TIMOUT					1
+#define ERR_NOT_ERASED				2
+#define ERR_PROTECTED				4
+#define ERR_INVAL					8
+#define ERR_ALIGN					16
 #define ERR_UNKNOWN_FLASH_VENDOR	32
 #define ERR_UNKNOWN_FLASH_TYPE		64
-#define ERR_PROG_ERROR			128
+#define ERR_PROG_ERROR				128
 
 /*-----------------------------------------------------------------------
  * Protection Flags for flash_protect():
