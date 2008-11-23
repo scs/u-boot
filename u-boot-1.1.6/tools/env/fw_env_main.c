@@ -57,17 +57,9 @@ main(int argc, char *argv[])
 	}
 
 	if (strcmp(cmdname, CMD_PRINTENV) == 0) {
-
-			fw_printenv (argc, argv);
-
-			return (EXIT_SUCCESS);
-
+		return fw_printenv (argc, argv);
 	} else if (strcmp(cmdname, CMD_SETENV) == 0) {
-
-			if (fw_setenv (argc, argv) != 0)
-				return (EXIT_FAILURE);
-
-			return (EXIT_SUCCESS);
+		return fw_setenv (argc, argv);
 	}
 
 	fprintf (stderr,

@@ -204,27 +204,27 @@ unsigned char *fw_getenv (unsigned char *name)
  * Print the current definition of one, or more, or all
  * environment variables
  */
-void fw_printenv (int argc, char *argv[])
+int fw_printenv (int argc, char *argv[])
 {
 	uchar *env, *nxt;
-	int i, n_flag;
+	int i, n_flag, ret = EXIT_SUCCESS;
 
 	if (env_init ())
-		return;
+		return ret;
 
 	if (argc == 1) {		/* Print all env variables  */
 		for (env = environment.data; *env; env = nxt + 1) {
 			for (nxt = env; *nxt; ++nxt) {
 				if (nxt >= &environment.data[ENV_SIZE]) {
-					fprintf (stderr, "## Error: "
-						"environment not terminated\n");
-					return;
+					fprintf (stderr, "## Error: environment not terminated\n");
+						ret = EXIT_FAILURE;
+					return ret;
 				}
 			}
 
 			printf ("%s\n", env);
 		}
-		return;
+		return ret;
 	}
 
 	if (strcmp (argv[1], "-n") == 0) {
@@ -232,9 +232,9 @@ void fw_printenv (int argc, char *argv[])
 		++argv;
 		--argc;
 		if (argc != 2) {
-			fprintf (stderr, "## Error: "
-				"`-n' option requires exactly one argument\n");
-			return;
+			fprintf (stderr, "## Error: `-n' option requires exactly one argument\n");
+			ret = EXIT_FAILURE;
+			return ret;
 		}
 	} else {
 		n_flag = 0;
@@ -248,9 +248,9 @@ void fw_printenv (int argc, char *argv[])
 
 			for (nxt = env; *nxt; ++nxt) {
 				if (nxt >= &environment.data[ENV_SIZE]) {
-					fprintf (stderr, "## Error: "
-						"environment not terminated\n");
-					return;
+					fprintf (stderr, "## Error: environment not terminated\n");
+					ret = EXIT_FAILURE;
+					return ret;
 				}
 			}
 			val = (char *)envmatch ((uchar *)name, env);
@@ -263,9 +263,13 @@ void fw_printenv (int argc, char *argv[])
 				break;
 			}
 		}
-		if (!val)
+		if (!val) {
 			fprintf (stderr, "## Error: \"%s\" not defined\n", name);
+			ret = EXIT_FAILURE;
+		}
 	}
+	
+	return ret;
 }
 
 /*

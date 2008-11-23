@@ -43,7 +43,7 @@
 # include "../../include/configs/bf537-leanxcam.h"
 # undef NO_HEADERS
 
-extern		void  fw_printenv(int argc, char *argv[]);
+extern		int  fw_printenv(int argc, char *argv[]);
 extern unsigned char *fw_getenv  (unsigned char *name);
 extern		int   fw_setenv  (int argc, char *argv[]);
 
