@@ -32,7 +32,7 @@ all:	$(obj)fw_printenv
 
 $(obj)fw_printenv:	$(SRCS) $(HEADERS)
 	$(CROSS_COMPILE)gcc $(CPPFLAGS) $(SRCS) -o $(obj)fw_printenv
-	cp fw_printenv ../../../../uclinux/vendors/SCS/BF537_LEANXCAM/
+	! [ -d "../../../../uclinux/vendors/SCS/BF537_LEANXCAM/" ] || cp fw_printenv ../../../../uclinux/vendors/SCS/BF537_LEANXCAM/
 #	ln -s $(obj)fw_printenv $(obj)fw_setenv
 
 clean:
