@@ -20,4 +20,4 @@ fi
 
 make -C "u-boot-1.1.6" || exit $?
 
-cp "u-boot-1.1.6/u-boot.{bin,ldr}" "$RESULTS_DIR" || exit $?
+cp u-boot-1.1.6/u-boot.{bin,ldr} "$RESULTS_DIR" || exit $?
