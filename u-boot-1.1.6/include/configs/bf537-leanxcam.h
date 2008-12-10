@@ -210,6 +210,7 @@
     "nfsroot=$(serverip):$(rootpath) console=ttyBF0,57600\0"                     \
     "upduboot=tftp $(loadaddr) u-boot.ldr; cp.b $(loadaddr) $(flash_base_monitor) $(filesize) \0"                 \
 	"updlinux=tftp $(loadaddr-linux) uImage; cp.b $(loadaddr-linux) $(flash_base_linux) $(filesize)\0"    \
+	"updbootflash=tftp $(loadaddr) boot-flash; cp.b $(loadaddr) $(flash_base_monitor) $(filesize)\0"    \
 	"tstuboot=tftp $(loadaddr) u-boot.bin; go $(loadaddr)\0"  \
 	"tstlinux=tftp $(loadaddr-linux) uImage; bootm $(loadaddr-linux)\0" \
 	""
