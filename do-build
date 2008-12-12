@@ -9,20 +9,15 @@ fi
 PLATFORM=$1
 RESULTS_DIR=$2
 
-pushd "u-boot-1.1.6"
-
 if [ "$PLATFORM" == "leanXcam" ]; then
-	make bf537-leanxcam_config || exit $?
+	make -C "u-boot-1.1.6" bf537-leanxcam_config || exit $?
 elif [ "$PLATFORM" == "indXcam" ]; then
-	exit 1 # do not use, mockup!
-	make bf537-indxcam_config || exit $?
+	make -C "u-boot-1.1.6" bf537-indxcam_config || exit $?
 else
 	echo "Unknown architecture!"
 	exit 1
 fi
 
-make || exit $?
+make -C "u-boot-1.1.6" || exit $?
 
-popd
-
-cp "u-boot-1.1.6/u-boot.ldr" "$RESULTS_DIR/u-boot.ldr" || exit $?
+cp u-boot-1.1.6/u-boot.{bin,ldr} "$RESULTS_DIR" || exit $?
