@@ -61,6 +61,11 @@ update_files() {
 	VERSION_MINOR=$3
 	VERSION_PATCH=$4
 	VERSION_RC=$5
+	
+	VERSION_FILE="u-boot-1.1.6/localversion-scs"
+	
+	echo " (Git_$VERSION_STRING)" > "$VERSION_FILE"
+	echo "$VERSION_FILE"
 }
 
 [ "$1" == "--help" ] && { help; exit; }
