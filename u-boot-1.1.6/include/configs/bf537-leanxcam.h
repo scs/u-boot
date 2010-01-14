@@ -204,7 +204,7 @@
 	"flash_base_linux=" MK_STR(CFG_FLASH_BASE_LINUX) "\0" \
 	"flash_base_monitor=" MK_STR(CFG_FLASH_BASE_MONITOR) "\0" \
 	"loadaddr-linux="  MK_STR(CFG_LOADADDR_LINUX) "\0" \
-	"boot=bootm $(flash_base_linux)\0" \
+	"boot=saveenv;bootm $(flash_base_linux)\0" \
 	"nokgdbargs=setenv bootargs root=/dev/mtdblock0 rw console=ttyBF0,115200\0"	\
     "nfsargs=setenv bootargs root=/dev/nfs rw \0"             \
     "nfsroot=$(serverip):$(rootpath) console=ttyBF0,57600\0"                     \
@@ -215,7 +215,7 @@
 	"tstlinux=tftp $(loadaddr-linux) uImage; bootm $(loadaddr-linux)\0" \
 	""
 
-
+#define CONFIG_VERSION_VARIABLE 1	/* include version env variable */
 
 /* CONFIG_SPI_BAUD controls the SPI peripheral clock divider		*/
 /* Values can range from 2-65535					*/
